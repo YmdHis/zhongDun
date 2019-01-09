@@ -166,9 +166,10 @@
 
 > | 数组字段 | 字段类型 | 说明     |
 > | :------- | :------- | :------- |
-> | article  | int      | 工种id   |
+> | id       | int      | 工种id   |
 > | name     | string   | 工种名称 |
 > | icon     | string   | 工种图标 |
+> | children | array    | 子分类   |
 
 ###### 
 
