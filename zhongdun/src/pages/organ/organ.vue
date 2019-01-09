@@ -10,6 +10,7 @@
 
 <script>
 import { Tab, TabItem } from 'vux'
+import {shouyeNews} from 'src/service/getData'
 
 export default {
 	components: {
@@ -20,6 +21,12 @@ export default {
 	    return {
 	    }
   	},
+        mounted(){
+        
+        shouyeNews().then(res => {
+          console.log(res);
+        })
+    },
 }
 </script>
 
