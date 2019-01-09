@@ -66,35 +66,9 @@
         <tab-item  @on-item-click="onClick('video')">免费试听</tab-item>
       </tab>
       <div class="grid-demo" v-if="active_tab=='news'">
-        <div class="news_list">
+        <div class="news_list" v-for="item in newslist">
           <div class="news_title">
-            <h3>行业新闻</h3>
-            <span>全部></span>
-          </div>
-          <ul>
-            <li class="news_list_li">
-              <p class="ellipsis">
-                特种作业人员安全技术培训考核管理规定
-              </p>
-              <div class="news_imfor_box">
-                <span class="news_imfor_txt">安培教育</span>
-                <span class="news_time">2019.01.09</span>
-              </div>
-            </li>
-            <li class="news_list_li">
-              <p class="ellipsis">
-                特种作业人员安全技术培训考核管理规定
-              </p>
-              <div class="news_imfor_box">
-                <span class="news_imfor_txt">安培教育</span>
-                <span class="news_time">2019.01.09</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="news_list">
-          <div class="news_title">
-            <h3>行业新闻</h3>
+            <h3 >{{item.name}}</h3>
             <span>全部></span>
           </div>
           <ul>
@@ -143,7 +117,6 @@
       <section @click = "gotoAddress({path: '/', query: {geohash}})" class="footer_nav_item" style="padding: 0;">
         <div class="home-img">
           <img src="../../images/banner.png" alt="">
-        <span>首页</span>
         </div>
       </section>
       <section @click = "gotoAddress({path: '/', query: {geohash}})" class="footer_nav_item">
@@ -161,6 +134,7 @@
 
 <script>
 import { Tab, TabItem} from 'vux'
+import {shouyeNews} from 'src/service/getData'
 
 export default {
   components: {
@@ -169,8 +143,8 @@ export default {
   },
   data () {
     return {
-    
       active_tab: 'news',
+       newslist:[],
     }
   },
   methods:{
@@ -179,8 +153,15 @@ export default {
       },
     gotoAddress(path){
         this.$router.push(path)
-      }
-    }
+      },
+    },
+    mounted(){
+        shouyeNews().then(res => {
+          this.newslist=res.data;
+          console.log(this.newslist);
+        });
+        
+    },
 }
 </script>
 
@@ -195,7 +176,7 @@ export default {
 }
   .banner{
     width: 100%;
-    height: 13rem;
+    height: 9rem;
     background: url(../../images/banner.png) no-repeat;
     background-size: 100% 100%;
   }
@@ -226,24 +207,24 @@ export default {
    }
    .module_block_a img{
     display: block;
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     margin: 0 auto;
    }
    .module_block_a p{
-    font-size: .8rem;
+    font-size: .5rem;
     color: #343434;
-    line-height: 1.5rem;
+    line-height: 1rem;
    }
   .hot_title{
     padding: 10px 1rem;
     border-bottom: 1px solid #e9e9e9;
-    line-height: 1.5rem;
+    line-height: 1rem;
     text-align: left;
   }
   .hot_title h2{
     display: inline-block;
-    font-size: 1rem;
+    font-size: .6rem;
     border-left: 3px solid #5ebf83;
     padding-left: 5px;
     color: #343434;
@@ -259,26 +240,27 @@ export default {
       margin: 0 auto;
    }
    .hot_module_a p{
-    font-size: 1rem;
+    font-size: .6rem;
     color: #343434;
-    line-height: 2.5rem;
+    line-height: 2rem;
    }
    .more_link{
     float: right;
     color: #656565;
-    font-size: .8rem;
+    font-size: .5rem;
    }
    .news_list{
+    padding-top: .5rem;
    }
    .news_title{
     width: 100%;
-    padding: 10px 1rem;
-    line-height: 1.5rem;
+    padding: 0 1rem;
+    line-height: 1rem;
     text-align: left;
    }
    .news_title h3{
     display: inline-block;
-    font-size: 1rem;
+    font-size: .6rem;
     padding:0 5px;
     color: #fff;
     background: #5ebf83;
@@ -287,7 +269,7 @@ export default {
    .news_title span{
     float: right;
     color: #656565;
-    font-size: .8rem;
+    font-size: .5rem;
    }
    .news_list_li{
     padding: 10px 1rem;
@@ -296,17 +278,17 @@ export default {
    .news_list_li p{
     width: 100%;
     color: #343434;
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-size: .7rem;
+    line-height: 1rem;
     text-align: left;;
    }
    .news_imfor_box{
-    margin-top: .52rem;
+    margin-top: .5rem;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    font-size: .8rem;
+    font-size: .5rem;
     color: #333;
    }
    .news_imfor_txt{
@@ -328,7 +310,6 @@ export default {
     display: -ms-flexbox;
     display: flex;
     width: 100%;
-    height: 4rem;
     background: url(../../images/footer_navBg.png) no-repeat center;
     background-size: 100% 100%;
    }
@@ -342,26 +323,24 @@ export default {
     flex-direction: column;
     -ms-flex-align: center;
     align-items: center;
-    padding-top: 1rem;
+    padding-top: .7rem;
    }
   .footer_nav_item img{
     width: 1rem;
     height: 1rem;
-    margin-top: .3rem;
+    margin-top: .1rem;
     fill: #ccc;
   }
   .footer_nav_item span{
     font-size: .45rem;
     color: #656565;
-    line-height: 1.5rem;
   }
   .footer_nav_item .home-img{
    background: #5ebf83;
-    margin-top: .5rem;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
-
+    border: 5px solid #fff;
   }
   .footer_nav_item .home-img img{
     display: block;
