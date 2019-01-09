@@ -20,7 +20,6 @@ Vue.prototype.$ajax = axios;
 new Vue({
   el: '#app',
   router,
-  store,
   components: { App },
   template: '<App/>'
 })
