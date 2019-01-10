@@ -10,15 +10,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-        '/app':{
-            target:'http://zdapp.808w.com',
-            changeOrigin:true,
-            pathRewrite:{
-                '^/app':'/app'
-            }
-        },
-    },
+    proxyTable: {},
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
