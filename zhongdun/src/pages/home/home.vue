@@ -538,6 +538,7 @@ export default {
     width: 100%;
     background: url(../../images/footer_navBg.png) no-repeat center;
     background-size: 100% 100%;
+    height: 2.6rem;
    }
    .footer_nav_item{
     -ms-flex: 1;
