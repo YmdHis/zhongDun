@@ -6,21 +6,10 @@ const path = require('path')
 
 module.exports = {
   dev: {
-    env: {
-        NODE_ENV: '"development"'
-    },
-    // Paths
+    env: require('./dev.env'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-        '/app':{
-            target:'http://zdapp.808w.com',
-            changeOrigin:true,
-            pathRewrite:{
-                '^/app':'/app'
-            }
-        },
-    },
+    proxyTable: {},
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -54,21 +43,11 @@ module.exports = {
   },
 
   build: {
-    env: {
-        NODE_ENV: '"production"'
-    },
-    // Template for index.html
+    env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
-
-    // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
-
-    /**
-     * Source Maps
-     */
-
     productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',

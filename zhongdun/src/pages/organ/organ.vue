@@ -21,7 +21,7 @@
 
 <script>
 import { Tab, TabItem, Popup, XSwitch, Cell, Group, XButton,TransferDom  } from 'vux'
-import {shouyeNews} from 'src/service/getData'
+import {shouyeNews} from 'src/service/api'
 
 export default {
   directives: {
