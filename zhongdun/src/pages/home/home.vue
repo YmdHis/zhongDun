@@ -144,7 +144,7 @@
 
 <script>
 import { Tab, TabItem} from 'vux'
-import {shouyeNews} from 'src/service/getData'
+import {shouyeNews} from 'src/service/api'
 import {formatDate} from 'src/assets/js/time'
 export default {
   components: {
@@ -157,7 +157,7 @@ export default {
        newslist:[],
     }
   },
-   filters: {
+  filters: {
      formatDate(time) {
         var date = new Date(time * 1000);
         return formatDate(date, 'yyyy-MM-dd');
@@ -170,14 +170,13 @@ export default {
     gotoAddress(path){
         this.$router.push(path)
       }
-    },
-    mounted(){
-        shouyeNews().then(res => {
-          this.newslist=res.data;
-          console.log(this.newslist);
-        });
-        
-    },
+  },
+  mounted(){
+    shouyeNews().then(res => {
+      this.newslist = res.data;
+      console.log(this.newslist);
+    });    
+  },
 }
 </script>
 
