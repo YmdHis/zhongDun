@@ -1,6 +1,24 @@
 <template>
   <div id="home">
-    <div class="banner"></div>
+    <div class="banner">
+      <div class="header_box clear">
+        <div class="header_address">
+           <router-link to="/" class="header_address_a">
+            武汉
+         </router-link>
+        </div>
+        <div class="header_search">
+          <img src="../../images/sear_icon.png" alt="" class="header_search_icon">
+          <input type="text" placeholder="请输入机构名称">
+          <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
+        </div>
+        <div class="header_login">
+           <router-link to="/login" class="header_login_a">
+            登录
+         </router-link>
+        </div>
+      </div>
+    </div>
     <div class="module_block">
       <div class="module_block_list">
          <router-link to="/enter" class="module_block_a">
@@ -57,14 +75,6 @@
             <p>在线报名</p>
            <img src="../../images/banner.png" alt="">
         </router-link>
-         <router-link to="/enter" class="hot_module_a">
-            <p>在线报名</p>
-           <img src="../../images/banner.png" alt="">
-        </router-link>
-         <router-link to="/enter" class="hot_module_a">
-            <p>在线报名</p>
-           <img src="../../images/banner.png" alt="">
-        </router-link>
       </div>
     </div>
      <div class="module_block home-last">
@@ -73,7 +83,7 @@
         <tab-item @on-item-click="onClick('course')">课程精选</tab-item>
         <tab-item  @on-item-click="onClick('video')">免费试听</tab-item>
       </tab>
-      <div class="grid-demo" v-if="active_tab=='news'">
+      <div class="news_box" v-if="active_tab=='news'">
         <div class="news_list" v-for="item in newslist">
           <div class="news_title">
             <h3 >{{item.name}}</h3>
@@ -103,7 +113,47 @@
               <section >
                 <img src="../../images/banner.png" alt="" class="course_img">
               </section>
-              <div></div>
+              <div class="course_txt">
+                <p class="course_txt_title">
+                  <span class="ellipsis">制冷与空调安装维修</span>
+                  <i></i>
+                </p>
+                <p class="course_price">￥850</p>
+                <div class="course_class">
+                  <span>制冷空调(初训)</span>
+                </div>
+                <div class="course_box_btn">
+                  <router-link :to="{path: '/', query: {}}"  class="course_btn">
+                    试听
+                  </router-link>
+                  <router-link :to="{path: '/', query: {}}"  class="course_btn">
+                    购买
+                  </router-link>
+                </div>
+              </div>
+            </li>
+            <li class="course_li">
+              <section >
+                <img src="../../images/banner.png" alt="" class="course_img">
+              </section>
+              <div class="course_txt">
+                <p class="course_txt_title">
+                  <span class="ellipsis">制冷与空调安装维修</span>
+                  <i></i>
+                </p>
+                <p class="course_price">￥850</p>
+                <div class="course_class">
+                  <span>制冷空调(初训)</span>
+                </div>
+                <div class="course_box_btn">
+                  <router-link :to="{path: '/', query: {}}"  class="course_btn">
+                    试听
+                  </router-link>
+                  <router-link :to="{path: '/', query: {}}"  class="course_btn">
+                    购买
+                  </router-link>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -112,6 +162,24 @@
          <div class="news_title">
             <h3>课程列表</h3>
             <span>全部></span>
+          </div>
+          <div class="video_list">
+            <router-link to="/enter" class="video_list_a">
+              <img src="../../images/banner.png" alt="">
+              <p class="ellipsis">电气作业(初训)</p>
+            </router-link>
+             <router-link to="/enter" class="video_list_a">
+              <img src="../../images/banner.png" alt="">
+              <p class="ellipsis">电气作业(初训)</p>
+            </router-link>
+             <router-link to="/enter" class="video_list_a">
+              <img src="../../images/banner.png" alt="">
+              <p class="ellipsis">电气作业(初训)</p>
+            </router-link>
+            <router-link to="/enter" class="video_list_a">
+              <img src="../../images/banner.png" alt="">
+              <p class="ellipsis">电气作业(初训)</p>
+            </router-link>
           </div>
       </div>
     </div>
@@ -191,10 +259,62 @@ export default {
     white-space: nowrap;
 }
   .banner{
+    position: relative;
     width: 100%;
     height: 9rem;
     background: url(../../images/banner.png) no-repeat;
     background-size: 100% 100%;
+  }
+  .header_box{
+    position: relative;
+    padding: .5rem;
+    width: 100%;
+  }
+  .header_address{
+    float: left;
+    font-size: .7rem;
+    width: 3rem;
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: .5rem;
+    float: left;
+    background: url(../../images/add_icon.png) no-repeat left center;
+  }
+  .header_search img{
+    vertical-align: middle;
+  }
+  .header_search input{
+    width: 6rem;
+  }
+  .header_search .header_search_icon{
+    width: 1rem;
+  }
+  .header_search .header_search_sy{
+    height: 1rem;
+  }
+  .header_address_a{
+    color: #808080;
+  }
+  .header_search {
+   float: left;
+    font-size: .7rem;
+    width: 9rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    background: #fff;
+    border-radius: 1rem;
+    position: relative;
+    margin: 0 .5rem;
+  }
+  .header_login{
+    float: left;
+    width: 2rem;
+    line-height: 1.5rem;
+    text-align:center;
+  }
+  .header_login_a{
+     font-size: .7rem;
+     color: #5ebf83;
   }
   .module_block{
  /*   padding: 0 20px;*/
@@ -327,6 +447,82 @@ export default {
     display: block;
     margin-right: .5rem;
    }
+   .course_txt{
+    width: 100%;
+    position: relative;
+    text-align:left;
+   }
+   .course_txt_title{
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-pack: justify;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    font-size: .5rem;
+    color: #333;
+   }
+   .course_txt_title i{
+    float:right;
+    width: 3rem;
+      background: url(../../images/course_icon.png) no-repeat;
+    background-size: 100% 100%;
+   }
+   .course_txt_title span{
+   font-size: .6rem;
+    font-weight: bold;
+    display: block;
+    width: 70%;
+    text-align: left;
+   }
+   .course_price{
+    font-size: .6rem;
+    line-height: 1.5rem;
+   }
+   .course_class{
+     font-size: .6rem;
+    color: #656565;
+   }
+   .course_box_btn{
+    position: absolute;
+    right: 0;
+    bottom: .1rem;
+   }
+  .course_btn{
+    font-size: .5rem;
+    color: #5ebf83;
+    border: 1px solid #5ebf83;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: .2rem;
+    padding: .1rem .3rem;
+  }
+  .video_list{
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-top: .5rem; 
+  }
+  .video_list_a{
+    width: 50%;
+  }
+  .video_list_a img{
+    display: block;
+    width: 7rem;
+    height: 4rem;
+    margin: 0 auto;
+  }
+  .video_list_a p{
+    font-size: .6rem;
+    padding: .5rem 0;
+  }
    .home-last{
     margin-bottom: 3rem; 
    }
