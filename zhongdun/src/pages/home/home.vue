@@ -57,6 +57,14 @@
             <p>在线报名</p>
            <img src="../../images/banner.png" alt="">
         </router-link>
+         <router-link to="/enter" class="hot_module_a">
+            <p>在线报名</p>
+           <img src="../../images/banner.png" alt="">
+        </router-link>
+         <router-link to="/enter" class="hot_module_a">
+            <p>在线报名</p>
+           <img src="../../images/banner.png" alt="">
+        </router-link>
       </div>
     </div>
      <div class="module_block home-last">
@@ -72,37 +80,39 @@
             <span>全部></span>
           </div>
           <ul>
-            <li class="news_list_li">
+            <li class="news_list_li" v-for="list in item.articles">
               <p class="ellipsis">
-                特种作业人员安全技术培训考核管理规定
+                {{list.post_title}}
               </p>
               <div class="news_imfor_box">
-                <span class="news_imfor_txt">安培教育</span>
-                <span class="news_time">2019.01.09</span>
-              </div>
-            </li>
-            <li class="news_list_li">
-              <p class="ellipsis">
-                特种作业人员安全技术培训考核管理规定
-              </p>
-              <div class="news_imfor_box">
-                <span class="news_imfor_txt">安培教育</span>
-                <span class="news_time">2019.01.09</span>
+                <span class="news_imfor_txt">众盾安全</span>
+                <span class="news_time">{{list.published_time | formatDate}}</span>
               </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="novice-demo" v-if="active_tab=='course'">
-       <div>
+      <div class="course_box" v-if="active_tab=='course'">
+        <div class="news_title">
+          <h3>课程列表</h3>
+          <span>全部></span>
+        </div>
+        <div class="course_list">
+          <ul>
+            <li class="course_li">
+              <section >
+                <img src="../../images/banner.png" alt="" class="course_img">
+              </section>
+              <div></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+       <div class="video_box" v-if="active_tab=='video'">
          <div class="news_title">
             <h3>课程列表</h3>
             <span>全部></span>
           </div>
-       </div>
-      </div>
-       <div class="novice-demo" v-if="active_tab=='video'">
-        sp
       </div>
     </div>
     <div class="footer_nav">
@@ -135,7 +145,7 @@
 <script>
 import { Tab, TabItem} from 'vux'
 import {shouyeNews} from 'src/service/getData'
-
+import {formatDate} from 'src/assets/js/time'
 export default {
   components: {
     Tab,
@@ -147,13 +157,19 @@ export default {
        newslist:[],
     }
   },
+   filters: {
+     formatDate(time) {
+        var date = new Date(time * 1000);
+        return formatDate(date, 'yyyy-MM-dd');
+      }
+  },
   methods:{
     onClick(state){
         this.active_tab = state;
       },
     gotoAddress(path){
         this.$router.push(path)
-      },
+      }
     },
     mounted(){
         shouyeNews().then(res => {
@@ -249,7 +265,9 @@ export default {
     color: #656565;
     font-size: .5rem;
    }
-   .news_list{
+   .news_list,
+   .course_box,
+   .video_box{
     padding-top: .5rem;
    }
    .news_title{
@@ -296,6 +314,18 @@ export default {
    }
    .news_time{
     color: #666;
+   }
+   .course_li{
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: .025rem solid #f1f1f1;
+    padding: .7rem .8rem;
+   }
+   .course_img{
+    width: 5rem;
+    height: 3rem;
+    display: block;
+    margin-right: .5rem;
    }
    .home-last{
     margin-bottom: 3rem; 
