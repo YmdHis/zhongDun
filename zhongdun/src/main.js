@@ -7,7 +7,6 @@ import store from './store/'
 import ajax from './config/ajax'
 import './config/rem'
 import '@/assets/css/app.css'/*引入公共样式*/
-import '@/assets/js/until'/*引入公共js*/
 
 Vue.config.productionTip = false
 
