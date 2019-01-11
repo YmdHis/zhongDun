@@ -4,6 +4,7 @@
       <div class="header_box clear">
         <div class="header_address">
            <router-link to="/" class="header_address_a">
+            <img src="../../images/add_icon.png" alt="" class="header_address_icon">
             武汉
          </router-link>
         </div>
@@ -22,58 +23,58 @@
     <div class="module_block">
       <div class="module_block_list">
          <router-link to="/enter" class="module_block_a">
-            <img src="../../images/banner.png" alt="">
+            <img src="../../images/icon1.png" alt="">
             <p>在线报名</p>
          </router-link>
          <router-link to="/enter" class="module_block_a">
-            <img src="../../images/banner.png" alt="">
-            <p>在线报名</p>
+            <img src="../../images/icon2.png" alt="">
+            <p>课程学习</p>
          </router-link>
          <router-link to="/enter" class="module_block_a">
-            <img src="../../images/banner.png" alt="">
-            <p>在线报名</p>
+            <img src="../../images/icon3.png" alt="">
+            <p>发现问题</p>
          </router-link>
          <router-link to="/enter" class="module_block_a">
-            <img src="../../images/banner.png" alt="">
-            <p>在线报名</p>
+            <img src="../../images/icon4.png" alt="">
+            <p>试题学习</p>
          </router-link>
          <router-link to="/enter" class="module_block_a">
-            <img src="../../images/banner.png" alt="">
-            <p>在线报名</p>
+            <img src="../../images/icon5.png" alt="">
+            <p>机构介绍</p>
          </router-link>
          <router-link to="/enter" class="module_block_a">
-            <img src="../../images/banner.png" alt="">
-            <p>在线报名</p>
+            <img src="../../images/icon6.png" alt="">
+            <p>个人中心</p>
          </router-link>
          <router-link to="/enter" class="module_block_a">
-            <img src="../../images/banner.png" alt="">
-            <p>在线报名</p>
+            <img src="../../images/icon7.png" alt="">
+            <p>证书查询</p>
          </router-link>
          <router-link to="/enter" class="module_block_a">
-            <img src="../../images/banner.png" alt="">
-            <p>在线报名</p>
+            <img src="../../images/icon8.png" alt="">
+            <p>VIP专区</p>
          </router-link>
       </div>
     </div>
-    <div class="module_block hot_module">
+    <div class="module_block hot_module" >
       <div class="hot_title">
         <h2>
           热门中心
         </h2>
         <router-link to="/enter" class="more_link">全部></router-link>
       </div>
-      <div class="module_block_list hot_module_list">
+      <div class="module_block_list hot_module_list" style="padding-bottom: 0;">
         <router-link to="/enter" class="hot_module_a">
-            <p>在线报名</p>
-           <img src="../../images/banner.png" alt="">
+            <p>报名</p>
+           <img src="../../images/bao1.png" alt="">
         </router-link>
         <router-link to="/enter" class="hot_module_a">
-            <p>在线报名</p>
-           <img src="../../images/banner.png" alt="">
+            <p>机构介绍</p>
+           <img src="../../images/bao2.png" alt="">
         </router-link>
-         <router-link to="/enter" class="hot_module_a">
-            <p>在线报名</p>
-           <img src="../../images/banner.png" alt="">
+         <router-link to="/enter" class="hot_module_a" style="border-right: none;">
+            <p>重点资讯</p>
+           <img src="../../images/bao3.png" alt="">
         </router-link>
       </div>
     </div>
@@ -165,20 +166,20 @@
           </div>
           <div class="video_list">
             <router-link to="/enter" class="video_list_a">
-              <img src="../../images/banner.png" alt="">
+              <img src="../../images/leson1.jpg" alt="">
               <p class="ellipsis">电气作业(初训)</p>
             </router-link>
              <router-link to="/enter" class="video_list_a">
-              <img src="../../images/banner.png" alt="">
-              <p class="ellipsis">电气作业(初训)</p>
+              <img src="../../images/leson2.jpg" alt="">
+              <p class="ellipsis">高压电工作业</p>
             </router-link>
              <router-link to="/enter" class="video_list_a">
-              <img src="../../images/banner.png" alt="">
-              <p class="ellipsis">电气作业(初训)</p>
+              <img src="../../images/leson3.jpg" alt="">
+              <p class="ellipsis">制冷工作业</p>
             </router-link>
             <router-link to="/enter" class="video_list_a">
-              <img src="../../images/banner.png" alt="">
-              <p class="ellipsis">电气作业(初训)</p>
+              <img src="../../images/leson4.jpg" alt="">
+              <p class="ellipsis">继电保护作业</p>
             </router-link>
           </div>
       </div>
@@ -260,8 +261,8 @@ export default {
   .banner{
     position: relative;
     width: 100%;
-    height: 9rem;
-    background: url(../../images/banner.png) no-repeat;
+    height: 8rem;
+    background: url(../../images/banner.jpg) no-repeat;
     background-size: 100% 100%;
   }
   .header_box{
@@ -273,11 +274,12 @@ export default {
     float: left;
     font-size: .7rem;
     width: 3rem;
-    height: 2rem;
-    line-height: 2rem;
+    height:1.2rem;
+    line-height: 1.2rem;
     padding-left: .5rem;
-    float: left;
-    background: url(../../images/add_icon.png) no-repeat left center;
+  }
+  .header_address_icon{
+    height: .6rem;
   }
   .header_search img{
     vertical-align: middle;
@@ -286,10 +288,10 @@ export default {
     width: 6rem;
   }
   .header_search .header_search_icon{
-    width: 1rem;
+    width: .6rem;
   }
   .header_search .header_search_sy{
-    height: 1rem;
+    height: .6rem;
   }
   .header_address_a{
     color: #808080;
@@ -298,8 +300,8 @@ export default {
    float: left;
     font-size: .7rem;
     width: 9rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
     background: #fff;
     border-radius: 1rem;
     position: relative;
@@ -308,7 +310,7 @@ export default {
   .header_login{
     float: left;
     width: 2rem;
-    line-height: 1.5rem;
+    line-height: 1rem;
     text-align:center;
   }
   .header_login_a{
@@ -328,13 +330,14 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
+    margin-bottom: .8rem;
+    padding-bottom: .8rem;
+     border-bottom: 1px solid #e9e9e9;
 
    }
    .module_block_a{
     width: 25%;
-    padding-top: 1rem;
+    padding-top: .8rem;
    /* display: -ms-flexbox;
     display: flex;*/
     -ms-flex-pack: center;
@@ -354,6 +357,7 @@ export default {
   .hot_title{
     padding: 10px 1rem;
     border-bottom: 1px solid #e9e9e9;
+    border-top: 1px solid #e9e9e9;
     line-height: 1rem;
     text-align: left;
   }
@@ -367,11 +371,12 @@ export default {
    .hot_module_a{
     width: 33.33%;
     padding: .3rem 0;
+    border-right: 1px solid #e9e9e9;
    }
    .hot_module_a img{
       display: block;
       width: 4rem;
-      height: 4rem;
+     /* height: 4rem;*/
       margin: 0 auto;
    }
    .hot_module_a p{
@@ -524,6 +529,7 @@ export default {
   }
    .home-last{
     margin-bottom: 3rem; 
+    border-top: 1px solid #e9e9e9;
    }
    .footer_nav{
     position: fixed;
