@@ -526,6 +526,7 @@ export default {
   .video_list_a p{
     font-size: .6rem;
     padding: .5rem 0;
+    color: #333;
   }
    .home-last{
     margin-bottom: 3rem; 
