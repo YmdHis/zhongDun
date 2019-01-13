@@ -10,7 +10,7 @@
 					<div>选择考试城市</div>
 					<div>       
 						<router-link  to="city">
-							<span>北京市</span>
+							<span style="font-size:0.6rem;color:#999">北京市</span>
 							<span> <x-icon type="ios-arrow-forward" size="17" style="vertical-align: middle;color:#999"></x-icon></span>
 						</router-link>
 					</div>
@@ -21,7 +21,7 @@
 			<div id="jieduan">
 				<p class="ex-choose-city" @click="lk">学习阶段</p>
 				<div>
- 				     <x-button  mini plain style="border-radius:99px;margin-right:0.12rem" v-for="item in wpList" :key="item.name"
+ 				     <x-button  mini plain style="border-radius:99px;margin-right:0.4rem;padding-left:0.4rem" v-for="item in wpList" :key="item.name"
 					    :class="{active : active == item.name}" 
 					    @click.native="selected(item.name)">
 						{{item.name}}
@@ -182,28 +182,28 @@ import { TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast, XAddress, Chi
       min-height: 100vh;  
       /* 设置主轴方向 */
       flex-direction: column;   }
-	.ex-next{height:1.5rem;background: #5ebf83;color:#FFF;line-height:1.5rem; position: fixed;
-		bottom:0;font-size:0.4rem;
-		width:100%;height: 1.5rem;text-align:center;}
-	#topbg{background: url(../../assets/images/topbg.png);height: 3.4rem;background-size:cover;background-repeat: no-repeat;overflow:hidden;}
-	#topbg>div{color:#ffffff;font-size:0.56rem;text-align:center;padding-top:1rem;}
-	#choosecity{overflow:hidden;padding:0.4rem 0.4rem;background:#FFF;vertical-align: middle;}
+	.ex-next{height:2rem;background: #5ebf83;color:#FFF;line-height:2rem; position: fixed;
+		bottom:0;font-size:0.66rem;
+		width:100%;text-align:center;}
+	#topbg{background: url(../../assets/images/topbg.png);height: 5rem;background-size:cover;background-repeat: no-repeat;overflow:hidden;}
+	#topbg>div{color:#ffffff;font-size:0.8rem;text-align:center;padding-top:2rem;}
+	#choosecity{overflow:hidden;padding:0.4rem 0.4rem;background:#FFF;line-height:1.2rem;}
 	#choosecity>div:nth-of-type(1){
-		float:left;font-size:0.45rem;font-weight: bold;color:#444;
+		float:left;font-size:0.66rem;color:#111;
 	}
 	#choosecity>div:nth-of-type(2){
 		color:#999 ;
 		float:right;
 	}
 	#jieduan{margin-top:0.3rem;background:#FFF;padding:0.4rem;}
-	.ex-choose-city{font-weight:bold;font-size:0.44rem;color:#505050;}
-	#ex-gongzhong{padding:0.4rem;background:#FFF;}
+	.ex-choose-city{font-weight:bold;font-size:0.67rem;color:#505050;}
+	#ex-gongzhong{padding:0.4rem;padding-top:0.8rem;background:#FFF;}
 	.ex-gongzhong-ul{}
-	.ex-gongzhong-li{margin-top:0.3rem;width:20%;margin-right:5%;overflow:hidden;display: inline-block}
+	.ex-gongzhong-li{margin-top:0.8rem;width:20%;margin-right:5%;overflow:hidden;display: inline-block}
 	.ex-gongzhong-li:nth-of-type(4n){margin-right:0;}
 	.ex-gongzhong-li>div{display: block;}
-	.ex-gongzhong-li>div>img{width:1rem;height:1rem;display: block;margin:0 auto;}
-	.ex-gongzhong-li>div>p{text-align:center;margin:0.3rem 0;color:#999;}
+	.ex-gongzhong-li>div>img{width:1.5rem;height:1.5rem;display: block;margin:0 auto;}
+	.ex-gongzhong-li>div>p{text-align:center;margin:0.3rem 0;color:#999;font-size:0.6rem;}
 	.emptyitem{
 		width:0;
 		visibility: hidden;
