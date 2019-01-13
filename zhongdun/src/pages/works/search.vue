@@ -25,7 +25,7 @@
 <div id="search_con">
   <div class="serach_history">
     <p class="searchtit">历史搜索</p>
-    <div style="border:1px solid #fff;min-height: 2.2rem;height:2.2rem;overflow:hidden" id="searcha">
+    <div style="border:1px solid #fff;min-height: 3.4rem;height:2.2rem;overflow:hidden" id="searcha">
       <div>专工考证</div>
       <div>专业制冷工考证</div>
       <div>专业制冷证</div>
@@ -134,8 +134,8 @@ function getResult (val) {
 }
 </script>
 <style type="text/css">
-#searchbox{padding-top:0.6rem;background: url(../../assets/images/topbg.png);height: 4.4rem;background-size:cover;background-repeat: no-repeat;overflow:hidden; }
-  #searchbox .weui-search-bar{background: transparent;}
+#searchbox{padding-top:0.8rem;background: url(../../assets/images/topbg.png);height: 6rem;background-size:cover;background-repeat: no-repeat;overflow:hidden; }
+  #searchbox .weui-search-bar{background: transparent;font-size:0.66rem;}
   #searchbox .weui-search-bar__cancel-btn{color:#333;padding-top:0.1rem;}
   #searchbox form{padding:0.1rem 0;border-radius:0.8rem;}
   #searchbox .weui-search-bar:before,#searchbox .weui-search-bar:after{border:none;}
@@ -145,14 +145,14 @@ function getResult (val) {
   }
   #search_con{border-radius:0.3rem;position: relative;top:-1.02rem;background: #FFF;overflow:hidden;}
   #searchbox .vux-search-fixed{position: relative !important;background: transparent !important;}
-  #search_kinds{display: flex;justify-content: space-around;margin-top:0.3rem;}
-    #search_kinds>div{font-size:0.42rem;padding-bottom:0.2rem;}
+  #search_kinds{display: flex;justify-content: space-around;margin-top:0.38rem;}
+    #search_kinds>div{font-size:0.62rem;padding-bottom:0.2rem;}
    .serach_history{
       padding:0.4rem;
       background: #FFF
     }
-  .searchtit{font-size:0.43rem;color:#333;font-weight:bold;margin-bottom:0.5rem;margin-top:0.4rem;}
+  .searchtit{font-size:0.67rem;color:#333;font-weight:bold;margin-bottom:0.5rem;margin-top:0.4rem;}
   .serach_history>div{padding:0 0.2rem}
-  .serach_history>div>div{display: inline-block;background:#f1f0f0;padding:0.15rem 0.3rem;border-radius:0.2rem;margin-bottom:0.3rem;}
+  .serach_history>div>div{font-size:0.62rem;display: inline-block;background:#f1f0f0;padding:0.15rem 0.3rem;border-radius:0.2rem;margin-bottom:0.3rem;}
 
 </style>
