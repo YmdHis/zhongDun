@@ -7,13 +7,11 @@
 			</div>
 			<div>
 				<div id="choosecity">	
-					<div>选择考试城市</div>
-					<div>       
-						<router-link  to="city">
-							<span style="font-size:0.6rem;color:#999">北京市</span>
-							<span> <x-icon type="ios-arrow-forward" size="17" style="vertical-align: middle;color:#999"></x-icon></span>
-						</router-link>
-					</div>
+				  <div>
+				    <group>
+				      <x-address @on-hide="logHide" @on-show="logShow" :title="title" v-model="value" :list="addressData" @on-shadow-change="onShadowChange" placeholder="" inline-desc="请选择考试城市" :show.sync="showAddress"></x-address>
+				    </group>
+				  </div>
 				</div>
 			</div>
 			<!--上部分 E-->
@@ -59,13 +57,24 @@
 	</div>
 </template>
 <script type="text/javascript">
-import { TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast, XAddress, ChinaAddressData } from 'vux'
+import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast,
+ Value2nameFilter as value2name } from 'vux'
 	export default{
 		 directives: {
 		    TransferDom
 		  },
 		data() {
 		    return {
+		      title:'',
+		      value_0_1: [],
+		      value: [],
+		      title2: '设置值',
+		      value2: ['天津市', '市辖区', '和平区'],
+		      value3: ['广东省', '中山市', '--'],
+		      addressData: ChinaAddressV4Data,
+		      value4: [],
+		      value5: ['广东省', '深圳市', '南山区'],
+		      showAddress: false,
 		      show13: false,
 		      wpList: [
 		        {
@@ -135,11 +144,12 @@ import { TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast, XAddress, Chi
 		    		id:'6',
 		    		name:'电工作业6',
 		    		imgsrc:require('@/assets/images/courseico.png')
-		    	},
+		    	}
 		   	 ]
 		    }
 		  },
 		components: {
+			XAddress,
 		    Popup,
 		    Group,
 		    Cell,
@@ -165,7 +175,34 @@ import { TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast, XAddress, Chi
 				if(children){
 					this.show13=true
 			    }
-			}
+			},
+			doShowAddress () {
+		      this.showAddress = true
+		      setTimeout(() => {
+		        this.showAddress = false
+		      }, 2000)
+		    },
+		    onShadowChange (ids, names) {
+		      console.log(ids, names)
+		    },
+		    changeData () {
+		      this.value2 = ['430000', '430400', '430407']
+		    },
+		    changeDataByLabels () {
+		      this.value2 = ['广东省', '广州市', '天河区']
+		    },
+		    changeDataByLabels2 () {
+		      this.value2 = ['广东省', '中山市', '--']
+		    },
+		    getName (value) {
+		      return value2name(value, ChinaAddressV4Data)
+		    },
+		    logHide (str) {
+		      console.log('on-hide', str)
+		    },
+		    logShow (str) {
+		      console.log('on-show')
+		    }
 		 }
 	}
 </script>
@@ -183,18 +220,11 @@ import { TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast, XAddress, Chi
       /* 设置主轴方向 */
       flex-direction: column;   }
 	.ex-next{height:2rem;background: #5ebf83;color:#FFF;line-height:2rem; position: fixed;
-		bottom:0;font-size:0.66rem;
+		bottom:0;font-size:0.64rem;
 		width:100%;text-align:center;}
 	#topbg{background: url(../../assets/images/topbg.png);height: 5rem;background-size:cover;background-repeat: no-repeat;overflow:hidden;}
 	#topbg>div{color:#ffffff;font-size:0.8rem;text-align:center;padding-top:2rem;}
-	#choosecity{overflow:hidden;padding:0.4rem 0.4rem;background:#FFF;line-height:1.2rem;}
-	#choosecity>div:nth-of-type(1){
-		float:left;font-size:0.66rem;color:#111;
-	}
-	#choosecity>div:nth-of-type(2){
-		color:#999 ;
-		float:right;
-	}
+	#choosecity .vux-popup-picker-value{font-size:0.66rem;}
 	#jieduan{margin-top:0.3rem;background:#FFF;padding:0.4rem;}
 	.ex-choose-city{font-weight:bold;font-size:0.67rem;color:#505050;}
 	#ex-gongzhong{padding:0.4rem;padding-top:0.8rem;background:#FFF;}
