@@ -26,5 +26,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-	 @vux-header-title: #000;
+  @import '~vux/src/styles/1px.less';
+  @import '~vux/src/styles/center.less';
+  
 </style>
