@@ -3,9 +3,9 @@
     <div class="banner">
       <div class="header_box clear">
         <div class="header_address">
-           <section class="header_address_a" @click="getLocation()">
+           <section class="header_address_a ellipsis">
             <img src="../../images/add_icon.png" alt="" class="header_address_icon">
-            武汉
+            {{LocationCity}}
          </section>
         </div>
         <div class="header_search">
@@ -216,6 +216,7 @@ import { Tab, TabItem} from 'vux'
 import {shouyeNews} from 'src/service/api'
 import {formatDate} from 'src/assets/js/time'
 import BMap from 'BMap'
+
 export default {
   components: {
     Tab,
@@ -224,7 +225,8 @@ export default {
   data () {
     return {
       active_tab: 'news',
-       newslist:[],
+      newslist:[],
+      LocationCity:"定位中",
     }
   },
   filters: {
@@ -241,37 +243,25 @@ export default {
         this.$router.push(path)
       },
     getLocation(){
-      // 百度地图API功能
-    var geolocation = new BMap.Geolocation();
-    geolocation.getCurrentPosition(function(r){
-      if(this.getStatus() == BMAP_STATUS_SUCCESS){
-        var mk = new BMap.Marker(r.point);  
-        console.log("lng:"+r.point.lng);
-        console.log("lat:"+r.point.lat);
-      }
-      else {
-        console.log('failed'+this.getStatus());
-      }        
-    },{enableHighAccuracy: true})
-    //关于状态码
-    //BMAP_STATUS_SUCCESS 检索成功。对应数值“0”。
-    //BMAP_STATUS_CITY_LIST 城市列表。对应数值“1”。
-    //BMAP_STATUS_UNKNOWN_LOCATION  位置结果未知。对应数值“2”。
-    //BMAP_STATUS_UNKNOWN_ROUTE 导航结果未知。对应数值“3”。
-    //BMAP_STATUS_INVALID_KEY 非法密钥。对应数值“4”。
-    //BMAP_STATUS_INVALID_REQUEST 非法请求。对应数值“5”。
-    //BMAP_STATUS_PERMISSION_DENIED 没有权限。对应数值“6”。(自 1.1 新增)
-    //BMAP_STATUS_SERVICE_UNAVAILABLE 服务不可用。对应数值“7”。(自 1.1 新增)
-    //BMAP_STATUS_TIMEOUT 超时。对应数值“8”。(自 1.1 新增)
+      let _this = this;
+      const geolocation = new BMap.Geolocation();
+      geolocation.getCurrentPosition(function getinfo(position){
+          let city = position.address.city;
+          _this.LocationCity = city;
+          //console.log(city);
+      }, function(e) {
+          _this.LocationCity = "定位失败"
+          //console.log('fail');
+      }, {provider: 'baidu'});
     }
   },
   mounted(){
     shouyeNews().then(res => {
       this.newslist = res.data;
       console.log(this.newslist);
-    });    
+    }),
+    this.getLocation();  
   },
-
 }
 </script>
 
@@ -299,7 +289,7 @@ export default {
   .header_address{
     float: left;
     font-size: .7rem;
-    width: 3rem;
+    width: 3.2rem;
     height:1.2rem;
     line-height: 1.2rem;
     padding-left: .5rem;
@@ -312,6 +302,7 @@ export default {
   }
   .header_search input{
     width: 6rem;
+    text-align: center;
   }
   .header_search .header_search_icon{
     width: .6rem;
@@ -321,17 +312,19 @@ export default {
   }
   .header_address_a{
     color: #808080;
+    font-size: .2rem;
   }
   .header_search {
    float: left;
     font-size: .7rem;
-    width: 9rem;
+    width: 8.8rem;
     height: 1.2rem;
     line-height: 1.2rem;
     background: #fff;
     border-radius: 1rem;
     position: relative;
     margin: 0 .5rem;
+    text-align: center;
   }
   .header_login{
     float: left;
@@ -368,6 +361,7 @@ export default {
     display: flex;*/
     -ms-flex-pack: center;
     justify-content: center;
+    text-align: center;
    }
    .module_block_a img{
     display: block;
@@ -409,6 +403,7 @@ export default {
     font-size: .6rem;
     color: #343434;
     line-height: 2rem;
+    text-align: center;
    }
    .more_link{
     float: right;
