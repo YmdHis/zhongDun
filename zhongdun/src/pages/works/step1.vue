@@ -8,9 +8,7 @@
 			<div>
 				<div id="choosecity">	
 				  <div>
-				    <group>
-				      <x-address @on-hide="logHide" @on-show="logShow" :title="title" v-model="value" :list="addressData" @on-shadow-change="onShadowChange" placeholder="" inline-desc="请选择考试城市" :show.sync="showAddress"></x-address>
-				    </group>
+				    <group><cell title="选择考试城市" :value="LocationCity" is-link></cell></group>
 				  </div>
 				</div>
 			</div>
@@ -68,15 +66,11 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
 		  },
 		data() {
 		    return {
+					LocationCity:"定位中",
 		      title:'',
 		      value_0_1: [],
 		      value: [],
-		      title2: '设置值',
-		      value2: ['天津市', '市辖区', '和平区'],
-		      value3: ['广东省', '中山市', '--'],
 		      addressData: ChinaAddressV4Data,
-		      value4: [],
-		      value5: ['广东省', '深圳市', '南山区'],
 		      showAddress: false,
 		      show13: false,
 		      wpList: [
@@ -103,13 +97,12 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
 		  },
 		  created:function(){
 		  },
-		 methods:{
-		 
+		methods:{
 		 	lk:function(){
 		 		this.$vux.alert.show({
 			    title: "提示",
 			    content: "哈哈哈"
-			})
+				})
 		 	},
 		 	selected:function(name){
    				this.active = name;
@@ -119,51 +112,39 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
 					this.show13=true
 			    }
 			},
-			doShowAddress () {
-		      this.showAddress = true
-		      setTimeout(() => {
-		        this.showAddress = false
-		      }, 2000)
-		    },
-		    onShadowChange (ids, names) {
-		   //   console.log(ids, names)
-		    },
-		    changeData () {
-		      this.value2 = ['430000', '430400', '430407']
-		    },
-		    changeDataByLabels () {
-		      this.value2 = ['广东省', '广州市', '天河区']
-		    },
-		    changeDataByLabels2 () {
-		      this.value2 = ['广东省', '中山市', '--']
-		    },
-		    getName (value) {
-		      return value2name(value, ChinaAddressV4Data)
-		    },
-		    logHide (str) {
-		      console.log('on-hide', str)
-		    },
-		    logShow (str) {
-		      console.log('on-show')
-		    }
-		 },
+			onShadowChange (ids, names) {
+				//   console.log(ids, names)
+			},
+			getLocation(){
+      let _this = this;
+      const geolocation = new BMap.Geolocation();
+      geolocation.getCurrentPosition(function getinfo(position){
+          let city = position.address.city;
+          _this.LocationCity = city;
+          //console.log(city);
+      }, function(e) {
+          _this.LocationCity = "定位失败"
+          //console.log('fail');
+      }, {provider: 'baidu'});
+    }
+		},
 		 mounted(){
 		 	showlist().then(res=>{
 		 		this.gzlists =res.data;
 		 		console.log(this.gzlists);
 		 		//alert(this.gzlist)
 		 	});
-		 	//console.log(BMap);
+		 	this.getLocation(); 
 		 }
 	}
 </script>
 <style type="text/css">
-	body{
+	/* body{
 		font-family：'微软雅黑'
 		 display: flex !important; 
 	    flex-flow: column; 
 	    min-height: 100vh;
-	}
+	} */
 	#ex-step1>div:nth-of-type(1){ display: flex; 
       display: -webkit-flex;  
       /* vh 相对于可视区域的高度 */
@@ -195,36 +176,4 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
 		color:#FFF !important;
 	}
 
-	/*组件css*/
-	@import '~vux/src/styles/close.less';
-
-.popup0 {
-  padding-bottom:15px;
-  height:200px;
-}
-.popup1 {
-  width:100%;
-  height:100%;
-}
-.popup2 {
-  padding-bottom:15px;
-  height:400px;
-}
-.position-vertical-demo {
-  background-color: #ffe26d;
-  color: #000;
-  text-align: center;
-  padding: 15px;
-}
-.position-horizontal-demo {
-  position: relative;
-  height: 100%;
-  .vux-close {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%) scale(4);
-    color: #000;
-  }
-}
 </style>
