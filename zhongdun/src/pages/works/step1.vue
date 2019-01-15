@@ -120,7 +120,8 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
       const geolocation = new BMap.Geolocation();
       geolocation.getCurrentPosition(function getinfo(position){
           let city = position.address.city;
-          _this.LocationCity = city;
+					_this.LocationCity = city;
+					setStore('locationCity',city);
           //console.log(city);
       }, function(e) {
           _this.LocationCity = "定位失败"
