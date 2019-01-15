@@ -17,9 +17,9 @@
 			<!--上部分 E-->
 			<!--学习阶段 S-->
 			<div id="jieduan">
-				<p class="ex-choose-city" @click="lk">学习阶段</p>
+				<p class="ex-choose-city" @click="lk">证书状态</p>
 				<div>
- 				     <x-button  mini plain style="border-radius:99px;margin-right:0.4rem;padding-left:0.4rem" v-for="item in wpList" :key="item.name"
+ 				     <x-button  mini plain style="border-radius:99px;margin-right:0.4rem;padding-left:0.6rem" v-for="item in wpList" :key="item.name"
 					    :class="{active : active == item.name}" 
 					    @click.native="selected(item.name)">
 						{{item.name}}
@@ -31,21 +31,21 @@
 			<div id="ex-gongzhong">
 				<p class="ex-choose-city">选择工种</p>
 				<ul class="ex-gongzhong-ul">
-					<li v-for="item1 in gongzhong" class="ex-gongzhong-li" @click="choosegz(item1.children)">
+					<li v-for="item1 in gzlists" class="ex-gongzhong-li" @click="choosegz(item1.children)">
 						<div>
-							<img :src='item1.imgsrc'>
+							<img :src='item1.icon'>
 							<p>{{item1.name}}</p>
 						</div>
-						<div v-transfer-dom>
+						<!-- <div v-transfer-dom>
 					      <popup v-model="show13" position="bottom" max-height="50%">
 					        <group>
-					         	 <cell v-for="item2 in item1.children"  :title="item2.text" :key="item2.id"></cell>
+					         	 <cell v-for="item2 in item1.children"  :title="item2.name" :key="item2.id"></cell>
 					        </group>
 					        <div style="padding: 10px;">
 					          <x-button @click.native="show13 = false" type="primary"> 关闭</x-button>
 					        </div>
 					      </popup>
-					    </div>
+					    </div> -->
 					</li>
 				</ul>
 			</div>
@@ -57,6 +57,9 @@
 	</div>
 </template>
 <script type="text/javascript">
+	//
+import BMap from 'BMap'
+import {showlist} from 'src/service/api'
 import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast,
  Value2nameFilter as value2name } from 'vux'
 	export default{
@@ -78,74 +81,14 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
 		      show13: false,
 		      wpList: [
 		        {
-		          name: '已报名'
+		          name: '有证'
 		        },
 		        {
-		          name: '未报名'
-		        },
-		        {
-		          name: '已报名(复审)'
+		          name: '无证'
 		        }
 		      ],
-		      active:'',
-		      gongzhong:[
-		    	{
-		    		id:'1',
-		    		name:'电工作业1',
-		    		imgsrc:require('@/assets/images/courseico.png'),
-		    		children:[
-		    			{
-		    				id:'12',
-		    				text :'工种子类1'
-		    			},
-		    			{
-		    				id:'13',
-		    				text :'工种子类2'
-		    			},
-		    			{
-		    				id:'14',
-		    				text :'工种子类3'
-		    			},
-		    			{
-		    				id:'15',
-		    				text :'工种子类1'
-		    			},
-		    			{
-		    				id:'16',
-		    				text :'工种子类2'
-		    			},
-		    			{
-		    				id:'17',
-		    				text :'工种子类3'
-		    			}
-		    		]
-		    	},
-		    	{
-		    		id:'2',
-		    		name:'电工作业2',
-		    		imgsrc:require('@/assets/images/courseico.png')
-		    	},
-		    	{
-		    		id:'3',
-		    		name:'电工作业3',
-		    		imgsrc:require('@/assets/images/courseico.png')
-		    	},
-		    	{
-		    		id:'4',
-		    		name:'电工作业4',
-		    		imgsrc:require('@/assets/images/courseico.png')
-		    	},
-		    	{
-		    		id:'5',
-		    		name:'电工作业5',
-		    		imgsrc:require('@/assets/images/courseico.png')
-		    	},
-		    	{
-		    		id:'6',
-		    		name:'电工作业6',
-		    		imgsrc:require('@/assets/images/courseico.png')
-		    	}
-		   	 ]
+		      active:'有证',
+		      gzlists:[]
 		    }
 		  },
 		components: {
@@ -183,7 +126,7 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
 		      }, 2000)
 		    },
 		    onShadowChange (ids, names) {
-		      console.log(ids, names)
+		   //   console.log(ids, names)
 		    },
 		    changeData () {
 		      this.value2 = ['430000', '430400', '430407']
@@ -203,6 +146,14 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
 		    logShow (str) {
 		      console.log('on-show')
 		    }
+		 },
+		 mounted(){
+		 	showlist().then(res=>{
+		 		this.gzlists =res.data;
+		 		console.log(this.gzlists);
+		 		//alert(this.gzlist)
+		 	});
+		 	//console.log(BMap);
 		 }
 	}
 </script>
