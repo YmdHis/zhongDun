@@ -15,7 +15,7 @@
         </div>
         <div class="header_login">
            <router-link to="/login" class="header_login_a">
-            登录
+            <img src="../../images/user.png" alt="" class="header_login_user">
          </router-link>
         </div>
       </div>
@@ -87,8 +87,10 @@
       <div class="news_box" v-if="active_tab=='news'">
         <div class="news_list" v-for="item in newslist">
           <div class="news_title">
+            <router-link :to="{ path: '/newslist', query: {id:item.id}}">
             <h3 >{{item.name}}</h3>
             <span>全部></span>
+            </router-link>
           </div>
           <ul>
             <li class="news_list_li" v-for="list in item.articles">
@@ -281,6 +283,9 @@ export default {
     background: url(../../images/banner.jpg) no-repeat;
     background-size: 100% 100%;
   }
+  .header_login_user{
+  height: .9rem;
+}
   .header_box{
     position: relative;
     padding: .5rem;
@@ -548,6 +553,7 @@ export default {
     font-size: .6rem;
     padding: .5rem 0;
     color: #333;
+    text-align: center;
   }
    .home-last{
     margin-bottom: 3rem; 

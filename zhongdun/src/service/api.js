@@ -61,5 +61,9 @@ export function fetch(type='GET',url, params) {
 
 //首页新闻
 export const shouyeNews = (params) => fetch('GET','/app/news/indexlist',params);
+// 新闻列表
+export const newsList = (params) => fetch('POST','/app/news/showlist',params);
+// 新闻详情
+export const newsDetails = (params) => fetch('POST','/app/news/children/newsDetails',params);
 //工种类别
 export const  showlist = (params) => fetch('GET','/app/category/showlist',params);
