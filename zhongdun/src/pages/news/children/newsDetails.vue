@@ -28,14 +28,12 @@
 import { XHeader,Flexbox, FlexboxItem} from 'vux'
 import {newsDetails} from 'src/service/api'
 import {formatDate} from 'src/assets/js/time'
-import VueHtml5Editor from 'vue-html5-editor'
 
 export default {
   components: {
     XHeader,
     Flexbox, 
-    FlexboxItem,
-    VueHtml5Editor
+    FlexboxItem
   },
   data () {
     return {
@@ -58,9 +56,6 @@ export default {
     },
   },
   computed:{
-    rmessage:function(){
-      return this.message.replace(/&quot/g,'"');
-    }
   },
   mounted(){
     newsDetails({id:this.$route.query.id}).then(res => {
