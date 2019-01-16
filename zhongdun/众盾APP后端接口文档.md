@@ -29,13 +29,9 @@
 
 ### 1\. 首页推荐新闻列表
 
-<<<<<<< HEAD
 1\. 首页推荐新闻列表
 
 ###### URL
-=======
-URL 
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 > http://zdapp.808w.com/app/news/indexlist
 
@@ -58,11 +54,7 @@ URL
 > | thumbnail | string   | 新闻分类缩略图 |
 > | articles  | array    | 此分类下的文章 |
 
-<<<<<<< HEAD
 ######
-=======
- 
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 
 
@@ -78,11 +70,7 @@ URL
 
 ### 2\. 新闻文章列表
 
-<<<<<<< HEAD
 ###### URL
-=======
-URL 
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 > http://zdapp.808w.com/app/news/showlist
 
@@ -109,11 +97,7 @@ URL
 > | published_time | int      | 文章发布时间戳 |
 > | thumbnail      | string   | 文章缩略图     |
 
-<<<<<<< HEAD
 ######
-=======
- 
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 
 
@@ -129,11 +113,7 @@ URL
 
 ### 3\. 新闻文章内容
 
-<<<<<<< HEAD
 ###### URL
-=======
-URL 
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 > http://zdapp.808w.com/app/news/article
 
@@ -158,11 +138,7 @@ URL
 > | nextArticle | array    | 下篇文章     |
 > | prevArticle | array    | 上篇文章     |
 
-<<<<<<< HEAD
 ######
-=======
- 
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 > 接口示例
 
@@ -175,16 +151,7 @@ URL
 ------
 
 
-<<<<<<< HEAD
 ###### URL
-=======
-
-## 二、工种相关接口
-
-###  1.工种分类接口
-
-URL 
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 > http://zdapp.808w.com/app/category/showlist
 
@@ -209,11 +176,7 @@ URL
 > | icon     | string   | 工种图标 |
 > | children | array    | 子分类   |
 
-<<<<<<< HEAD
 ######
-=======
- 
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 > 接口示例
 
@@ -226,25 +189,6 @@ URL
 -----------
 5.机构详情接口
 
-<<<<<<< HEAD
-###### URL
-
-> http://zdapp.808w.com/app/company/details/
-
-###### 接口功能
-
-> ```
-> 机构详细信息
-> ```
-
-###### 请求参数
-
-> | 参数 | 必选 | 类型 | 说明 |
-> | :--- | :--- | :--- | ---- |
-> | companyId | 是 | int | 机构id  |
-
-###### 业务相关数据
-=======
 
 
 ## 三、机构相关接口
@@ -272,23 +216,11 @@ URL
 > | range     | 否   | int    | 距离范围                                                     |
 
 业务相关数据
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 > | 数组字段 | 字段类型 | 说明     |
 > | :------- | :------- | :------- |
 > | id       | int      | 机构id   |
 > | name     | string   | 机构名称 |
-<<<<<<< HEAD
-> | longitude | string   | 机构经度 |
-> | latitude | string    | 机构纬度 |
-> | mobile | string    | 机构电话 |
-
-######
-
-> 接口示例
-
-> 地址：http://zdapp.808w.com/app/company/details/companyId/113
-=======
 > | icon     | string   | 机构图片 |
 > | latitude | string   | 经度     |
 > | latitude | string   | 纬度     |
@@ -298,14 +230,10 @@ URL
 > 接口示例
 
 > 地址：http://zdapp.808w.com/app/company/showlist?type=map&range=30&category=1
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
 
 ```javascript
 
 ```
-<<<<<<< HEAD
-=======
 
 ------
 
->>>>>>> 0161ab78a83569e0260a709d1cd031258bfe3eea
