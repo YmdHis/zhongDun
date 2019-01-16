@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <div class="banner">
+      <img src="../../images/banner.jpg" alt="" class="banner_img">
       <div class="header_box clear">
         <div class="header_address" @click="chooCity()">
            <section class="header_address_a ellipsis">
@@ -295,12 +296,17 @@ export default {
     position: relative;
     width: 100%;
     height: 8rem;
-    background: url(../../images/banner.jpg) no-repeat;
-    background-size: 100% 100%;
+  }
+  .banner_img{
+    position: absolute;
+    top:0;
+    width: 100%;
+    height: 8rem;
   }
   .header_login_user{
   height: .9rem;
-}
+  vertical-align: middle;
+  }
   .header_box{
     position: relative;
     padding: .5rem;
@@ -316,6 +322,7 @@ export default {
   }
   .header_address_icon{
     height: .6rem;
+    vertical-align: middle;
   }
   .header_search img{
     vertical-align: middle;
