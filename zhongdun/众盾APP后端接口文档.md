@@ -381,7 +381,7 @@ URL
 
 > 接口示例
 
-> 地址：http://zdapp.808w.com/app/category/three_cateById/categoryId/1/companyId/113
+> 地址：http://zdapp.808w.com/app/company/three_cateById/categoryId/1/companyId/113
 
 ```javascript
 
