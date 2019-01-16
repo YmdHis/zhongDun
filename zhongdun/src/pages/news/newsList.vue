@@ -56,6 +56,7 @@ export default {
    mounted(){
     newsList({id:this.$route.query.id}).then(res => {
       this.list = res.data;
+      console.log(123);
       console.log(this.list);
     })
   }
