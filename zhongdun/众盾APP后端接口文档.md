@@ -209,14 +209,13 @@ URL
 
 请求参数
 
-> | 参数      | 必选 | 类型   | 说明                                              |
-> | :-------- | :--- | :----- | ------------------------------------------------- |
-> | type      | 否   | string | ‘default’：默认排序，‘map’：距离，‘comment’：评论 |
-> | longitude | 是   | string | 经度                                              |
-> | latitude  | 是   | string | 纬度                                              |
-> | category  | 否   | int    | 工种分类id                                        |
-> | price     | 否   | int    | 传入值为1的时候价格由低到高                       |
-> | range     | 否   | int    | 距离范围                                          |
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | type      | 否   | string | ‘default’：默认排序，‘map’：距离，‘comment’：评论，‘price’：价格 |
+> | longitude | 是   | string | 经度                                                         |
+> | latitude  | 是   | string | 纬度                                                         |
+> | category  | 否   | int    | 工种分类id                                                   |
+> | range     | 否   | int    | 距离范围                                                     |
 
 业务相关数据
 
