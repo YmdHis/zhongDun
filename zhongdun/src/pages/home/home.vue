@@ -256,7 +256,6 @@ export default {
       geolocation.getCurrentPosition(function getinfo(position){
           let city = position.address.city;
           _this.LocationCity = city;
-         
           //console.log(city);
       }, function(e) {
           _this.LocationCity = "定位失败"
