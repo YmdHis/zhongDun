@@ -632,8 +632,10 @@ export default {
     height: 100%;
     background: #fff;
     overflow-y: auto;
+    z-index: 999;
   }
   .city-hid{
     display: none;
   }
+ 
 </style>
