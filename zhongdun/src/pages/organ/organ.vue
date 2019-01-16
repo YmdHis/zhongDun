@@ -1,5 +1,23 @@
 <template>
   <div id="organ">
+    <div class="header_box clear">
+        <div class="header_address">
+           <section class="header_address_a ellipsis">
+            <img src="../../images/add_icon.png" alt="" class="header_address_icon">
+            {{LocationCity}}
+         </section>
+        </div>
+        <div class="header_search">
+          <img src="../../images/sear_icon.png" alt="" class="header_search_icon">
+          <input type="text" placeholder="请输入机构名称">
+          <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
+        </div>
+        <div class="header_login">
+           <router-link to="/login" class="header_login_a">
+            <img src="../../images/user.png" alt="" class="header_login_user">
+         </router-link>
+        </div>
+    </div>
     <div class="organ_species">
        <tab :line-width="3" custom-bar-width="10px" active-color="#5ebf83" bar-active-color="5ebf83">
       <tab-item selected @on-item-click="" class="organ_species_tit">培训机构</tab-item>
@@ -12,6 +30,7 @@
       <flexbox-item><div class="organ_choose_t">综合</div></flexbox-item>
       <flexbox-item><div class="organ_choose_t">距离</div></flexbox-item>
       <flexbox-item><div class="organ_choose_t">价格</div></flexbox-item>
+      <flexbox-item><div class="organ_choose_t">评价</div></flexbox-item>
        <flexbox-item><div class="organ_choose_t organ_choose_icon">筛选<img src="../../images/choose_icon.jpg" alt=""></div></flexbox-item>
     </flexbox>
     </div>
@@ -54,6 +73,7 @@
 import { Tab, TabItem, Flexbox, FlexboxItem,Rater} from 'vux'
 import {shouyeNews} from 'src/service/api'
 import footNav from 'src/components/footNav'
+import BMap from 'BMap'
 
 export default {
  
@@ -67,11 +87,29 @@ export default {
 	},
 	data () {
 	    return {
-        data:5
+        data:5,
+         LocationCity:"定位中",
 	    }
   	},
   mounted(){
-   
+   this.getLocation();  
+  },
+   methods:{
+    gotoAddress(path){
+        this.$router.push(path)
+      },
+    getLocation(){
+      let _this = this;
+      const geolocation = new BMap.Geolocation();
+      geolocation.getCurrentPosition(function getinfo(position){
+          let city = position.address.city;
+          _this.LocationCity = city;
+          //console.log(city);
+      }, function(e) {
+          _this.LocationCity = "定位失败"
+          //console.log('fail');
+      }, {provider: 'baidu'});
+    }
   },
 }
 </script>
@@ -84,6 +122,67 @@ export default {
   background:#fff;
   font-size: 14px;
 }
+.header_login_user{
+  height: .9rem;
+}
+  .header_box{
+    position: relative;
+    padding: .5rem;
+    width: 100%;
+  }
+  .header_address{
+    float: left;
+    font-size: .7rem;
+    width: 3.2rem;
+    height:1.2rem;
+    line-height: 1.2rem;
+    padding-left: .5rem;
+  }
+  .header_address_icon{
+    height: .6rem;
+    vertical-align: middle;
+  }
+  .header_search img{
+    vertical-align: middle;
+  }
+  .header_search input{
+    width: 6rem;
+    text-align: center;
+    background: none;
+  }
+  .header_search .header_search_icon{
+    width: .6rem;
+  }
+  .header_search .header_search_sy{
+    height: .6rem;
+  }
+  .header_address_a{
+    color: #808080;
+    font-size: .2rem;
+  }
+  .header_search {
+   float: left;
+    font-size: .7rem;
+    width: 8.8rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    background: #fff;
+    border-radius: 1rem;
+    position: relative;
+    margin: 0 .5rem;
+    text-align: center;
+    background: #f2f2f2;
+  }
+  .header_login{
+    float: left;
+    width: 2rem;
+    line-height: 1rem;
+    text-align:center;
+  }
+  .header_login_a{
+     font-size: .7rem;
+     color: #5ebf83;
+  }
 .organ_species_tit{
   font-size: .7rem;
 }
