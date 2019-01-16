@@ -17,7 +17,7 @@
         </p> -->
         <span>{{listText.published_time | formatDate}}</span>
       </div>
-  
+
       <div class="news_details_text" v-html="post_content">
       </div>
     </div>
