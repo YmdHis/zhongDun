@@ -17,8 +17,8 @@
         </p> -->
         <span>{{listText.published_time | formatDate}}</span>
       </div>
-      <div class="news_details_text" >
-        {{listText.post_content}}
+  
+      <div class="news_details_text" v-html="post_content">
       </div>
     </div>
   </div>
@@ -28,17 +28,20 @@
 import { XHeader,Flexbox, FlexboxItem} from 'vux'
 import {newsDetails} from 'src/service/api'
 import {formatDate} from 'src/assets/js/time'
+import VueHtml5Editor from 'vue-html5-editor'
 
 export default {
   components: {
     XHeader,
     Flexbox, 
-    FlexboxItem
+    FlexboxItem,
+    VueHtml5Editor
   },
   data () {
     return {
       listText:[],
-       borderColor: {
+      post_content:'',
+      borderColor: {
         borderColor: '#333'
       },
     }
@@ -47,19 +50,29 @@ export default {
     formatDate(time) {
         var date = new Date(time * 1000);
         return formatDate(date, 'yyyy年MM月dd日');
-    }
+    },
   },
   methods:{
-   back(){
+    back(){
         this.$router.go(-1);//返回上一层
     },
   },
-   mounted(){
+  computed:{
+    rmessage:function(){
+      return this.message.replace(/&quot/g,'"');
+    }
+  },
+  mounted(){
     newsDetails({id:this.$route.query.id}).then(res => {
       this.time=res.time;
       this.listText = res.data.article;
+      this.post_content = res.data.article.post_content.replace(/&lt;/g, "<").
+                    replace(/&quot;/g,'"').
+                    replace(/&gt;/g, ">");
       console.log(this.listText);
-    })
+
+    });
+    //console.log(this.rmessage);
   }
 }
 </script>
