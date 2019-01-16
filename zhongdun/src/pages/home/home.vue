@@ -2,7 +2,7 @@
   <div id="home">
     <div class="banner">
       <div class="header_box clear">
-        <div class="header_address" @click="chooCity()">
+        <div class="header_address">
            <section class="header_address_a ellipsis">
             <img src="../../images/add_icon.png" alt="" class="header_address_icon">
             {{LocationCity}}
@@ -208,9 +208,7 @@
         <img src="../../images/banner.png" alt="">
         <span>我的</span>
       </section>
-    </div>
-    <div class="city-choo" :class="cityPickerShow?'':'city-hid'">
-      <city-picker @closeMsg="close"></city-picker>
+    
     </div>
   </div>
 </template>
@@ -220,21 +218,17 @@ import { Tab, TabItem} from 'vux'
 import {shouyeNews} from 'src/service/api'
 import {formatDate} from 'src/assets/js/time'
 import BMap from 'BMap'
-import cityPicker from 'src/components/cityPicker'
-import {setStore,getStore} from 'src/config/mUtils'
 
 export default {
   components: {
     Tab,
     TabItem,
-    cityPicker,
   },
   data () {
     return {
       active_tab: 'news',
       newslist:[],
       LocationCity:"定位中",
-      cityPickerShow:false,
     }
   },
   filters: {
@@ -261,14 +255,6 @@ export default {
           _this.LocationCity = "定位失败"
           //console.log('fail');
       }, {provider: 'baidu'});
-    },
-    chooCity(){
-      this.cityPickerShow = !this.cityPickerShow
-    },
-    close:function (res){
-      if(res == 'close'){
-        this.chooCity();
-      }
     }
   },
   mounted(){
@@ -623,16 +609,5 @@ export default {
   }
   .footer_nav_item .home-img span{
     color: #fff;
-  }
-  .city-choo{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    overflow-y: auto;
-  }
-  .city-hid{
-    display: none;
   }
 </style>
