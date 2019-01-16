@@ -8,12 +8,57 @@
     <!--选择价格 S-->
     <div class="ex-price">
     	<div class="ex-cour-info">
-    		<p>安培教育</p>
-    		<p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span></p>
+    		<div>安培教育</div>
+    		<p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
+    		<p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
+    		<p class="addgz">请选择报名工种&nbsp;<span class="icoset"> <x-icon type="ios-plus-outline" size="18"  @click.native="show13 = true" ></x-icon></span></p>
+    		<!--弹框显示 S-->
+    		<div v-transfer-dom id="gzs">
+		      <popup v-model="show13" position="bottom" max-height="80%">
+		        <group>
+		        	<div class="content-gz">
+		        <!--一级分类-->
+		        	<p class="gz-close"> <x-icon type="ios-close-outline" size="25" style="color:#CCC" @click.native="show13 = false"></x-icon></p>
+			         <div>
+			         	<p class="ex-titp" style="margin-top:0">生产安全</p>
+			         	<ul class="gzfl">
+			         		<li>电工作业</li>
+			         		<li>高处作业</li>
+			         		<li>焊接与热切割作业</li>
+			         		<li>危险与化学品作业</li>
+			         		<li>电工作业</li>
+			         		<li>电工作业</li>
+			         	</ul>
+			         </div>
+			     <!--一级分类-->
+			     <!--二级分类-->
+			         <div>
+			         	<p class="ex-titp">工种</p>
+			         	<ul class="gzfl">
+			         		<li class="gz-active">低压电工作业作业</li>
+			         		<li>高压电工作业</li>
+			         	</ul>
+			         </div>
+			     <!--二级分类-->
+			     <!--三级分类-->
+			         <div>
+			         	<p class="ex-titp">新郑复审</p>
+			         	<ul class="gzfl">
+			         		<li>新证</li>
+			         		<li>复审(650元)</li>
+			         	</ul>
+			         </div>
+			     <!--三级分类-->
+			    </div>
+		        </group>
+		        <div style="padding: 15px;">
+		          <x-button @click.native="show13 = false" id="ex-sub1">确定 </x-button>
+		        </div>
+		      </popup>
+		    </div>
+		    <!--弹框显示 E-->
     	</div>
-    	<div>
-    		<x-icon type="ios-arrow-right" size="24"></x-icon>
-    	</div>
+    	
     </div>
     <!--选择价格 E-->
     <!--form提交 S-->
@@ -38,8 +83,9 @@
 	      </x-input>
 	    </group>
 	   	<div style="padding:0.4rem">
-	    	<x-button style="background:#5ebf83;color:#FFF" @click.native=" showToast= true" title="54">立即报名</x-button>
+	    	<x-button style="background:#5ebf83 !important;color:#FFF  !important;" @click.native=" showToast= true" title="54">立即报名</x-button>
 	    </div>
+	    <p class="khxy">提交报名表示同意<span>《客户协议》</span></p>
    	</div>
     <!--form提交 E-->
     <!--弹框内容-->
@@ -78,6 +124,7 @@
 			    <div id="ex-subtn">
 				   <x-button mini style="color:#000;background:#dadada;margin-right:0.3rem"  @click.native="showToast=false">返回修改</x-button>
 				   <x-button mini type="primary" >确认提交</x-button>
+
 			   </div>
 			    <!--弹框表格 E-->
 	        </div>
@@ -101,6 +148,7 @@ import {
 	    ButtonTabItem,
 	    XInput,
 	    Cell,
+	    Popup,
 	    XTable,
 	 	TransferDomDirective as TransferDom
 } from 'vux'
@@ -112,6 +160,7 @@ export default {
   	 XTable,
     XButton,
     Group,
+    Popup,
   	Checklist,
   	Group,
   	Cell,
@@ -124,6 +173,7 @@ export default {
   },
   data () {
     return {
+    	show13:false,
     	showToast: false,
     	value1:'1',
     	value1:'2',
@@ -131,6 +181,7 @@ export default {
     	value1:'4',
     	commonList: [ '先生', '女士'],
     	radioValue: ['先生']
+    	//gz-active:''
      }
   },
   methods:{
@@ -141,6 +192,12 @@ export default {
       this.$vux.toast.show({
         //text: 'toast'
       })
+    },
+    removecourse(e){
+    	e.currentTarget.parentElement.remove();
+    },
+    log (str) {
+      console.log(str)
     }
   }
 }
@@ -168,20 +225,32 @@ export default {
 	background: #FFF;
 	padding:0.4rem;
 }
+
 .ex-cour-info{
 	float:left;
 	width:90%;
 }
-.ex-cour-info>p:nth-of-type(1){
+.ex-cour-info>div{
 	font-size:0.75rem;
 	color:#000;
 	margin-bottom:0.3rem;
 }
-.ex-cour-info>p:nth-of-type(2){
+.ex-cour-info>p{
 	font-size:0.66rem;
-	color:#83d19d;
+	color:#5ebf83;
 	font-weight:-bold;
-	line-height: 0.9rem
+	line-height: 0.9rem;
+	
+}
+.ex-cour-info .icoset{
+	margin-left:0.3rem;
+	position: relative;
+	top:0.2rem;
+}
+.addgz{
+	color:#CCC !important;
+	font-size:0.62rem;
+	margin-top:0.3rem;
 }
 .ex-price>div:nth-of-type(2){
 	float:right;
@@ -243,4 +312,26 @@ font-size:0.6rem;
 #ex-tables>tr>td:nth-of-type(2){color:#333;font-size:0.66rem;}
 #ex-subtn{text-align:right;margin-bottom:0.4rem;margin-top:0;}
 #ex-subtn button{border-radius:1px;background: #5ebf83;margin-right:0.64rem;font-size:0.54rem;}
+
+/*客户协议*/
+.khxy{font-size:0.66rem;text-align:center;color:#999;margin-top:0.2rem;}
+.khxy>span{
+	color:#83d19d;
+}
+/*弹框显示 content-gz ex-titp gzfl*/
+.content-gz{border-radius: 0.3rem}
+#gzs>div{border-radius:  0.6rem 0.6rem 0 0;background:#FFF;}
+#gzs .weui-cells:before,#gzs .weui-cells:after{border:none;}
+.content-gz{padding:0 0.5rem 0 0.5rem;}
+.ex-titp{font-size:0.68rem;margin-top:1rem;}
+.gzfl{font-size:0.54rem;}
+.gzfl li{display: inline-block;background: #e8e8e8;color:#111;padding:0.4rem 0.5rem;border-radius:0.3rem;margin-right:0.34rem;margin-top: 0.5rem;border:1px solid #e8e8e8;}
+#ex-sub1{background-color: #5ebf83;border-radius:0.6rem;font-size:0.68rem;margin-top:1.6rem;color:#FFF}
+.gz-active{
+	border:1px solid #5ebf83 !important;background:#FFF !important;color: #5ebf83 !important
+}
+.gz-close{text-align: right}
+.gz-close .vux-x-icon {
+  fill: #999;
+}
 </style>

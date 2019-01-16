@@ -18,9 +18,9 @@
               <flexbox-item :span="8">
                 <div class="news_li_title">{{item.post_title}}</div>
                 <div class="news_li_icon">
-                  <i><img src="" alt=""></i><span>{{item.post_hits}}</span>
-                  <i><img src="" alt=""></i><span>{{item.post_like}}</span>
-                  <i><img src="" alt=""></i><span>2</span>
+                  <i><img src="../../images/news_icon1.jpg" alt="" class="news_li_iconImg"></i><span>{{item.post_hits}}</span>
+                  <i><img src="../../images/news_icon2.jpg" alt="" class="news_li_iconImg"></i><span>{{item.post_like}}</span>
+                  <i><img src="../../images/news_icon3.jpg" alt="" class="news_li_iconImg"></i><span>2</span>
                 </div>
               </flexbox-item>
             </flexbox>
@@ -89,5 +89,16 @@ export default {
   font-size: .7rem;
   color: #1a1a1a;
   overflow: hidden;
+}
+.news_li_icon .news_li_iconImg{
+  vertical-align: middle;
+  height: .5rem;
+  padding-top:.1rem; 
+}
+.news_li_icon span{
+  font-size: .5rem;
+  color: #808080;
+  display: inline-block;
+  padding-right: .8rem;
 }
 </style>
