@@ -29,13 +29,7 @@
 
 ### 1\. 首页推荐新闻列表
 
-<<<<<<< HEAD
-1\. 首页推荐新闻列表
-
-###### URL
-=======
 URL 
->>>>>>> parent of d1e884e... Merge branch 'master' of https://github.com/YmdHis/zhongDun
 
 > http://zdapp.808w.com/app/news/indexlist
 
@@ -58,11 +52,7 @@ URL
 > | thumbnail | string   | 新闻分类缩略图 |
 > | articles  | array    | 此分类下的文章 |
 
-<<<<<<< HEAD
-######
-=======
  
->>>>>>> parent of d1e884e... Merge branch 'master' of https://github.com/YmdHis/zhongDun
 
 
 
@@ -78,11 +68,7 @@ URL
 
 ### 2\. 新闻文章列表
 
-<<<<<<< HEAD
-###### URL
-=======
 URL 
->>>>>>> parent of d1e884e... Merge branch 'master' of https://github.com/YmdHis/zhongDun
 
 > http://zdapp.808w.com/app/news/showlist
 
@@ -109,11 +95,7 @@ URL
 > | published_time | int      | 文章发布时间戳 |
 > | thumbnail      | string   | 文章缩略图     |
 
-<<<<<<< HEAD
-######
-=======
  
->>>>>>> parent of d1e884e... Merge branch 'master' of https://github.com/YmdHis/zhongDun
 
 
 
@@ -129,11 +111,7 @@ URL
 
 ### 3\. 新闻文章内容
 
-<<<<<<< HEAD
-###### URL
-=======
 URL 
->>>>>>> parent of d1e884e... Merge branch 'master' of https://github.com/YmdHis/zhongDun
 
 > http://zdapp.808w.com/app/news/article
 
@@ -158,11 +136,7 @@ URL
 > | nextArticle | array    | 下篇文章     |
 > | prevArticle | array    | 上篇文章     |
 
-<<<<<<< HEAD
-######
-=======
  
->>>>>>> parent of d1e884e... Merge branch 'master' of https://github.com/YmdHis/zhongDun
 
 > 接口示例
 
@@ -175,16 +149,12 @@ URL
 ------
 
 
-<<<<<<< HEAD
-###### URL
-=======
 
 ## 二、工种相关接口
 
 ###  1.工种分类接口
 
 URL 
->>>>>>> parent of d1e884e... Merge branch 'master' of https://github.com/YmdHis/zhongDun
 
 > http://zdapp.808w.com/app/category/showlist
 
@@ -209,11 +179,7 @@ URL
 > | icon     | string   | 工种图标 |
 > | children | array    | 子分类   |
 
-<<<<<<< HEAD
-######
-=======
  
->>>>>>> parent of d1e884e... Merge branch 'master' of https://github.com/YmdHis/zhongDun
 
 > 接口示例
 
@@ -224,10 +190,6 @@ URL
 ```
 
 -----------
-<<<<<<< HEAD
-5.机构详情接口
-=======
->>>>>>> parent of d1e884e... Merge branch 'master' of https://github.com/YmdHis/zhongDun
 
 
 
