@@ -211,7 +211,7 @@ URL
 
 > | 参数      | 必选 | 类型   | 说明                                                         |
 > | :-------- | :--- | :----- | ------------------------------------------------------------ |
-> | type      | 否   | string | ‘default’：默认排序，‘map’：距离，‘comment’：评论，‘price’：价格 |
+> | type      | 否   | string | ‘default’：默认排序，‘map’：距离，‘comment’：评论数，‘price’：价格 |
 > | longitude | 是   | string | 经度                                                         |
 > | latitude  | 是   | string | 纬度                                                         |
 > | category  | 否   | int    | 工种分类id                                                   |
