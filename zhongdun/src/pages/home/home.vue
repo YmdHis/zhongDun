@@ -211,7 +211,7 @@
       </section>
     </div>
     <div class="city-choo" :class="cityPickerShow?'':'city-hid'">
-      <city-picker @closeMsg="close"></city-picker>
+      <city-picker @closeMsg="close" :msgCity="LocationCity"></city-picker>
     </div>
   </div>
 </template>

@@ -10,8 +10,9 @@
                 <input type="search" name="city" placeholder="请输入学校/商务楼/写字楼等" required="required" class="city_input">
             </div>
         </div>
-        <div class="city_positioning">
-            当前定位城市：{{guessCity}}  重新定位
+        <div class="city_positioning" @click="getLocation()">
+            当前定位城市：{{msgCity}}  
+            <p class="relocation">重新定位</p>
         </div>
         <section class="city_name_box">
             <ul>
@@ -44,11 +45,12 @@ export default {
     },
     data(){
         return{
-            guessCity: '',   //当前城市
+            LocationCity: '',   //当前城市
             guessCityid: '', //当前城市id
             groupcity: {},   //所有城市列表
         }
     },
+    props:['msgCity'],
     mounted(){
        this.groupcity = data 
     },
@@ -68,6 +70,19 @@ export default {
         //点击图标关闭
         closeBtn(){
             this.$emit("closeMsg", "close");
+        },
+        getLocation(){
+            let _this = this;
+            const geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function getinfo(position){
+                let city = position.address.city;
+                _this.LocationCity = city;
+                
+                //console.log(city);
+            }, function(e) {
+                _this.LocationCity = "定位失败"
+                //console.log('fail');
+            }, {provider: 'baidu'});
         },
          naver: function (id) { // 点击右边字母滚动
                 let obj = document.getElementById(id);
@@ -151,6 +166,10 @@ export default {
   .city_positioning{
     font-size: .6rem;
     padding:.5rem .3rem;
+  }
+  .relocation{
+      float:right;
+      padding-right: 2rem;
   }
 </style>
 
