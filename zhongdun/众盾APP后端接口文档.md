@@ -29,7 +29,7 @@
 
 ### 1\. 首页推荐新闻列表
 
-URL 
+URL
 
 > http://zdapp.808w.com/app/news/indexlist
 
@@ -52,7 +52,7 @@ URL
 > | thumbnail | string   | 新闻分类缩略图 |
 > | articles  | array    | 此分类下的文章 |
 
- 
+
 
 
 
@@ -68,7 +68,7 @@ URL
 
 ### 2\. 新闻文章列表
 
-URL 
+URL
 
 > http://zdapp.808w.com/app/news/showlist
 
@@ -95,7 +95,7 @@ URL
 > | published_time | int      | 文章发布时间戳 |
 > | thumbnail      | string   | 文章缩略图     |
 
- 
+
 
 
 
@@ -111,7 +111,7 @@ URL
 
 ### 3\. 新闻文章内容
 
-URL 
+URL
 
 > http://zdapp.808w.com/app/news/article
 
@@ -136,7 +136,7 @@ URL
 > | nextArticle | array    | 下篇文章     |
 > | prevArticle | array    | 上篇文章     |
 
- 
+
 
 > 接口示例
 
@@ -154,7 +154,7 @@ URL
 
 ###  1.工种分类接口
 
-URL 
+URL
 
 > http://zdapp.808w.com/app/category/showlist
 
@@ -179,7 +179,7 @@ URL
 > | icon     | string   | 工种图标 |
 > | children | array    | 子分类   |
 
- 
+
 
 > 接口示例
 
@@ -197,7 +197,7 @@ URL
 
 ### 1.机构列表接口
 
-URL 
+URL
 
 > http://zdapp.808w.com/app/company/showlist
 
@@ -227,7 +227,7 @@ URL
 > | latitude | string   | 经度     |
 > | latitude | string   | 纬度     |
 
- 
+
 
 > 接口示例
 
@@ -239,3 +239,43 @@ URL
 
 ------
 
+### 2.机构详细内容接口
+
+URL
+
+> http://zdapp.808w.com/app/company/details
+
+接口功能
+
+> ```
+> 工种分类和子分类
+> ```
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | companyId | 是   | int    | 机构id                                                     |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | id       | int      | 机构id   |
+> | name     | string   | 机构名称 |
+> | more     | string   | 机构图片 |
+> | latitude | string   | 经度     |
+> | latitude | string   | 纬度     |
+> | mobile | string   | 电话    |
+
+
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/company/details/companyId/113
+
+```javascript
+
+```
+
+------
