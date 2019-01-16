@@ -263,10 +263,10 @@ URL
 > | :------- | :------- | :------- |
 > | id       | int      | 机构id   |
 > | name     | string   | 机构名称 |
-> | icon     | string   | 机构图片 |
+> | more     | string   | 机构图片 |
 > | latitude | string   | 经度     |
 > | latitude | string   | 纬度     |
-> | mobile | string   | 纬度     |
+> | mobile | string   | 电话    |
 
 
 
