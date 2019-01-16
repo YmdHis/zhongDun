@@ -2,11 +2,11 @@
   <div id="home">
     <div class="banner">
       <div class="header_box clear">
-        <div class="header_address">
-           <router-link to="/" class="header_address_a">
+        <div class="header_address" @click="chooCity()">
+           <section class="header_address_a ellipsis">
             <img src="../../images/add_icon.png" alt="" class="header_address_icon">
-            武汉
-         </router-link>
+            {{LocationCity}}
+         </section>
         </div>
         <div class="header_search">
           <img src="../../images/sear_icon.png" alt="" class="header_search_icon">
@@ -15,7 +15,7 @@
         </div>
         <div class="header_login">
            <router-link to="/login" class="header_login_a">
-            登录
+            <img src="../../images/user.png" alt="" class="header_login_user">
          </router-link>
         </div>
       </div>
@@ -87,8 +87,10 @@
       <div class="news_box" v-if="active_tab=='news'">
         <div class="news_list" v-for="item in newslist">
           <div class="news_title">
+            <router-link :to="{ path: '/newslist', query: {id:item.id}}">
             <h3 >{{item.name}}</h3>
             <span>全部></span>
+            </router-link>
           </div>
           <ul>
             <li class="news_list_li" v-for="list in item.articles">
@@ -206,7 +208,9 @@
         <img src="../../images/banner.png" alt="">
         <span>我的</span>
       </section>
-    
+    </div>
+    <div class="city-choo" :class="cityPickerShow?'':'city-hid'">
+      <city-picker @closeMsg="close"></city-picker>
     </div>
   </div>
 </template>
@@ -215,15 +219,22 @@
 import { Tab, TabItem} from 'vux'
 import {shouyeNews} from 'src/service/api'
 import {formatDate} from 'src/assets/js/time'
+import BMap from 'BMap'
+import cityPicker from 'src/components/cityPicker'
+import {setStore,getStore} from 'src/config/mUtils'
+
 export default {
   components: {
     Tab,
     TabItem,
+    cityPicker,
   },
   data () {
     return {
       active_tab: 'news',
-       newslist:[],
+      newslist:[],
+      LocationCity:"定位中",
+      cityPickerShow:false,
     }
   },
   filters: {
@@ -238,13 +249,35 @@ export default {
       },
     gotoAddress(path){
         this.$router.push(path)
+      },
+    getLocation(){
+      let _this = this;
+      const geolocation = new BMap.Geolocation();
+      geolocation.getCurrentPosition(function getinfo(position){
+          let city = position.address.city;
+          _this.LocationCity = city;
+         
+          //console.log(city);
+      }, function(e) {
+          _this.LocationCity = "定位失败"
+          //console.log('fail');
+      }, {provider: 'baidu'});
+    },
+    chooCity(){
+      this.cityPickerShow = !this.cityPickerShow
+    },
+    close:function (res){
+      if(res == 'close'){
+        this.chooCity();
       }
+    }
   },
   mounted(){
     shouyeNews().then(res => {
       this.newslist = res.data;
       console.log(this.newslist);
-    });    
+    }),
+    this.getLocation();  
   },
 }
 </script>
@@ -265,6 +298,9 @@ export default {
     background: url(../../images/banner.jpg) no-repeat;
     background-size: 100% 100%;
   }
+  .header_login_user{
+  height: .9rem;
+}
   .header_box{
     position: relative;
     padding: .5rem;
@@ -273,7 +309,7 @@ export default {
   .header_address{
     float: left;
     font-size: .7rem;
-    width: 3rem;
+    width: 3.2rem;
     height:1.2rem;
     line-height: 1.2rem;
     padding-left: .5rem;
@@ -286,6 +322,7 @@ export default {
   }
   .header_search input{
     width: 6rem;
+    text-align: center;
   }
   .header_search .header_search_icon{
     width: .6rem;
@@ -295,17 +332,19 @@ export default {
   }
   .header_address_a{
     color: #808080;
+    font-size: .2rem;
   }
   .header_search {
    float: left;
     font-size: .7rem;
-    width: 9rem;
+    width: 8.8rem;
     height: 1.2rem;
     line-height: 1.2rem;
     background: #fff;
     border-radius: 1rem;
     position: relative;
     margin: 0 .5rem;
+    text-align: center;
   }
   .header_login{
     float: left;
@@ -342,6 +381,7 @@ export default {
     display: flex;*/
     -ms-flex-pack: center;
     justify-content: center;
+    text-align: center;
    }
    .module_block_a img{
     display: block;
@@ -383,6 +423,7 @@ export default {
     font-size: .6rem;
     color: #343434;
     line-height: 2rem;
+    text-align: center;
    }
    .more_link{
     float: right;
@@ -527,6 +568,7 @@ export default {
     font-size: .6rem;
     padding: .5rem 0;
     color: #333;
+    text-align: center;
   }
    .home-last{
     margin-bottom: 3rem; 
@@ -582,5 +624,16 @@ export default {
   }
   .footer_nav_item .home-img span{
     color: #fff;
+  }
+  .city-choo{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    overflow-y: auto;
+  }
+  .city-hid{
+    display: none;
   }
 </style>
