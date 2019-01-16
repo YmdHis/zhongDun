@@ -279,3 +279,112 @@ URL
 ```
 
 ------
+
+### 3.机构工种一级分类接口
+
+URL
+
+> http://zdapp.808w.com/app/company/categoryByCompanyId
+
+接口功能
+
+> ```
+> 工种分类和子分类
+> ```
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | companyId | 是   | int    | 机构id                                                     |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | id       | int      | 分类id   |
+> | name     | string   | 分类名称 |
+
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/company/categoryByCompanyId/companyId/113
+
+```javascript
+
+```
+
+------
+
+### 4.机构工种二级分类接口
+
+URL
+
+> http://zdapp.808w.com/app/category/two_cateById
+
+接口功能
+
+> ```
+> 工种分类和子分类
+> ```
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | parentId | 是   | int    | 分类一级id                                                     |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | id       | int      | 分类id   |
+> | name     | string   | 分类名称 |
+
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/category/two_cateById/parentId/1
+
+```javascript
+
+```
+
+------
+
+### 4.机构工种三级分类接口
+
+URL
+
+> http://zdapp.808w.com/app/company/three_cateById
+
+接口功能
+
+> ```
+> 工种分类和子分类
+> ```
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | categoryId | 是   | int    | 分类二级id                                                     |
+> | companyId | 是   | int    | 机构id                                                     |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | title       | string      | 课程名称   |
+> | price     | string   | 机构课程价格 |
+
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/category/three_cateById/categoryId/1/companyId/113
+
+```javascript
+
+```
+
+------
