@@ -377,11 +377,12 @@ URL
 > | :------- | :------- | :------- |
 > | title       | string      | 课程名称   |
 > | price     | string   | 机构课程价格 |
+> | id     | int   | 机构课程id |
 
 
 > 接口示例
 
-> 地址：http://zdapp.808w.com/app/company/three_cateById/categoryId/1/companyId/113
+> 地址：http://zdapp.808w.com/app/company/three_cateById/categoryId/187/companyId/113
 
 ```javascript
 
