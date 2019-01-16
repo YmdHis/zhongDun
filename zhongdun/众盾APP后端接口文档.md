@@ -28,7 +28,7 @@
 
 1\. 首页推荐新闻列表
 
-###### URL 
+###### URL
 
 > http://zdapp.808w.com/app/news/indexlist
 
@@ -48,7 +48,7 @@
 > | thumbnail | string   | 新闻分类缩略图 |
 > | articles  | array    | 此分类下的文章 |
 
-###### 
+######
 
 
 
@@ -64,7 +64,7 @@
 
 2\. 新闻文章列表
 
-###### URL 
+###### URL
 
 > http://zdapp.808w.com/app/news/showlist
 
@@ -91,7 +91,7 @@
 > | published_time | int      | 文章发布时间戳 |
 > | thumbnail      | string   | 文章缩略图     |
 
-###### 
+######
 
 
 
@@ -107,7 +107,7 @@
 
 3\. 新闻文章内容
 
-###### URL 
+###### URL
 
 > http://zdapp.808w.com/app/news/article
 
@@ -132,7 +132,7 @@
 > | nextArticle | array    | 下篇文章     |
 > | prevArticle | array    | 上篇文章     |
 
-###### 
+######
 
 > 接口示例
 
@@ -146,7 +146,7 @@
 
  4.工种分类接口
 
-###### URL 
+###### URL
 
 > http://zdapp.808w.com/app/category/showlist
 
@@ -171,7 +171,7 @@
 > | icon     | string   | 工种图标 |
 > | children | array    | 子分类   |
 
-###### 
+######
 
 > 接口示例
 
@@ -182,4 +182,40 @@
 ```
 
 -----------
+5.机构详情接口
 
+###### URL
+
+> http://zdapp.808w.com/app/company/details/
+
+###### 接口功能
+
+> ```
+> 机构详细信息
+> ```
+
+###### 请求参数
+
+> | 参数 | 必选 | 类型 | 说明 |
+> | :--- | :--- | :--- | ---- |
+> | companyId | 是 | int | 机构id  |
+
+###### 业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | id       | int      | 机构id   |
+> | name     | string   | 机构名称 |
+> | longitude | string   | 机构经度 |
+> | latitude | string    | 机构纬度 |
+> | mobile | string    | 机构电话 |
+
+######
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/company/details/companyId/113
+
+```javascript
+
+```
