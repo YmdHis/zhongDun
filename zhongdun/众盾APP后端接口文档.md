@@ -272,7 +272,7 @@ URL
 
 > 接口示例
 
-> 地址：http://zdapp.808w.com/app/company/details/companyId/113
+> 地址：http://zdapp.808w.com/app/company/details?companyId=1
 
 ```javascript
 
@@ -308,7 +308,7 @@ URL
 
 > 接口示例
 
-> 地址：http://zdapp.808w.com/app/company/categoryByCompanyId/companyId/113
+> 地址：http://zdapp.808w.com/app/company/categoryByCompanyId?companyId=1
 
 ```javascript
 
@@ -344,7 +344,7 @@ URL
 
 > 接口示例
 
-> 地址：http://zdapp.808w.com/app/category/two_cateById/parentId/1
+> 地址：http://zdapp.808w.com/app/category/two_cateById?parentId=1
 
 ```javascript
 
@@ -382,7 +382,7 @@ URL
 
 > 接口示例
 
-> 地址：http://zdapp.808w.com/app/company/three_cateById/categoryId/187/companyId/113
+> 地址：http://zdapp.808w.com/app/company/three_cateById?categoryId=187&companyId=1
 
 ```javascript
 
