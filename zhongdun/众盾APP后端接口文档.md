@@ -542,8 +542,8 @@ URL
 > | :------- | :------- | :------- |
 > | code       | 0,1      | 订单状态（0失败，1成功）   |
 > | msg     | string   | 返回的信息 |
-> | order_sn       | string      | 订单号   |
-> | total_money     | string   | 订单价格 |
+> | data     | string   | 返回的信息(order_sn:订单号,total_money:订单价格) |
+
 
 
 > 接口示例
