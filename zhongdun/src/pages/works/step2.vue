@@ -185,10 +185,10 @@ export default {
      }
   },
   methods:{
-  	 change (val, label) {
+		change (val, label) {
       console.log('change', val, label)
     },
-     doShowToast () {
+		doShowToast () {
       this.$vux.toast.show({
         //text: 'toast'
       })
