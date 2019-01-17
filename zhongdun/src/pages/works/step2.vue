@@ -2,16 +2,17 @@
   <div>
   	<div id="bmhead">
     	<x-header :left-options="{backText: ''}"><b>我要报名</b></x-header>
-    	
     	<div class="ex-topimg"><img src="../../assets/images/bmbanner.png"></div>
     </div>
     <!--选择价格 S-->
     <div class="ex-price">
     	<div class="ex-cour-info">
-    		<div>安培教育</div>
-    		<p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
-    		<p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
-    		<p class="addgz">请选择报名工种&nbsp;<span class="icoset"> <x-icon type="ios-plus-outline" size="18"  @click.native="show13 = true" ></x-icon></span></p>
+    		<div>{{jgname}}</div>
+    		<!-- <p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
+    		<p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p> -->
+    		
+    		<p v-for="item in gzcouse">{{item.name}}&nbsp;<span class="pricecolor">￥{{item.price}}</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
+    		<p class="addgz">请选择报名工种&nbsp;<span class="icoset"> <x-icon type="ios-plus-outline" size="18"  @click.native="bml" ></x-icon></span></p>
     		<!--弹框显示 S-->
     		<div v-transfer-dom id="gzs">
 		      <popup v-model="show13" position="bottom" max-height="80%">
@@ -20,39 +21,35 @@
 		        <!--一级分类-->
 		        	<p class="gz-close"> <x-icon type="ios-close-outline" size="25" style="color:#CCC" @click.native="show13 = false"></x-icon></p>
 			         <div>
-			         	<p class="ex-titp" style="margin-top:0">生产安全</p>
+			         	<p class="ex-titp" style="margin-top:0">1、生产安全</p>
 			         	<ul class="gzfl">
-			         		<li>电工作业</li>
-			         		<li>高处作业</li>
-			         		<li>焊接与热切割作业</li>
-			         		<li>危险与化学品作业</li>
-			         		<li>电工作业</li>
-			         		<li>电工作业</li>
+			         		<li  v-for="item1 in enroll" :class="{active :active == item1.name}" :key="item1.name" @click="gzs(item1.category_id,item1.name)">{{item1.name}}</li>
 			         	</ul>
 			         </div>
 			     <!--一级分类-->
 			     <!--二级分类-->
-			         <div>
-			         	<p class="ex-titp">工种</p>
+			         <div v-if="gz">
+			         	<p class="ex-titp">2、工种</p>
 			         	<ul class="gzfl">
-			         		<li class="gz-active">低压电工作业作业</li>
-			         		<li>高压电工作业</li>
+			         		<li :class="{active :active == item2.name}" :key="item2.name" v-for="item2 in enrollTwo" 
+			         		@click="fss(item2.id,companyid,item2.name)">{{item2.name}}</li> 
+			         		<!-- <li class="-gz-active" v-bind="enrollTwo"></li> -->
 			         	</ul>
 			         </div>
 			     <!--二级分类-->
 			     <!--三级分类-->
-			         <div>
-			         	<p class="ex-titp">新郑复审</p>
+			         <div v-if="fs">
+			         	<p class="ex-titp">3、新证复审</p>
 			         	<ul class="gzfl">
-			         		<li>新证</li>
-			         		<li>复审(650元)</li>
+			         		<li v-for="item3 in enrollThree"  :class="{active :active == item3.name}" :key="item3.name" 
+			         		@click="xz(item3.title,item3.price)">{{item3.title}}</li> 
 			         	</ul>
 			         </div>
 			     <!--三级分类-->
 			    </div>
 		        </group>
 		        <div style="padding: 15px;">
-		          <x-button @click.native="show13 = false" id="ex-sub1">确定 </x-button>
+		          <x-button @click.native="show13 = false" id="ex-sub1" @clcik="gzadd">确定 </x-button>
 		        </div>
 		      </popup>
 		    </div>
@@ -137,6 +134,9 @@
 </template>
 
 <script>
+import {enroll} from 'src/service/api';
+import {enrollTwo} from 'src/service/api';
+import {enrollThree} from 'src/service/api';
 import {
 		XDialog,
 		XButton, 
@@ -173,6 +173,14 @@ export default {
   },
   data () {
     return {
+    	work3:'',
+    	onplace:'',
+    	companyid:'',
+    	gzcouse:[],
+    	enroll:[],
+    	gz:false,
+    	fs:false,
+    	jgname:'',
     	show13:false,
     	showToast: false,
     	value1:'1',
@@ -180,15 +188,74 @@ export default {
     	value1:'3',
     	value1:'4',
     	commonList: [ '先生', '女士'],
-    	radioValue: ['先生']
-    	//gz-active:''
+    	radioValue: ['先生'],
+    	data1:'',
+    	addvalue:false,
+    	active:''
      }
   },
+  mounted(){
+  	this.jgname=this.$route.query.name;
+  },
   methods:{
-		change (val, label) {
+ 
+  	gzadd(){
+  		if(this.addvalue){
+  			alert("tinahcon");
+  			this.gzcouse.push(this.work3);
+  			console.log(this.gzcouse);
+  		}else{
+  			alert("请选择所有信息");
+  		}
+  	},
+  	bml(){
+  		this.show13 = true;
+  		this.companyid=this.$route.query.id;
+		enroll({companyId:this.$route.query.id}).then(res=>{
+        this.enroll=res.data;
+        console.log(this.enroll);
+
+       });
+		//alert(this.companyid);
+  	},
+  	gzs(data1,name){
+  	
+  		this.data1 = data1;
+  		this.fs=false;
+
+  	},
+  	fss(data1,data2,data3){
+  		//请求参数 categoryId companyId
+  		this.active=data3;
+  		data2=this.companyid;
+ 
+  		//alert(data2);
+  		enrollThree({categoryId:data1,companyId:data2}).then(res=>{
+        this.enrollThree=res.data;
+        this.$forceUpdate();
+        //alert(data1);
+        this.fs = true;
+        console.log(this.enrollThree);
+       });
+  	},
+  	xz(data,price){
+  	//	this.work3=this.work1+'-'+this.work2+'-'+data;
+     this.work3=data;
+  		this.price=price;
+  		this.active=data;
+
+  		this.gzcouse.push({name:this.work3,price:this.price});
+  		console.log(this.gzcouse);
+
+  		if(data){
+  			this.addvalue=true;
+
+  		}
+  	},
+	change (val, label) {
       console.log('change', val, label)
     },
-		doShowToast () {
+	doShowToast () {
       this.$vux.toast.show({
         //text: 'toast'
       })
@@ -199,6 +266,18 @@ export default {
     log (str) {
       console.log(str)
     }
+  },
+  watch:{
+  	data1:function(){
+  		let data1 = this.data1;
+		enrollTwo({parentId:data1}).then(res=>{
+        this.enrollTwo=res.data;
+        //alert(data1);
+        this.gz = true;
+        this.$forceUpdate();
+        console.log(this.enrollTwo);
+       });
+  	}
   }
 }
 </script>
@@ -228,7 +307,7 @@ export default {
 
 .ex-cour-info{
 	float:left;
-	width:90%;
+	
 }
 .ex-cour-info>div{
 	font-size:0.75rem;
@@ -327,7 +406,7 @@ font-size:0.6rem;
 .gzfl{font-size:0.54rem;}
 .gzfl li{display: inline-block;background: #e8e8e8;color:#111;padding:0.4rem 0.5rem;border-radius:0.3rem;margin-right:0.34rem;margin-top: 0.5rem;border:1px solid #e8e8e8;}
 #ex-sub1{background-color: #5ebf83;border-radius:0.6rem;font-size:0.68rem;margin-top:1.6rem;color:#FFF}
-.gz-active{
+.active{
 	border:1px solid #5ebf83 !important;background:#FFF !important;color: #5ebf83 !important
 }
 .gz-close{text-align: right}
