@@ -389,3 +389,91 @@ URL
 ```
 
 ------
+
+### 6.机构总点评星级展示
+
+URL
+
+> http://zdapp.808w.com/app/company/companyRemark
+
+接口功能
+
+> ```
+> 工种分类和子分类
+> ```
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | companyId | 是   | int    | 机构id                                                     |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | companyId | int      | 机构id   |
+> | rank1     | int   | 服务 |
+> | rank2     | int   | 教学 |
+> | rank3     | int   | 环境 |
+> | rank4     | int   | 收费 |
+> | count_comment     | int   | 机构总评论数 |
+
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/company/companyRemark?companyId=1
+
+```javascript
+
+```
+
+------
+
+### 7.机构评论列表接口
+
+URL
+
+> http://zdapp.808w.com/app/blog/blogs
+
+接口功能
+
+> ```
+> 工种分类和子分类
+> ```
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | limit | 是   | int    | 每页条数                                                     |
+> | page | 是   | int    | 页数                                                     |
+> | cat_type | 是   | tring    | 评论类型   机构：company  用户： |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | id       | string      | 评论id   |
+> | readed_count     | string   | 阅读数量 |
+> | comment_count     | int   | 评论数量 |
+> | praise_count     | int   | 点赞数量 |
+> | rank1     | int   | 服务 |
+> | rank2     | int   | 教学 |
+> | rank3     | int   | 环境 |
+> | rank4     | int   | 收费 |
+> | user_id     | int   | 用户id |
+> | title     | int   | 评论标题 |
+> | content     | int   | 评论内容 |
+> | createdTime     | int   | 评论时间 |
+
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/blog/blogs?limit=20&page=1&cat_type=company
+
+```javascript
+
+```
+
+------
