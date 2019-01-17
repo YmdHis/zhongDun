@@ -1,14 +1,14 @@
 <template>
 <div class="footer_nav">
-  <section @click = "gotoAddress({path: '/', query: {geohash}})" class="footer_nav_item">
+  <section @click = "gotoAddress({path: '/step1', query: {geohash}})" class="footer_nav_item">
     <img src="../images/banner.png" alt="">
     <span>报名</span>
   </section>
-   <section @click = "gotoAddress({path: '/', query: {geohash}})" class="footer_nav_item">
+   <section @click = "gotoAddress({path: '/learning', query: {geohash}})" class="footer_nav_item">
     <img src="../images/banner.png" alt="">
     <span>学习</span>
   </section>
-  <section @click = "gotoAddress({path: '/', query: {geohash}})" class="footer_nav_item" style="padding: 0;">
+  <section @click = "gotoAddress({path: '/home', query: {geohash}})" class="footer_nav_item" style="padding: 0;">
     <div class="home-img">
       <img src="../images/banner.png" alt="">
     </div>

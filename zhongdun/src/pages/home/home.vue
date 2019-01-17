@@ -23,19 +23,19 @@
     </div>
     <div class="module_block">
       <div class="module_block_list">
-         <router-link to="/enter" class="module_block_a">
+         <router-link to="/step1" class="module_block_a">
             <img src="../../images/icon1.png" alt="">
             <p>在线报名</p>
          </router-link>
-         <router-link to="/enter" class="module_block_a">
+         <router-link to="/learning" class="module_block_a">
             <img src="../../images/icon2.png" alt="">
             <p>课程学习</p>
          </router-link>
-         <router-link to="/enter" class="module_block_a">
+         <router-link :to="{ path: '/newslist', query: {id:196}}" class="module_block_a">
             <img src="../../images/icon3.png" alt="">
             <p>发现问题</p>
          </router-link>
-         <router-link to="/enter" class="module_block_a">
+         <router-link to="/learning" class="module_block_a">
             <img src="../../images/icon4.png" alt="">
             <p>试题学习</p>
          </router-link>
@@ -65,7 +65,7 @@
         <router-link to="/enter" class="more_link">全部></router-link>
       </div>
       <div class="module_block_list hot_module_list" style="padding-bottom: 0;">
-        <router-link to="/enter" class="hot_module_a">
+        <router-link to="/step1" class="hot_module_a">
             <p>报名</p>
            <img src="../../images/bao1.png" alt="">
         </router-link>
@@ -73,7 +73,7 @@
             <p>机构介绍</p>
            <img src="../../images/bao2.png" alt="">
         </router-link>
-         <router-link to="/enter" class="hot_module_a" style="border-right: none;">
+         <router-link :to="{ path: '/newslist', query: {id:196}}" class="hot_module_a" style="border-right: none;">
             <p>重点资讯</p>
            <img src="../../images/bao3.png" alt="">
         </router-link>
@@ -95,13 +95,15 @@
           </div>
           <ul>
             <li class="news_list_li" v-for="list in item.articles">
-              <p class="ellipsis">
-                {{list.post_title}}
-              </p>
-              <div class="news_imfor_box">
-                <span class="news_imfor_txt">众盾安全</span>
-                <span class="news_time">{{list.published_time | formatDate}}</span>
-              </div>
+               <router-link :to="{ path: '/newsDetails', query: {id:list.id,cid:list.category_id}}">
+                <p class="ellipsis">
+                  {{list.post_title}}
+                </p>
+                <div class="news_imfor_box">
+                  <span class="news_imfor_txt">众盾安全</span>
+                  <span class="news_time">{{list.published_time | formatDate}}</span>
+                </div>
+              </router-link>
             </li>
           </ul>
         </div>

@@ -15,7 +15,7 @@
           <span>作者：admin</span>
           <span>来源：互联网</span>
         </p> -->
-        <span>{{listText.published_time | formatDate}}</span>
+        <span class="news_details_time">{{listText.published_time | formatDate}}</span>
       </div>
 
       <div class="news_details_text" v-html="post_content">
@@ -73,6 +73,17 @@ export default {
 </script>
 
 <style scoped>
+*{
+  font-size: 14px;
+}
+body, html{
+  background: #fff;
+}
+strong, b {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1rem;
+}
 	.goBack {
   position: absolute;
   width: 12px;
@@ -85,16 +96,24 @@ export default {
   top: 5px;
 }
 .news_box{
-  padding:.5rem;
+  padding:.5rem .7rem;
 }
 .news_details_title{
   width: 100%;
   color: #1a1a1a;
-  font-size: .7rem;
+  font-size: 1rem;
   font-weight: bold;
   letter-spacing: .1rem;
+  line-height: 1.5rem;
 }
 .news_details_text{
-
+  line-height: 1rem;
+}
+.news_details_time{
+  color: #b2b2b2;
+  padding: .5rem 0;
+}
+.news_details_time img{
+  width: 100%;
 }
 </style>
