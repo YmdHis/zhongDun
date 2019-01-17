@@ -1,24 +1,24 @@
 <template>
 <div class="footer_nav">
-  <section @click = "gotoAddress({path: '/step1', query: {geohash}})" class="footer_nav_item">
-    <img src="../images/banner.png" alt="">
+  <section @click = "gotoAddress({path: '/step1', query: {}})" class="footer_nav_item">
+    <img src="../images/main1.jpg" alt="">
     <span>报名</span>
   </section>
-   <section @click = "gotoAddress({path: '/learning', query: {geohash}})" class="footer_nav_item">
-    <img src="../images/banner.png" alt="">
+   <section @click = "gotoAddress({path: '/learning', query: {}})" class="footer_nav_item">
+    <img src="../images/main2.jpg" alt="">
     <span>学习</span>
   </section>
-  <section @click = "gotoAddress({path: '/home', query: {geohash}})" class="footer_nav_item" style="padding: 0;">
+  <section @click = "gotoAddress({path: '/home', query: {}})" class="footer_nav_item" style="padding: 0;">
     <div class="home-img">
-      <img src="../images/banner.png" alt="">
+      <img src="../images/home.png" alt="">
     </div>
   </section>
-  <section @click = "gotoAddress({path: '/', query: {geohash}})" class="footer_nav_item">
-    <img src="../images/banner.png" alt="">
+  <section @click = "gotoAddress({path: '/', query: {}})" class="footer_nav_item">
+    <img src="../images/main3.jpg" alt="">
     <span>发现</span>
   </section>
-  <section @click = "gotoAddress({path: '/', query: {geohash}})" class="footer_nav_item">
-    <img src="../images/banner.png" alt="">
+  <section @click = "gotoAddress({path: '/', query: {}})" class="footer_nav_item">
+    <img src="../images/main4.jpg" alt="">
     <span>我的</span>
   </section>
     
