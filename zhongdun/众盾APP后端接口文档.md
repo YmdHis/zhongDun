@@ -477,3 +477,81 @@ URL
 ```
 
 ------
+
+### 8.立即报名短信验证码接口
+
+URL
+
+> http://zdapp.808w.com/app/public/appSend
+
+接口功能
+
+> ```
+> 发送短信验证码
+> ```
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | mobile | 是   | int    | 手机号                                                   |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | code       | 0,1      | 短信发送状态（0失败，1成功）   |
+> | msg     | string   | 返回的信息 |
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/puliic/appSend?mobile=12345678911
+
+```javascript
+
+```
+
+------
+
+### 9.立即报名表单提交接口
+
+URL
+
+> http://zdapp.808w.com/app/public/addOrder
+
+接口功能
+
+> ```
+> 提交内容生成订单
+> ```
+
+请求参数
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | company_id       | int      | 机构id   |
+> | course_ids     | string   | 课程ids |
+> | user_nickname     | string   | 姓名 |
+> | sex   | string   | 性别 |
+> |   mobile   | int   | 手机号 |
+> | code     | int   | 验证码 |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | code       | 0,1      | 订单状态（0失败，1成功）   |
+> | msg     | string   | 返回的信息 |
+> | order_sn       | string      | 订单号   |
+> | total_money     | string   | 订单价格 |
+
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/puliic/addOrder
+
+```javascript
+
+```
+
+------
