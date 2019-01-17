@@ -14,17 +14,17 @@
       <div class="details_title_box">
         <p class="details_title">
           <span class=" ellipsis">{{organ.name}}<img src="../../../images/course_icon.png" alt="" class="details_title_icon"></span>
-          <img src="../../../images/add_icon.png" alt="" class="details_phone">
+          <img src="../../../images/tel.jpg" alt="" class="details_phone">
         </p>
         <p class="details_certification">
           <span>身份认证</span>
-          <span>身份认证</span>
-          <span>身份认证</span>
+          <span>授权认证</span>
+          <span>营业执照认证</span>
         </p>  
       </div>
       <div class="details_address_box">
         <group>
-        <cell title="xxx" value="3.1公里" class="details_address" link="/home" >
+        <cell :title="address" :value="distance" class="details_address" link="/home" >
           <img slot="icon" width="12" style="display:block;margin-right:5px;" src="../../../images/add_icon.png">
         </cell>
       </group>
@@ -101,7 +101,7 @@
         </div>
       </div>
     </div>
-    <x-button class="details_address_btn">立即报名</x-button>
+    <div class="ex-next" @click="toStepTwo()">立即报名</div>
   </div>
 </template>
 
@@ -109,6 +109,8 @@
 import BMap from 'BMap'
 import { XHeader,Flexbox, FlexboxItem,Group,CellBox,Cell,XButton, Rater} from 'vux'
 import {organDetails} from 'src/service/api'
+import { getStore, setStore } from 'src/config/mUtils'
+
 export default {
   components: {
     XHeader,
@@ -123,7 +125,8 @@ export default {
   data () {
     return {
       data:5,
-      xxx:"",
+      address:"",
+      distance:"",
       organ:[],
       borderColor: {
         borderColor: '#333'
@@ -133,26 +136,47 @@ export default {
   methods:{
    back(){
         this.$router.go(-1);//返回上一层
-    }
-     // getCity(lng, lat) {
-     //      console.log(lng, lat)
-     //  },
+    },
+    toStepTwo(){
+      let name = this.organ.name;
+      let id = this.organ.id;
+      this.$router.push({path:'/step2',query:{name:name,id:id}});
+    },
+    rad(d){
+      return d*Math.PI/180.0;//经纬度转换成三角函数中度分表形式
+    },
+    //计算距离
+    getDistance(lat1,lng1,lat2,lng2){
+      let radLat1 = this.rad(lat1);
+      let radLng1 = this.rad(lng1);
+      let radLat2 = this.rad(lat2);
+      let radLng2 = this.rad(lng2);
+      let a = radLat1 - radLat2;
+      let b = radLng1- radLng2;
+      let s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) + Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+      s = s*6378.137 ;// EARTH_RADIUS;
+      s = Math.round(s * 10000) / 10000; //输出为公里
+      s=s.toFixed(2);//四舍五入，取几位小数
+      return s;
+    },
+
   },
    mounted(){
     organDetails({companyId:1}).then(res => {
+      let _this = this;
       this.organ = res.data;
       console.log(this.organ);
-      this.lng=this.organ.longitude;
-      this.lat=this.organ.latitude;
-      let point = new BMap.Point(this.lng,this.lat);
-      console.log(point);
-      let gc = new BMap.Geocoder(); 
+      let lng = this.organ.longitude;
+      let lat = this.organ.latitude;
+      let point = new BMap.Point(lng, lat);
+      let gc = new BMap.Geocoder();
+      let latitude = getStore("latitude");
+      let longitude = getStore("longitude");
       gc.getLocation(point, function(rs){
-        // 百度地图解析城市名
-        console.log(rs.addressComponents.city);
         //或者其他信息
-        console.log(rs.address);
-        this.xxx = rs.address;
+        //console.log(rs.address);
+        _this.address = rs.address;
+        _this.distance = _this.getDistance(lat,lng,latitude,longitude) + 'km';
       }); 
     })
   }
@@ -302,4 +326,7 @@ export default {
   font-size: .6rem;
   color: #999;
 }
+.ex-next{height:2rem;background: #5ebf83;color:#FFF;line-height:2rem; position: fixed;
+    bottom:0;font-size:0.64rem;
+    width:100%;text-align:center;}
 </style>
