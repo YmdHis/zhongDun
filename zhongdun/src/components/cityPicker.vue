@@ -28,7 +28,8 @@
         </section>
         <aside class="letter-aside">
           <ul>
-            <li v-for="(value, key, index) in sortgroupcity" @click="naver(key)" ref="key" :key="index">
+            <li v-for="(value, key, index) in sortgroupcity" @click.prevent="custormAnchor(key)"
+  :key="index">
                 {{key}}
             </li>
           </ul>
@@ -97,14 +98,15 @@ export default {
             this.LocationCity = city;
             this.closeBtn();
         },
-        naver: function (id) { // 点击右边字母滚动
-            let obj = document.getElementById(id);
-                let obj1 = document.getElementById('city_picker');
-            console.log(obj);
-            let oPos = obj.offsetTop;
-            console.log(oPos)
-            return window.scrollTo(0, oPos - 36)
-        }
+        custormAnchor(index) { //锚点滚动到固定位置      
+             let anchorElement = document.getElementById(index);
+             if(anchorElement) { 
+                anchorElement.scrollIntoView();
+                alert(index);
+
+            }               
+        },
+
     }
      
 }
@@ -113,6 +115,7 @@ export default {
 <style scoped>
 #city_picker{
     background: #fff;
+    overflow-y:scroll; 
 }
 .header{
     width: 100%;
