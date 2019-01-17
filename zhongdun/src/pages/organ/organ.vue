@@ -138,8 +138,8 @@ export default {
     },
     /*经纬度计算距离*/
     GetDistance( lat2,  lng2){
-      let longitude=this.$route.query.longitude;
-      let latitude=this.$route.query.latitude;
+      let longitude=getStore("longitude");;
+      let latitude=getStore("latitude");
       var radLat1 = latitude*Math.PI / 180.0;
       var radLat2 = lat2*Math.PI / 180.0;
       var a = radLat1 - radLat2;

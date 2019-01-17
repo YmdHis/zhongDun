@@ -165,7 +165,7 @@ import cityPicker from 'src/components/cityPicker'
         }else{
           setStore("active",this.active);
           setStore("exactive",this.exactive);
-          this.$router.push({path:'/organ',query:{latitude:latitude,longitude:longitude,category:this.exactive}});
+          this.$router.push({path:'/organ'});
         }
       },
     },
