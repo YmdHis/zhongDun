@@ -7,7 +7,7 @@
         <div class="city_input_box">
             <div class="city_input_style">
                 <i class="city_input_icon"><img src="../images/sear_icon.png" alt=""></i>
-                <input type="search" name="city" placeholder="请输入学校/商务楼/写字楼等" required="required" class="city_input">
+                <input type="text" name="address_detail" placeholder="请输入学校/商务楼/写字楼等" required="required" class="city_input" id="suggestId" >
             </div>
         </div>
         <div class="city_positioning" @click="getLocation()">
@@ -40,7 +40,6 @@
 <script>
 import data from 'src/config/cityCenter.json'
 import {setStore,getStore} from 'src/config/mUtils'
-
 export default {
     components:{
     },
@@ -49,12 +48,15 @@ export default {
             LocationCity: '',   //当前城市
             guessCityid: '', //当前城市id
             groupcity: {},   //所有城市列表
+            address_detail: null, //详细地址
+            userlocation: {lng: "", lat: ""},
         }
     },
     props:['msgCity'],
     mounted(){
        this.groupcity = data,
        this.LocationCity = getStore("LocationCity");
+        
     },
     computed:{
         //将获取的数据按照A-Z字母开头排序
