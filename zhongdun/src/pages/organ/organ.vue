@@ -4,7 +4,7 @@
         <div class="header_address">
            <section class="header_address_a ellipsis">
             <img src="../../images/add_icon.png" alt="" class="header_address_icon">
-            {{LocationCity}}
+            {{LocationCitys}}
          </section>
         </div>
         <div class="header_search">
@@ -27,16 +27,16 @@
     </div>
     <div class="organ_choose_title">
       <flexbox :gutter="0">
-      <flexbox-item><div class="organ_choose_t">综合</div></flexbox-item>
-      <flexbox-item><div class="organ_choose_t">距离</div></flexbox-item>
-      <flexbox-item><div class="organ_choose_t">价格</div></flexbox-item>
-      <flexbox-item><div class="organ_choose_t">评价</div></flexbox-item>
+      <flexbox-item><div class="organ_choose_t" @click="updates('default')">综合</div></flexbox-item>
+      <flexbox-item><div class="organ_choose_t" @click="updates('map')">距离</div></flexbox-item>
+      <flexbox-item><div class="organ_choose_t" @click="updates('price')">价格</div></flexbox-item>
+      <flexbox-item><div class="organ_choose_t"  @click="updates('comment')">评价</div></flexbox-item>
        <flexbox-item><div class="organ_choose_t organ_choose_icon">筛选<img src="../../images/choose_icon.jpg" alt=""></div></flexbox-item>
     </flexbox>
     </div>
     <div class="origan_box">
-      <div class="origan_list">
-        <router-link to="/organDetail" > 
+      <div class="origan_list" v-for="items in jgdata">
+        <router-link :to="{ path: '/organDetail', query: {companyId:items.id}}"> 
           <flexbox>
             <flexbox-item :span="4"><div class="origan_list_imgBox">
               <img src="../../images/banner.png" alt="" class="origan_img">
@@ -45,38 +45,37 @@
             <flexbox-item>
               <div class="origan_txt">
                   <flexbox>
-                    <flexbox-item class="ellipsis"><span class="origan_txt_title">制冷与空调安装维修</span></flexbox-item>
+                    <flexbox-item class="ellipsis"><span class="origan_txt_title">{{items.name}}</span></flexbox-item>
                     <flexbox-item :span="3"><img src="../../images/course_icon.png" alt="" class="origan_txt_title_img"></flexbox-item>
                   </flexbox>
                   <p class="origan_evaluation">
                    <rater v-model="data" :font-size="15" disabled></rater> 
-                      37条
+                      {{items.count_comment}}条
                     </p>
                   <div class="origan_class">
                     <flexbox>
-                      <flexbox-item :span="3"><div class="origan_buy">￥650</div></flexbox-item>
+                      <flexbox-item :span="3"><div class="origan_buy">￥{{items.min_price}}</div></flexbox-item>
                       <flexbox-item><div class="origan_curse ellipsis"><span>电工</span><span>焊工</span></div></flexbox-item>
-                      <flexbox-item :span="3"><div class="origan_km">3.1公里</div></flexbox-item>
+                      <flexbox-item :span="3"><div class="origan_km">{{GetDistance(items.latitude,items.longitude)}}公里</div></flexbox-item>
                     </flexbox>
                   </div>
                 </div>
             </flexbox-item>
           </flexbox> 
       </router-link>
+      
       </div>
     </div>
    <foot-nav></foot-nav>
   </div>
 </template>
-
 <script>
 import { Tab, TabItem, Flexbox, FlexboxItem,Rater} from 'vux'
-import {shouyeNews} from 'src/service/api'
+import {jglist} from 'src/service/api'
 import footNav from 'src/components/footNav'
+import { getStore, setStore } from 'src/config/mUtils'
 import BMap from 'BMap'
-
 export default {
- 
 	components: {
 		Tab,
 		TabItem,
@@ -89,27 +88,53 @@ export default {
 	    return {
         data:5,
          LocationCity:"定位中",
+         jgdata:[],
+         LocationCitys:''
 	    }
   	},
-  mounted(){
-   this.getLocation();  
+  mounted(){ 
+  // this.getLocation(); 
+   this.updates('default');
+   this.LocationCitys=getStore('LocationCity');
   },
    methods:{
+    updates(da){
+        jglist({longitude:this.$route.query.longitude,latitude:this.$route.query.latitude,type:da}).then(res=>{
+            this.jgdata=res.data;
+            console.log(this.jgdata);
+           });
+
+    },
+  
     gotoAddress(path){
-        this.$router.push(path)
+        this.$router.push(path);
+
       },
+      /*经纬度计算距离*/
+      GetDistance( lat2,  lng2){
+         let longitude=this.$route.query.longitude;
+       let latitude=this.$route.query.latitude;
+        var radLat1 = latitude*Math.PI / 180.0;
+        var radLat2 = lat2*Math.PI / 180.0;
+        var a = radLat1 - radLat2;
+        var  b = longitude*Math.PI / 180.0 - lng2*Math.PI / 180.0;
+        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +
+        Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+        s = s *6378.137 ;// EARTH_RADIUS;
+        s = Math.round(s * 10000) / 10000;
+        return s;
+    },
+    /*
     getLocation(){
       let _this = this;
       const geolocation = new BMap.Geolocation();
       geolocation.getCurrentPosition(function getinfo(position){
           let city = position.address.city;
           _this.LocationCity = city;
-          //console.log(city);
       }, function(e) {
           _this.LocationCity = "定位失败"
-          //console.log('fail');
       }, {provider: 'baidu'});
-    }
+    }*/
   },
 }
 </script>
