@@ -13,7 +13,7 @@
       </div>
       <div class="details_title_box">
         <p class="details_title">
-          <span class=" ellipsis">安培教育<img src="../../../images/course_icon.png" alt="" class="details_title_icon"></span>
+          <span class=" ellipsis">{{organ.name}}<img src="../../../images/course_icon.png" alt="" class="details_title_icon"></span>
           <img src="../../../images/add_icon.png" alt="" class="details_phone">
         </p>
         <p class="details_certification">
@@ -24,7 +24,7 @@
       </div>
       <div class="details_address_box">
         <group>
-        <cell title="湖北武汉" value="3.1公里" class="details_address" link="/home" >
+        <cell :title="xxx" value="3.1公里" class="details_address" link="/home" >
           <img slot="icon" width="12" style="display:block;margin-right:5px;" src="../../../images/add_icon.png">
         </cell>
       </group>
@@ -106,7 +106,9 @@
 </template>
 
 <script>
+import BMap from 'BMap'
 import { XHeader,Flexbox, FlexboxItem,Group,CellBox,Cell,XButton, Rater} from 'vux'
+import {organDetails} from 'src/service/api'
 export default {
   components: {
     XHeader,
@@ -121,6 +123,8 @@ export default {
   data () {
     return {
       data:5,
+      xxx:"",
+      organ:[],
       borderColor: {
         borderColor: '#333'
       },
@@ -129,7 +133,28 @@ export default {
   methods:{
    back(){
         this.$router.go(-1);//返回上一层
-    },
+    }
+     // getCity(lng, lat) {
+     //      console.log(lng, lat)
+     //  },
+  },
+   mounted(){
+    organDetails({companyId:1}).then(res => {
+      this.organ = res.data;
+      console.log(this.organ);
+      this.lng=this.organ.longitude;
+      this.lat=this.organ.latitude;
+      let point = new BMap.Point(this.lng,this.lat);
+      console.log(point);
+      let gc = new BMap.Geocoder(); 
+      gc.getLocation(point, function(rs){
+        // 百度地图解析城市名
+        console.log(rs.addressComponents.city);
+        //或者其他信息
+        console.log(rs.address);
+        this.xxx = rs.address;
+      }); 
+    })
   }
 }
 </script>
