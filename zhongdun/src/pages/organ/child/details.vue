@@ -162,7 +162,7 @@ export default {
 
   },
    mounted(){
-    organDetails({companyId:1}).then(res => {
+    organDetails({companyId:this.$route.query.companyId}).then(res => {
       let _this = this;
       this.organ = res.data;
       console.log(this.organ);
