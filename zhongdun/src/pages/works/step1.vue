@@ -90,7 +90,7 @@ import cityPicker from 'src/components/cityPicker'
               name: '无证'
             }
           ],
-          active:'有证',
+          active:'无证',
           gzlists:[]
         }
       },
