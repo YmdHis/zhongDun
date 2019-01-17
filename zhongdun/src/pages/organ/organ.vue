@@ -1,10 +1,10 @@
 <template>
   <div id="organ">
     <div class="header_box clear">
-        <div class="header_address">
+        <div class="header_address" @click="chooCity()">
            <section class="header_address_a ellipsis">
             <img src="../../images/add_icon.png" alt="" class="header_address_icon">
-            {{LocationCitys}}
+            {{LocationCity}}
          </section>
         </div>
         <div class="header_search">
@@ -27,10 +27,10 @@
     </div>
     <div class="organ_choose_title">
       <flexbox :gutter="0">
-      <flexbox-item><div class="organ_choose_t" @click="updates('default')">综合</div></flexbox-item>
-      <flexbox-item><div class="organ_choose_t" @click="updates('map')">距离</div></flexbox-item>
-      <flexbox-item><div class="organ_choose_t" @click="updates('price')">价格</div></flexbox-item>
-      <flexbox-item><div class="organ_choose_t"  @click="updates('comment')">评价</div></flexbox-item>
+      <flexbox-item><div class="organ_choose_t" :class="[type =='default' ? 'organ_choo_color' : '']" @click="updates('default')">综合</div></flexbox-item>
+      <flexbox-item><div class="organ_choose_t" :class="[type =='map' ? 'organ_choo_color' : '']" @click="updates('map')">距离</div></flexbox-item>
+      <flexbox-item><div class="organ_choose_t" :class="[type =='price' ? 'organ_choo_color' : '']" @click="updates('price')">价格</div></flexbox-item>
+      <flexbox-item><div class="organ_choose_t" :class="[type =='comment' ? 'organ_choo_color' : '']"  @click="updates('comment')">评价</div></flexbox-item>
        <flexbox-item><div class="organ_choose_t organ_choose_icon">筛选<img src="../../images/choose_icon.jpg" alt=""></div></flexbox-item>
     </flexbox>
     </div>
@@ -56,17 +56,20 @@
                     <flexbox>
                       <flexbox-item :span="3"><div class="origan_buy">￥{{items.min_price}}</div></flexbox-item>
                       <flexbox-item><div class="origan_curse ellipsis"><span>电工</span><span>焊工</span></div></flexbox-item>
-                      <flexbox-item :span="3"><div class="origan_km">{{GetDistance(items.latitude,items.longitude)}}公里</div></flexbox-item>
+                      <flexbox-item :span="3"><div class="origan_km">{{GetDistance(items.latitude,items.longitude)}}km</div></flexbox-item>
                     </flexbox>
                   </div>
                 </div>
             </flexbox-item>
           </flexbox> 
       </router-link>
-      
+
       </div>
     </div>
    <foot-nav></foot-nav>
+    <div class="city-choo" :class="cityPickerShow?'':'city-hid'">
+      <city-picker @closeMsg="close" @cityMsg="formPicker" :msgCity="LocationCity"></city-picker>
+    </div>
   </div>
 </template>
 <script>
@@ -75,6 +78,7 @@ import {jglist} from 'src/service/api'
 import footNav from 'src/components/footNav'
 import { getStore, setStore } from 'src/config/mUtils'
 import BMap from 'BMap'
+import cityPicker from 'src/components/cityPicker'
 export default {
 	components: {
 		Tab,
@@ -82,59 +86,71 @@ export default {
     Flexbox, 
     FlexboxItem,
     Rater,
-    footNav
+    footNav,
+    cityPicker
 	},
 	data () {
-	    return {
-        data:5,
-         LocationCity:"定位中",
-         jgdata:[],
-         LocationCitys:''
-	    }
-  	},
-  mounted(){ 
-  // this.getLocation(); 
-   this.updates('default');
-   this.LocationCitys=getStore('LocationCity');
+    return {
+      data:5,
+        LocationCity:"定位中",
+        jgdata:[],
+        LocationCity:'',
+        cityPickerShow:false,
+        type:'default',
+    }
   },
-   methods:{
+  mounted(){ 
+    this.updates('default');
+    this.LocationCity=getStore('LocationCity');
+  },
+  methods:{
     updates(da){
-        jglist({longitude:this.$route.query.longitude,latitude:this.$route.query.latitude,type:da}).then(res=>{
-            this.jgdata=res.data;
-            console.log(this.jgdata);
-           });
-
+      setStore("type",da);
+      this.type = da;
+      let longitude = getStore("longitude");
+      let latitude = getStore("latitude");
+      jglist({longitude:longitude,latitude:latitude,type:da}).then(res=>{
+          this.jgdata=res.data;
+          console.log(this.jgdata);
+      });
     },
-  
     gotoAddress(path){
         this.$router.push(path);
-
-      },
-      /*经纬度计算距离*/
-      GetDistance( lat2,  lng2){
-         let longitude=this.$route.query.longitude;
-       let latitude=this.$route.query.latitude;
-        var radLat1 = latitude*Math.PI / 180.0;
-        var radLat2 = lat2*Math.PI / 180.0;
-        var a = radLat1 - radLat2;
-        var  b = longitude*Math.PI / 180.0 - lng2*Math.PI / 180.0;
-        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +
-        Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
-        s = s *6378.137 ;// EARTH_RADIUS;
-        s = Math.round(s * 10000) / 10000;
-        return s;
     },
-    /*
-    getLocation(){
-      let _this = this;
-      const geolocation = new BMap.Geolocation();
-      geolocation.getCurrentPosition(function getinfo(position){
-          let city = position.address.city;
-          _this.LocationCity = city;
-      }, function(e) {
-          _this.LocationCity = "定位失败"
-      }, {provider: 'baidu'});
-    }*/
+    chooCity(){
+      this.cityPickerShow = !this.cityPickerShow
+      console.log("cityPickerShow:"+this.cityPickerShow);
+    },
+    close(res){
+      if(res == 'close'){
+        this.chooCity();
+      }
+    },
+    formPicker(res){
+      this.LocationCity = res;
+      let longitude = getStore("longitude");
+      let latitude = getStore("latitude");
+      let da = getStore("type");
+      jglist({longitude:longitude,latitude:latitude,type:da}).then(res=>{
+          this.jgdata=res.data;
+          console.log(this.jgdata);
+      });
+    },
+    /*经纬度计算距离*/
+    GetDistance( lat2,  lng2){
+      let longitude=this.$route.query.longitude;
+      let latitude=this.$route.query.latitude;
+      var radLat1 = latitude*Math.PI / 180.0;
+      var radLat2 = lat2*Math.PI / 180.0;
+      var a = radLat1 - radLat2;
+      var  b = longitude*Math.PI / 180.0 - lng2*Math.PI / 180.0;
+      var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +
+      Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+      s = s *6378.137 ;// EARTH_RADIUS;
+      s = Math.round(s * 10000) / 10000;
+      s=s.toFixed(2);//四舍五入，取几位小数
+      return s;
+    },
   },
 }
 </script>
@@ -142,7 +158,21 @@ export default {
 <style lang="less" scoped>
 @import '~vux/src/styles/1px.less';
 @import '~vux/src/styles/center.less';
-
+.city-choo{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  overflow-y: auto;
+  z-index: 999;
+}
+.city-hid{
+  display: none;
+}
+.organ_choo_color{
+  color: #5ebf83;
+}
 #organ{
   background:#fff;
   font-size: 14px;
