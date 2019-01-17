@@ -463,8 +463,8 @@ URL
 > | rank3     | int   | 环境 |
 > | rank4     | int   | 收费 |
 > | user_id     | int   | 用户id |
-> | title     | int   | 评论标题 |
-> | content     | int   | 评论内容 |
+> | title     | string   | 评论标题 |
+> | content     | string   | 评论内容 |
 > | createdTime     | int   | 评论时间 |
 
 
