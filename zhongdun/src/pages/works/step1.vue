@@ -6,7 +6,7 @@
         <div>众盾安全</div>
       </div>
       <div>
-        <div id="choosecity"> 
+        <div id="choosecity"  @click="chooCity()"> 
           <div>
             <group><cell title="选择考试城市" :value="LocationCity" is-link></cell></group>
           </div>
@@ -15,7 +15,7 @@
       <!--上部分 E-->
       <!--学习阶段 S-->
       <div id="jieduan">
-        <p class="ex-choose-city" @click="lk">证书状态</p>
+        <p class="ex-choose-city">证书状态</p>
         <div>
              <x-button  mini plain style="border-radius:99px;margin-right:0.4rem;padding-left:0.6rem" v-for="item in wpList" :key="item.name"
               :class="{active : active == item.name}" 
@@ -30,8 +30,8 @@
         <p class="ex-choose-city">选择工种</p>
         <ul class="ex-gongzhong-ul">
           <li v-for="item1 in gzlists" class="ex-gongzhong-li">
-            <div  :class="{exactive : exactive == item1.name}" 
-              @click="gzselected(item1.name)" >
+            <div  :class="{exactive : exactive == item1.id}" 
+              @click="gzselected(item1.id)" >
               <img :src='item1.icon'>
               <p>{{item1.name}}</p>
             </div>
@@ -50,8 +50,11 @@
       </div>
       <!-- 选择工种 E -->
     </div>
-    <div class="ex-next">
+    <div class="ex-next" @click="nextStep()">
       下一步
+    </div>
+		<div class="city-choo" :class="cityPickerShow?'':'city-hid'">
+      <city-picker @closeMsg="close" @cityMsg="formPicker" :msgCity="LocationCity"></city-picker>
     </div>
   </div>
 </template>
@@ -59,8 +62,11 @@
   //
 import BMap from 'BMap'
 import {showlist} from 'src/service/api'
-import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XSwitch, Toast,
- Value2nameFilter as value2name } from 'vux'
+import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XSwitch,Value2nameFilter as value2name } from 'vux'
+import { getStore, setStore } from 'src/config/mUtils'
+import cityPicker from 'src/components/cityPicker'
+
+
   export default{
      directives: {
         TransferDom
@@ -68,7 +74,8 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
     data() {
         return {
           exactive:'',
-          LocationCity:"定位中",
+					LocationCity:"定位中",
+          cityPickerShow:false,
           title:'',
           value_0_1: [],
           value: [],
@@ -93,25 +100,17 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
         Group,
         Cell,
         XSwitch,
-        Toast,
         XAddress,
-        XButton
-      },
-      created:function(){
+				XButton,
+				cityPicker
       },
     methods:{
-      lk:function(){
-        this.$vux.alert.show({
-          title: "提示",
-          content: "哈哈哈"
-        })
-      },
-      selected:function(name){
-          this.active = name;
+      selected:function(name){//有证无证
+        console.log(name);
+        this.active = name;
           
       },
-      gzselected:function(name){
-          
+      gzselected:function(name){//工种选择
           this.exactive = name;
       },
       choosegz:function(children){
@@ -122,37 +121,70 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
       onShadowChange (ids, names) {
         //   console.log(ids, names)
       },
-      getLocation(){
-      let _this = this;
-      const geolocation = new BMap.Geolocation();
-      geolocation.getCurrentPosition(function getinfo(position){
-          let point = position.address.point;
-     //_this.LocationCity = city;
-          console.log(point);
-      }, function(e) {
-          _this.LocationCity = "定位失败"
-          //console.log('fail');
-      }, {provider: 'baidu'});
-    }
+			getLocation(){
+				let _this = this;
+				const geolocation = new BMap.Geolocation();
+				geolocation.getCurrentPosition(function getinfo(position){
+						let city = position.address.city;
+						_this.LocationCity = city;
+						setStore("LocationCity",city);
+						setStore("latitude",position.latitude);
+						setStore("longitude",position.longitude);
+						console.log(position);
+				}, function(e) {
+						_this.LocationCity = "定位失败"
+						//console.log('fail');
+				}, {provider: 'baidu'});
+			},
+      chooCity(){
+        this.cityPickerShow = !this.cityPickerShow
+      },
+      close(res){
+        if(res == 'close'){
+          this.chooCity();
+        }
+      },
+      formPicker(res){
+        this.LocationCity = res;
+      },
+      nextStep(){
+        let latitude = getStore("latitude");
+        let longitude = getStore("longitude");
+        if(longitude == '' || latitude == ''){
+          this.$vux.toast.show({
+            text: '请选择考试城市',
+            type:'text',
+            position: 'middle'
+          })
+        }else if(this.exactive == ''){
+          this.$vux.toast.show({
+            text: '请选择工种',
+            type:'text',
+            position: 'middle'
+          })
+        }else{
+          setStore("active",this.active);
+          setStore("exactive",this.exactive);
+          this.$router.push({path:'/organ',query:{latitude:latitude,longitude:longitude,category:this.exactive}});
+        }
+      },
     },
-     mounted(){
+    mounted(){
       showlist().then(res=>{
         this.gzlists =res.data;
         console.log(this.gzlists);
         //alert(this.gzlist)
-      });
-      this.getLocation(); 
-
-     }
+			});
+			let LocationCity = getStore("LocationCity");
+			if(!LocationCity){
+				this.getLocation(); 
+			}else{
+				this.LocationCity = LocationCity;
+			}
+		}
   }
 </script>
 <style type="text/css">
-  /* body{
-    font-family：'微软雅黑'
-     display: flex !important; 
-      flex-flow: column; 
-      min-height: 100vh;
-  } */
   #ex-step1>div:nth-of-type(1){ display: flex; 
       display: -webkit-flex;  
       /* vh 相对于可视区域的高度 */
@@ -182,5 +214,17 @@ import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XS
     border:1px solid #5ebf83 !important;
     background: #5ebf83 !important;
     color:#FFF !important;
+  }
+	.city-choo{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    overflow-y: auto;
+    z-index: 999;
+  }
+  .city-hid{
+    display: none;
   }
 </style>
