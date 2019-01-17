@@ -148,7 +148,7 @@ export default {
       Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
       s = s *6378.137 ;// EARTH_RADIUS;
       s = Math.round(s * 10000) / 10000;
-      s=s.toFixed(2);//四舍五入，取几位小数
+      s=s.toFixed(1);//四舍五入，取几位小数
       return s;
     },
   },
