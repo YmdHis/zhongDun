@@ -24,7 +24,7 @@
       </div>
       <div class="details_address_box">
         <group>
-        <cell :title="xxx" value="3.1公里" class="details_address" link="/home" >
+        <cell title="xxx" value="3.1公里" class="details_address" link="/home" >
           <img slot="icon" width="12" style="display:block;margin-right:5px;" src="../../../images/add_icon.png">
         </cell>
       </group>
