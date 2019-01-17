@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="city_positioning" @click="getLocation()">
-            当前定位城市：{{msgCity}}  
+            当前定位城市：{{LocationCity}}  
             <p class="relocation">重新定位</p>
         </div>
         <section class="city_name_box">
@@ -21,14 +21,14 @@
                         <span v-if="index == 0">（按首字母排序）</span>
                     </h4>
                     <ul class="clear">
-                        <li v-for="item in value" :key="item.id" class="ellipsis city_name_li" >{{item.name}}</li>
+                        <li v-for="item in value" :key="item.id" class="ellipsis city_name_li" @click="transCity(item.name,item.longitude,item.latitude)">{{item.name}}</li>
                     </ul>
                 </li>
             </ul>
         </section>
         <aside class="letter-aside">
           <ul>
-            <li v-for="(value, key, index) in sortgroupcity" @click="naver(key)" ref="key">
+            <li v-for="(value, key, index) in sortgroupcity" @click="naver(key)" ref="key" :key="index">
                 {{key}}
             </li>
           </ul>
@@ -52,7 +52,8 @@ export default {
     },
     props:['msgCity'],
     mounted(){
-       this.groupcity = data 
+       this.groupcity = data,
+       this.LocationCity = getStore("LocationCity");
     },
     computed:{
         //将获取的数据按照A-Z字母开头排序
@@ -63,13 +64,16 @@ export default {
                     sortobj[String.fromCharCode(i)] = this.groupcity[String.fromCharCode(i)];
                 }
             }
+            //console.log(sortobj)
             return sortobj
         }
     },
     methods:{
         //点击图标关闭
         closeBtn(){
+            let city = getStore("LocationCity");
             this.$emit("closeMsg", "close");
+            this.$emit("cityMsg",city); 
         },
         getLocation(){
             let _this = this;
@@ -77,21 +81,30 @@ export default {
             geolocation.getCurrentPosition(function getinfo(position){
                 let city = position.address.city;
                 _this.LocationCity = city;
-                
+                setStore("LocationCity",city);
+                setStore("latitude",position.latitude);
+                setStore("longitude",position.longitude);
                 //console.log(city);
             }, function(e) {
                 _this.LocationCity = "定位失败"
                 //console.log('fail');
             }, {provider: 'baidu'});
         },
-         naver: function (id) { // 点击右边字母滚动
-                let obj = document.getElementById(id);
-                 let obj1 = document.getElementById('city_picker');
-                console.log(obj);
-                let oPos = obj.offsetTop;
-                console.log(oPos)
-                return window.scrollTo(0, oPos - 36)
-            }
+        transCity(city,longitude,latitude){
+            setStore("LocationCity",city);
+            setStore("latitude",latitude);
+            setStore("longitude",longitude);
+            this.LocationCity = city;
+            this.closeBtn();
+        },
+        naver: function (id) { // 点击右边字母滚动
+            let obj = document.getElementById(id);
+                let obj1 = document.getElementById('city_picker');
+            console.log(obj);
+            let oPos = obj.offsetTop;
+            console.log(oPos)
+            return window.scrollTo(0, oPos - 36)
+        }
     }
      
 }
