@@ -448,7 +448,8 @@ URL
 > | :-------- | :--- | :----- | ------------------------------------------------------------ |
 > | limit | 是   | int    | 每页条数                                                     |
 > | page | 是   | int    | 页数                                                     |
-> | cat_type | 是   | tring    | 评论类型   机构：company  用户： |
+> | cat_type | 是   | tring    | 评论类型   机构：company  课程id： |
+> | cat_id | 是   | int    | 评论类型id   机构id：company  课程id： |
 
 业务相关数据
 
@@ -466,11 +467,12 @@ URL
 > | title     | string   | 评论标题 |
 > | content     | string   | 评论内容 |
 > | createdTime     | int   | 评论时间 |
+> | user_nickname     | string   | 用户名 |
 
 
 > 接口示例
 
-> 地址：http://zdapp.808w.com/app/blog/blogs?limit=20&page=1&cat_type=company
+> 地址：http://zdapp.808w.com/app/blog/blogs?limit=20&page=1&cat_type=company&cat_id=1
 
 ```javascript
 
