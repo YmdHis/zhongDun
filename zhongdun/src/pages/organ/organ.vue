@@ -213,7 +213,7 @@ export default {
   }
   .header_address_a{
     color: #808080;
-    font-size: .2rem;
+    font-size: .6rem;
   }
   .header_search {
    float: left;
@@ -247,7 +247,7 @@ export default {
 }
 .organ_choose_t{
   text-align: center;
-  font-size: .5rem;
+  font-size: .6rem;
   border-right:1px solid #e9e9e9;
 }
 .organ_choose_icon{
