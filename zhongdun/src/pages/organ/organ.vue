@@ -20,49 +20,97 @@
     </div>
     <div class="organ_species">
        <tab :line-width="3" custom-bar-width="10px" active-color="#5ebf83" bar-active-color="5ebf83">
-      <tab-item selected @on-item-click="" class="organ_species_tit">培训机构</tab-item>
-      <tab-item @on-item-click="" class="organ_species_tit">培训老师</tab-item>
-      <tab-item @on-item-click="" class="organ_species_tit">申请入驻</tab-item>
-    </tab>
+        <tab-item selected @on-item-click="onClick('organ')" class="organ_species_tit">培训机构</tab-item>
+        <tab-item @on-item-click="onClick('teacher')" class="organ_species_tit">培训老师</tab-item>
+        <tab-item @on-item-click="" class="organ_species_tit">申请入驻</tab-item>
+      </tab>
     </div>
-    <div class="organ_choose_title">
-      <flexbox :gutter="0">
-      <flexbox-item><div class="organ_choose_t" :class="[type =='default' ? 'organ_choo_color' : '']" @click="updates('default')">综合</div></flexbox-item>
-      <flexbox-item><div class="organ_choose_t" :class="[type =='map' ? 'organ_choo_color' : '']" @click="updates('map')">距离</div></flexbox-item>
-      <flexbox-item><div class="organ_choose_t" :class="[type =='price' ? 'organ_choo_color' : '']" @click="updates('price')">价格</div></flexbox-item>
-      <flexbox-item><div class="organ_choose_t" :class="[type =='comment' ? 'organ_choo_color' : '']"  @click="updates('comment')">评价</div></flexbox-item>
-       <flexbox-item><div class="organ_choose_t organ_choose_icon">筛选<img src="../../images/choose_icon.jpg" alt=""></div></flexbox-item>
-    </flexbox>
-    </div>
-    <div class="origan_box">
-      <div class="origan_list" v-for="items in jgdata">
-        <router-link :to="{ path: '/organDetail', query: {companyId:items.id}}"> 
-          <flexbox>
-            <flexbox-item :span="4"><div class="origan_list_imgBox">
-              <img src="../../images/banner.png" alt="" class="origan_img">
-            </div>
-            </flexbox-item>
-            <flexbox-item>
-              <div class="origan_txt">
-                  <flexbox>
-                    <flexbox-item class="ellipsis"><span class="origan_txt_title">{{items.name}}</span></flexbox-item>
-                    <flexbox-item :span="3"><img src="../../images/course_icon.png" alt="" class="origan_txt_title_img"></flexbox-item>
-                  </flexbox>
-                  <p class="origan_evaluation">
-                   <rater v-model="data" :font-size="15" disabled></rater> 
-                      {{items.count_comment}}条
-                    </p>
-                  <div class="origan_class">
+    <div v-if="active_tab=='organ'" class="organ_item">
+      <div class="organ_choose_title">
+        <flexbox :gutter="0">
+        <flexbox-item><div class="organ_choose_t" :class="[type =='default' ? 'organ_choo_color' : '']" @click="updates('default')">综合</div></flexbox-item>
+        <flexbox-item><div class="organ_choose_t" :class="[type =='map' ? 'organ_choo_color' : '']" @click="updates('map')">距离</div></flexbox-item>
+        <flexbox-item><div class="organ_choose_t" :class="[type =='price' ? 'organ_choo_color' : '']" @click="updates('price')">价格</div></flexbox-item>
+        <flexbox-item><div class="organ_choose_t" :class="[type =='comment' ? 'organ_choo_color' : '']"  @click="updates('comment')">评价</div></flexbox-item>
+         <flexbox-item><div class="organ_choose_t organ_choose_icon">筛选<img src="../../images/choose_icon.jpg" alt=""></div></flexbox-item>
+      </flexbox>
+      </div>
+      <div class="origan_box">
+        <div class="origan_list" v-for="items in jgdata">
+          <router-link :to="{ path: '/organDetail', query: {companyId:items.id}}"> 
+            <flexbox>
+              <flexbox-item :span="4"><div class="origan_list_imgBox">
+                <img src="../../images/banner.png" alt="" class="origan_img">
+              </div>
+              </flexbox-item>
+              <flexbox-item>
+                <div class="origan_txt">
                     <flexbox>
-                      <flexbox-item :span="9"><div class="origan_buy">{{items.min_price==null?'暂无价格':'￥'+items.min_price}}</div></flexbox-item>
-                     <!--  <flexbox-item><div class="origan_curse ellipsis"><span>电工</span><span>焊工</span></div></flexbox-item> -->
-                      <flexbox-item :span="3"><div class="origan_km">{{GetDistance(items.latitude,items.longitude)}}km</div></flexbox-item>
+                      <flexbox-item class="ellipsis"><span class="origan_txt_title">{{items.name}}</span></flexbox-item>
+                      <flexbox-item :span="3"><img src="../../images/course_icon.png" alt="" class="origan_txt_title_img"></flexbox-item>
                     </flexbox>
+                    <p class="origan_evaluation">
+                     <rater v-model="data" :font-size="15" disabled></rater> 
+                        {{items.count_comment}}条
+                      </p>
+                    <div class="origan_class">
+                      <flexbox>
+                        <flexbox-item :span="9"><div class="origan_buy">{{items.min_price==null?'暂无价格':'￥'+items.min_price}}</div></flexbox-item>
+                       <!--  <flexbox-item><div class="origan_curse ellipsis"><span>电工</span><span>焊工</span></div></flexbox-item> -->
+                        <flexbox-item :span="3"><div class="origan_km">{{GetDistance(items.latitude,items.longitude)}}km</div></flexbox-item>
+                      </flexbox>
+                    </div>
                   </div>
-                </div>
-            </flexbox-item>
-          </flexbox> 
-      </router-link>
+              </flexbox-item>
+            </flexbox> 
+        </router-link>
+        </div>
+      </div>
+    </div>
+    <div v-if="active_tab=='teacher'" class="teacher_item">
+      <div class="teacher_list clear">
+        <router-link to="/teacherDetails">
+          <img src="../../images/teacher1.png" alt="" class="teacher_list_people">
+          <div class='des'>
+            <p class='mz'>金丹</p>
+            <p class='star'>5分<rater v-model="data" :font-size="15" disabled></rater></p>
+            <p class='lesson'>生产安全讲师</p>
+          </div>
+          <div class='shouc'><img src='../../images/teacher_icon1.png'></div>
+        </router-link>
+      </div>
+      <div class="teacher_list clear">
+        <router-link to="/teacherDetails">
+          <img src="../../images/teacher2.png" alt="" class="teacher_list_people">
+          <div class='des'>
+            <p class='mz'>陈盛祺</p>
+            <p class='star'>5分<rater v-model="data" :font-size="15" disabled></rater></p>
+            <p class='lesson'>生产安全讲师</p>
+          </div>
+          <div class='shouc'><img src='../../images/teacher_icon2.png'></div>
+        </router-link>
+      </div>
+      <div class="teacher_list clear">
+        <router-link to="/teacherDetails">
+          <img src="../../images/teacher3.png" alt="" class="teacher_list_people">
+          <div class='des'>
+            <p class='mz'>李超</p>
+            <p class='star'>5分<rater v-model="data" :font-size="15" disabled></rater></p>
+            <p class='lesson'>生产安全讲师</p>
+          </div>
+          <div class='shouc'><img src='../../images/teacher_icon1.png'></div>
+        </router-link>
+      </div>
+      <div class="teacher_list clear">
+        <router-link to="/teacherDetails">
+          <img src="../../images/teacher4.png" alt="" class="teacher_list_people">
+          <div class='des'>
+            <p class='mz'>赵毅</p>
+            <p class='star'>5分<rater v-model="data" :font-size="15" disabled></rater></p>
+            <p class='lesson'>生产安全讲师</p>
+          </div>
+          <div class='shouc'><img src='../../images/teacher_icon1.png'></div>
+        </router-link>
       </div>
     </div>
    <foot-nav></foot-nav>
@@ -90,8 +138,9 @@ export default {
 	},
 	data () {
     return {
-      data:5,
+        data:5,
         LocationCity:"定位中",
+        active_tab: 'organ',
         jgdata:[],
         LocationCity:'',
         cityPickerShow:false,
@@ -113,6 +162,9 @@ export default {
 
           console.log(this.jgdata);
       });
+    },
+    onClick(state){
+      this.active_tab = state;
     },
     gotoAddress(path){
         this.$router.push(path);
@@ -290,5 +342,60 @@ export default {
 .origan_curse,
 .origan_km{
   color: #333;
+}
+.teacher_item{
+  position: absolute;
+  background:#fff;
+  width:100%;
+  height:100%;
+  padding: 0 .8rem;
+}
+.teacher_list{
+  border-bottom: 1px solid #e9e9e9;
+  padding: .7rem 0;
+}
+.teacher_list_people{
+  float: left;
+  height: 3rem;
+  width: 3rem;
+  border-radius: .3rem;
+  margin-right: .7rem;
+}
+.img{
+  width: 3rem;
+  height: 3rem;
+  float: left;
+  border-radius:.2rem;
+}
+
+.des{
+  float: left;
+  width: 8rem;
+  color: #404040;
+}
+
+.mz{
+  font-size: .8rem;
+}
+
+.star{
+  font-size: .5rem;
+  color: #999999;
+  padding:.3rem 0;
+}
+.star img{
+  width: 1rem;
+  height: 1.5rem;
+}
+.lesson{
+  font-size: .6rem;
+  color: #999999;
+}
+.shouc{
+  float: right;
+  width: 1rem;
+}
+.shouc img{
+width: 1rem;
 }
 </style>

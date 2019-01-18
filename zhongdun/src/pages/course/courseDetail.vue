@@ -1,12 +1,18 @@
 <template>
 <div id="courseDetail">
+	 <div class="details_header">
+      <x-header :left-options="{backText: ''}"  style="background-color:#f5f5f5;">
+        <a slot="overwrite-left" class="goBack" :style="borderColor" v-on:click="back"></a>
+        机构详情
+      </x-header>
+    </div>
 	<div class="footer_nav">
       <section @click = "" class="footer_nav_item">
-        <img src="../../images/banner.png" alt="">
+        <img src="../../images/couer_icon3.png" alt="">
         <span>咨询客服</span>
       </section>
        <section @click = "" class="footer_nav_item">
-        <img src="../../images/banner.png" alt="">
+        <img src="../../images/couer_icon1.png" alt="">
         <span>电话咨询</span>
       </section>
       <section @click = "" class="footer_nav_item">
@@ -19,22 +25,21 @@
 		您的浏览器不支持Video标签。
 	</video>
 	<div class="video-column">
-		<div class="dianz"><img src="../../images/banner.png" class="dianz-img"><span>1234</span></div>
-		<div class="share"><img src="../../images/banner.png" class="share-img"><span>分享</span></div>
+		<div class="dianz"><img src="../../images/couer_icon2.png" class="dianz-img"><span>1234</span></div>
+		<div class="share"><img src="../../images/send.png" class="share-img"><span>分享</span></div>
 		<div class="clearfix"></div>
 	</div>
 	<div class="video-title">
 		制冷与空调设备安装维修作业--陈老师
 	</div>
 	<tab :line-width="1" active-color='#5ebf83' custom-bar-width="50px" >
-        <tab-item selected @on-item-click="onItemClick">课程</tab-item>
-        <tab-item @on-item-click="onItemClick">目录</tab-item>
+        <tab-item selected @on-item-click="onItemClick">目录</tab-item>
+        <tab-item @on-item-click="onItemClick">介绍</tab-item>
         <tab-item  @on-item-click="onItemClick">推荐</tab-item>
   	</tab>
   	<div class="tab-container">
-  		<div v-if="showIndex == 0">0</div>
-  		<div v-else-if="showIndex == 1">
-			<ul class="lesson-list">
+  		<div v-if="showIndex == 0">
+  			<ul class="lesson-list">
 				<li class="lesson-li">第一节 制冷与空调安装01</li>
 				<li class="lesson-li">第一节 制冷与空调安装01</li>
 				<li class="lesson-li">第一节 制冷与空调安装01</li>
@@ -47,6 +52,9 @@
 				<li class="lesson-li">第一节 制冷与空调安装01</li>
 				<li class="lesson-li">第一节 制冷与空调安装0332</li>
 			</ul>
+  		</div>
+  		<div v-else-if="showIndex == 1">
+			介绍
   		</div>
   		<div v-else class="course-list">
 			<p class="course-like">观看该课程的人还喜欢</p>
@@ -104,11 +112,12 @@
 </template>
 
 <script>
-import { Tab, TabItem, Popup, XSwitch, Cell, Group, XButton,TransferDom  } from 'vux'
+import { XHeader, Tab, TabItem, Popup, XSwitch, Cell, Group, XButton,TransferDom  } from 'vux'
 
 export default {
   	name: 'course',
 	components: {
+		XHeader,
 		Tab,
 		TabItem,
 	    Popup,
@@ -121,28 +130,46 @@ export default {
 		return{
 			types:[{id:1,title:'电工作业'},{id:2,title:'制冷与空调作业'},{id:3,title:'高处作业'},{id:4,title:'焊接热切割'},{id:5,title:'电工'}],
 			showIndex:0,
+			borderColor: {
+	        	borderColor: '#333'
+	      },
 		}
 	},
 	methods:{
 		onItemClick(index){
 			console.log(index);
 			this.showIndex = index;
-		}
+		},
+		back(){
+        	this.$router.go(-1);//返回上一层
+    	},
 	}
 }
 </script>
 
 <style scoped>
+	.goBack {
+	  position: absolute;
+	  width: 12px;
+	  height: 12px;
+	  border-style: solid;
+	  border-color: white;
+	  border-width: 1px 0 0 1px;
+	  -webkit-transform: rotate(315deg);
+	  transform: rotate(315deg);
+	  top: 5px;
+	}
 	.clearfix{
 		clear: both;
 	}
 	.video-play{
+		display: block;
 		width: 100%;
 		height: 9rem;
 	}
 	.video-column{
 		width: 100%;
-		padding-top: 0.5rem;
+		padding: 0.2rem 0;
 	}
 	.video-column span{
 		font-size: 0.5rem;
@@ -151,6 +178,8 @@ export default {
 	.dianz-img,.share-img{
 		width: 1rem;
 		height: 1rem;
+		vertical-align: middle;
+		padding-right: .1rem;
 	}
 	.dianz{
 		height: 1.5rem;
@@ -177,6 +206,7 @@ export default {
 	.lesson-list{
 		background: #fff;
 		width: 100%;
+		padding: 0 .5rem;
 		padding-bottom: 2.7rem;
 	}
 	.lesson-li{
@@ -281,7 +311,7 @@ export default {
 		padding-top: .7rem;
 	}
 	.footer_nav_item img{
-		width: 1rem;
+		/*width: 1rem;*/
 		height: 1rem;
 		margin-top: .1rem;
 		fill: #ccc;
