@@ -189,29 +189,7 @@
           </div>
       </div>
     </div>
-    <div class="footer_nav">
-      <section @click = "gotoAddress({path: '/step1', query: {}})" class="footer_nav_item">
-        <img src="../../images/main11.jpg" alt="">
-        <span>报名</span>
-      </section>
-       <section @click = "gotoAddress({path: '/learning', query: {}})" class="footer_nav_item">
-        <img src="../../images/main22.jpg" alt="">
-        <span>学习</span>
-      </section>
-      <section @click = "gotoAddress({path: '/', query: {}})" class="footer_nav_item" style="padding: 0;">
-        <div class="home-img">
-          <img src="../../images/home.png" alt="">
-        </div>
-      </section>
-      <section @click = "gotoAddress({path: '/', query: {}})" class="footer_nav_item">
-        <img src="../../images/main33.jpg" alt="">
-        <span>发现</span>
-      </section>
-      <section @click = "gotoAddress({path: '/', query: {}})" class="footer_nav_item">
-        <img src="../../images/main44.jpg" alt="">
-        <span>我的</span>
-      </section>
-    </div>
+     <foot-nav></foot-nav>
     <div class="city-choo" :class="cityPickerShow?'':'city-hid'">
       <city-picker @closeMsg="close" :msgCity="LocationCity"></city-picker>
     </div>
@@ -219,6 +197,7 @@
 </template>
 
 <script>
+import footNav from 'src/components/footNav'
 import { Tab, TabItem} from 'vux'
 import {shouyeNews} from 'src/service/api'
 import {formatDate} from 'src/assets/js/time'
@@ -231,6 +210,7 @@ export default {
     Tab,
     TabItem,
     cityPicker,
+    footNav
   },
   data () {
     return {
@@ -341,7 +321,7 @@ export default {
   }
   .header_address_a{
     color: #808080;
-    font-size: .2rem;
+    font-size: .6rem;
   }
   .header_search {
    float: left;
