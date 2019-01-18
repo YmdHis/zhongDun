@@ -507,7 +507,7 @@ URL
 
 > 接口示例
 
-> 地址：http://zdapp.808w.com/app/puliic/appSend?mobile=12345678911
+> 地址：http://zdapp.808w.com/app/public/appSend?mobile=12345678911
 
 ```javascript
 
