@@ -17,9 +17,9 @@
           <img src="../../../images/tel.jpg" alt="" class="details_phone">
         </p>
         <p class="details_certification">
-          <span>身份认证</span>
-          <span>授权认证</span>
-          <span>营业执照认证</span>
+          <img src="../../../images/icon1.jpg" alt="" class="details_img_iconR"><span>身份认证</span>
+          <img src="../../../images/icon2.jpg" alt="" class="details_img_iconR"><span>授权认证</span>
+          <img src="../../../images/icon3.jpg" alt="" class="details_img_iconR"><span>营业执照认证</span>
         </p>  
       </div>
       <div class="details_address_box">
@@ -68,9 +68,10 @@
              </flexbox-item>
             <flexbox-item>
               <div class="details_evaluation_list_other">
-                <span>学费：650元</span>
-                <span>拿本：2个月</span>
-                <span class="loving"><x-icon type="ios-heart-outline" size="20" class="loving_icon"></x-icon>12</span>
+                <span>所选课程：焊工</span>
+               <!--  <span>学费：650元</span>
+                <span>拿本：2个月</span> -->
+                <span class="loving"> <x-icon type="ios-heart" size="20" class="loving_icon" style="fill:#fb8e52;"></x-icon>12</span>
               </div>
             </flexbox-item>
           </flexbox> 
@@ -81,7 +82,7 @@
           <img src="../../../images/icon1.png" alt="">
         </div>
         <div class="details_evaluation_list_rg">
-          <flexbox orient="vertical" :gutter="0">
+          <flexbox orient="vertical" :gutter="0" >
             <flexbox-item><div class="details_evaluation_list_user">学员1213</div></flexbox-item>
             <flexbox-item>
               <div class="details_evaluation_list_star"><rater v-model="data" disabled :font-size="20"></rater>
@@ -92,9 +93,12 @@
              </flexbox-item>
             <flexbox-item>
               <div class="details_evaluation_list_other">
-                <span>学费：650元</span>
-                <span>拿本：2个月</span>
-                <span class="loving"><x-icon type="ios-heart-outline" size="20" class="loving_icon"></x-icon>12</span>
+                <span>所选课程：低压电工</span>
+                <!-- <span>学费：650元</span> -->
+                <!-- <span>拿本：2个月</span> -->
+                <span class="loving"> 
+                  <x-icon type="ios-heart-outline" size="20" class="loving_icon"></x-icon>0
+                </span>
               </div>
             </flexbox-item>
           </flexbox> 
@@ -108,7 +112,7 @@
 <script>
 import BMap from 'BMap'
 import { XHeader,Flexbox, FlexboxItem,Group,CellBox,Cell,XButton, Rater} from 'vux'
-import {organDetails} from 'src/service/api'
+import {organDetails,blogs} from 'src/service/api'
 import { getStore, setStore } from 'src/config/mUtils'
 
 export default {
@@ -128,6 +132,10 @@ export default {
       address:"",
       distance:"",
       organ:[],
+      limit:2,
+      page:1,
+      cat_id:'',
+      cat_type:'company',
       borderColor: {
         borderColor: '#333'
       },
@@ -178,7 +186,13 @@ export default {
         _this.address = rs.address;
         _this.distance = _this.getDistance(lat,lng,latitude,longitude) + 'km';
       }); 
-    })
+    }),
+     blogs({limit:this.limit,page:this.page,cat_type:this.cat_type,cat_id:this.$route.query.companyId}).then(res=>{
+        this.blogslist =res;
+        console.log(this.blogslist);
+        //alert(this.gzlist)
+      });
+
   }
 }
 </script>
@@ -219,6 +233,10 @@ export default {
 }
 .details_certification{
   padding-top: .5rem;
+}
+.details_img_iconR{
+  height: .8rem;
+  vertical-align: middle;
 }
 .details_certification span{
   display: inline-block;
