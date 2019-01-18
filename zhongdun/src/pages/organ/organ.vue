@@ -54,8 +54,8 @@
                     </p>
                   <div class="origan_class">
                     <flexbox>
-                      <flexbox-item :span="3"><div class="origan_buy">{{items.min_price==null?'暂无价格':'￥'+items.min_price}}</div></flexbox-item>
-                      <flexbox-item><div class="origan_curse ellipsis"><span>电工</span><span>焊工</span></div></flexbox-item>
+                      <flexbox-item :span="9"><div class="origan_buy">{{items.min_price==null?'暂无价格':'￥'+items.min_price}}</div></flexbox-item>
+                     <!--  <flexbox-item><div class="origan_curse ellipsis"><span>电工</span><span>焊工</span></div></flexbox-item> -->
                       <flexbox-item :span="3"><div class="origan_km">{{GetDistance(items.latitude,items.longitude)}}km</div></flexbox-item>
                     </flexbox>
                   </div>
