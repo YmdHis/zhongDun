@@ -23,7 +23,7 @@
     <checklist  :options="commonList" v-model="radioValue" :max="1" @on-change="change"></checklist>
   </div>
 
-  <div class="ex-next">
+  <div class="ex-next" @click="queren">
 	 确认支付
   </div>
  </div>
@@ -38,7 +38,16 @@
 	methods: {
 	    change (val, label) {
 	      console.log('change', val, label)
-	    }
+			},
+			queren(){
+				this.$vux.toast.show({
+            text: '支付成功',
+            type:'text',
+            position: 'middle'
+				})
+				setTimeout(this.$router.push({path:'/home'}),2000);
+				
+			},
 	  },
 	  data () {
 	    return {

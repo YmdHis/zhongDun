@@ -11,27 +11,27 @@
     		<!-- <p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
     		<p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p> -->
     		
-    		<p v-for="item in gzcouse">{{item.name}}&nbsp;<span class="pricecolor">￥{{item.price}}</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
-    		<p class="addgz">请选择报名工种&nbsp;<span class="icoset"> <x-icon type="ios-plus-outline" size="18"  @click.native="bml" ></x-icon></span></p>
+    		<p v-for="item in gzcouse" :key="item.name">{{item.name}}&nbsp;<span class="pricecolor">￥{{item.price}}</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
+    		<p class="addgz">请选择报名工种&nbsp;<span class="icoset"> <x-icon type="ios-plus-outline" size="18"  @click="bml" ></x-icon></span></p>
     		<!--弹框显示 S-->
     		<div v-transfer-dom id="gzs">
 		      <popup v-model="show13" position="bottom" max-height="80%">
 		        <group>
 		        	<div class="content-gz">
 		        <!--一级分类-->
-		        	<p class="gz-close"> <x-icon type="ios-close-outline" size="25" style="color:#CCC" @click.native="show13 = false"></x-icon></p>
+		        	<p class="gz-close"> <x-icon type="ios-close-outline" size="25" style="color:#CCC" @click="show13 = false"></x-icon></p>
 			         <div>
-			         	<p class="ex-titp" style="margin-top:0">1、生产安全</p>
+			         	<p class="ex-titp" style="margin-top:0">生产安全</p>
 			         	<ul class="gzfl">
-			         		<li  v-for="item1 in enroll" :class="{active :active == item1.name}" :key="item1.name" @click="gzs(item1.category_id,item1.name)">{{item1.name}}</li>
+			         		<li  v-for="item1 in enroll" :class="[active1 == item1.name?'active':'']" :key="item1.name" @click="gzs(item1.category_id,item1.name)">{{item1.name}}</li>
 			         	</ul>
 			         </div>
 			     <!--一级分类-->
 			     <!--二级分类-->
 			         <div v-if="gz">
-			         	<p class="ex-titp">2、工种</p>
+			         	<p class="ex-titp">工种</p>
 			         	<ul class="gzfl">
-			         		<li :class="{active :active == item2.name}" :key="item2.name" v-for="item2 in enrollTwo" 
+			         		<li :class="[active2 == item2.name?'active':'']" :key="item2.name" v-for="item2 in enrollTwo" 
 			         		@click="fss(item2.id,companyid,item2.name)">{{item2.name}}</li> 
 			         		<!-- <li class="-gz-active" v-bind="enrollTwo"></li> -->
 			         	</ul>
@@ -39,9 +39,9 @@
 			     <!--二级分类-->
 			     <!--三级分类-->
 			         <div v-if="fs">
-			         	<p class="ex-titp">3、新证复审</p>
+			         	<p class="ex-titp">新证复审</p>
 			         	<ul class="gzfl">
-			         		<li v-for="item3 in enrollThree"  :class="{active :active == item3.name}" :key="item3.name" 
+			         		<li v-for="item3 in enrollThree"  :class="[active3 == item3.title?'active':'']" :key="item3.title" 
 			         		@click="xz(item3.title,item3.price)">{{item3.title}}</li> 
 			         	</ul>
 			         </div>
@@ -49,7 +49,7 @@
 			    </div>
 		        </group>
 		        <div style="padding: 15px;">
-		          <x-button @click.native="show13 = false" id="ex-sub1" @clcik="gzadd">确定 </x-button>
+		          <x-button id="ex-sub1" @click.native="gzadd">确定 </x-button>
 		        </div>
 		      </popup>
 		    </div>
@@ -61,7 +61,7 @@
     <!--form提交 S-->
     <div id="ex-sub">
     	<group>
-	      <x-input title="姓名" name="username" placeholder="请输入姓名" is-type="china-name"></x-input>
+	      <x-input title="姓名" name="username" placeholder="请输入姓名" is-type="china-name" v-model="username"></x-input>
 	    </group>
 	    <group>
 	   		<div id="sex1">
@@ -72,15 +72,15 @@
 	   		</div>
 	    </group>
 	    <group>
-	      <x-input title="手机号码" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"></x-input>
+	      <x-input title="手机号码" name="" placeholder="请输入手机号码" keyboard="number"  v-model="mobile"></x-input>
 	    </group>
     	<group>
-	      <x-input title="验证码" class="weui-vcode">
-	        <x-button slot="right"  style="background:#5ebf83;color:#FFF" mini>发送验证码</x-button>
+	      <x-input title="验证码" class="weui-vcode" v-model="vcode">
+	        <x-button slot="right"  style="background:#5ebf83;color:#FFF" mini @click.native="yzm">发送验证码</x-button>
 	      </x-input>
 	    </group>
 	   	<div style="padding:0.4rem">
-	    	<x-button style="background:#5ebf83 !important;color:#FFF  !important;" @click.native=" showToast= true" title="54">立即报名</x-button>
+	    	<x-button style="background:#5ebf83 !important;color:#FFF  !important;" @click.native="baoming" title="54">立即报名</x-button>
 	    </div>
 	    <p class="khxy">提交报名表示同意<span>《客户协议》</span></p>
    	</div>
@@ -98,29 +98,30 @@
 			        <x-table full-bordered style="background-color:#fff;" id="ex-tables">
 			            <tr>
 			              <td>姓名</td>
-			              <td colspan="3">1</td>
+			              <td colspan="3">{{username}}</td>
 			            </tr>
 			            <tr>
 			              <td>性别</td>
-			              <td colspan="3">2</td>
+			              <td colspan="3">{{sex}}</td>
 			            </tr>
 			             <tr>
 			              <td>手机号码</td>
-			              <td colspan="3">55465445</td>
+			              <td colspan="3">{{mobile}}</td>
 			            </tr>
 			             <tr>
 			              <td>报名机构</td>
-			              <td colspan="3">5454</td>
+			              <td colspan="3">{{jgname}}</td>
 			            </tr>
-			             <tr>
+			             <tr v-for="item in gzcouse">
 			              <td>报名工种</td>
-			              <td colspan="3">看了</td>
+			              <td colspan="3">{{item.name}}</td>
 			            </tr>
+									
 			        </x-table>
 			    </div>
 			    <div id="ex-subtn">
 				   <x-button mini style="color:#000;background:#dadada;margin-right:0.3rem"  @click.native="showToast=false">返回修改</x-button>
-				   <x-button mini type="primary" >确认提交</x-button>
+				   <x-button mini type="primary" @click.native="tijiao">确认提交</x-button>
 
 			   </div>
 			    <!--弹框表格 E-->
@@ -136,7 +137,7 @@
 <script>
 import {enroll} from 'src/service/api';
 import {enrollTwo} from 'src/service/api';
-import {enrollThree} from 'src/service/api';
+import {enrollThree,yzmGet} from 'src/service/api';
 import {
 		XDialog,
 		XButton, 
@@ -176,7 +177,8 @@ export default {
     	work3:'',
     	onplace:'',
     	companyid:'',
-    	gzcouse:[],
+			gzcouse:[],
+			gzcouse1:[],
     	enroll:[],
     	gz:false,
     	fs:false,
@@ -191,94 +193,113 @@ export default {
     	radioValue: ['先生'],
     	data1:'',
     	addvalue:false,
-    	active:''
+			active1:'',
+			active2:'',
+			active3:'',
+			username:'',
+			mobile:'',
+			vcode:'',
+			sex:'',
      }
   },
   mounted(){
   	this.jgname=this.$route.query.name;
   },
   methods:{
- 
-  	gzadd(){
-  		if(this.addvalue){
-  			alert("tinahcon");
-  			this.gzcouse.push(this.work3);
-  			console.log(this.gzcouse);
-  		}else{
-  			alert("请选择所有信息");
-  		}
-  	},
-  	bml(){
-  		this.show13 = true;
+  	bml(){//加号
+			this.show13 = true;
+			this.active1 = '';
+			this.active2 = '';
+			this.active3 = '';
+			this.enrollTwo = [];
+			this.enrollThree = [];
   		this.companyid=this.$route.query.id;
-		enroll({companyId:this.$route.query.id}).then(res=>{
+			enroll({companyId:this.$route.query.id}).then(res=>{
         this.enroll=res.data;
         console.log(this.enroll);
-
        });
-		//alert(this.companyid);
   	},
-  	gzs(data1,name){
-  	
-  		this.data1 = data1;
-  		this.fs=false;
-
+  	gzs(data1,name){//一级
+			this.active1 = name;
+			enrollTwo({parentId:data1}).then(res=>{
+			    this.enrollTwo=res.data;
+			    this.gz = true;
+			    this.$forceUpdate();
+			    console.log(this.enrollTwo);
+			   });
   	},
-  	fss(data1,data2,data3){
+  	fss(data1,data2,data3){//二级
   		//请求参数 categoryId companyId
-  		this.active=data3;
+  		this.active2=data3;
   		data2=this.companyid;
- 
-  		//alert(data2);
   		enrollThree({categoryId:data1,companyId:data2}).then(res=>{
         this.enrollThree=res.data;
         this.$forceUpdate();
-        //alert(data1);
         this.fs = true;
         console.log(this.enrollThree);
        });
   	},
-  	xz(data,price){
-  	//	this.work3=this.work1+'-'+this.work2+'-'+data;
-     this.work3=data;
-  		this.price=price;
-  		this.active=data;
-
-  		this.gzcouse.push({name:this.work3,price:this.price});
-  		console.log(this.gzcouse);
-
-  		if(data){
-  			this.addvalue=true;
-
-  		}
-  	},
-	change (val, label) {
-      console.log('change', val, label)
-    },
-	doShowToast () {
-      this.$vux.toast.show({
-        //text: 'toast'
-      })
-    },
+  	xz(data,price){//三级
+			let gzcouse1 = [];
+     	this.work3 = data;
+  		this.price = price;
+  		this.active3 = data;
+			gzcouse1.push({name:this.work3,price:this.price});
+			this.gzcouse1 = gzcouse1;
+  		console.log(this.gzcouse1);
+		},
+		gzadd(){//确定
+			this.show13 = false;
+			this.gzcouse = this.gzcouse1;
+			console.log(this.gzcouse);
+		},
+		tijiao(){
+			this.$router.push({path:'/step3'});
+		},
+		change (val, label) {
+			console.log(label[0])
+			this.sex = label[0];
+		},
+		baoming(){
+			let username = this.username;
+			let mobile = this.mobile;
+			let vcode = this.vcode;
+			if(username == ''){
+				this.$vux.toast.show({
+            text: '请填写姓名',
+            type:'text',
+            position: 'middle'
+				})
+			}else if(mobile == ''){
+				this.$vux.toast.show({
+            text: '请填写手机号',
+            type:'text',
+            position: 'middle'
+				})
+			}else if(vcode == ''){
+				this.$vux.toast.show({
+            text: '请填写验证码',
+            type:'text',
+            position: 'middle'
+				})
+			}else{
+				this.showToast = true;
+			}
+			console.log(this.username);
+		},
     removecourse(e){
     	e.currentTarget.parentElement.remove();
-    },
+		},
+		yzm(){
+			let mobile = this.mobile;
+			yzmGet({mobile:mobile}).then(res=>{
+				console.log(res);
+       });
+		},
     log (str) {
       console.log(str)
     }
   },
-  watch:{
-  	data1:function(){
-  		let data1 = this.data1;
-		enrollTwo({parentId:data1}).then(res=>{
-        this.enrollTwo=res.data;
-        //alert(data1);
-        this.gz = true;
-        this.$forceUpdate();
-        console.log(this.enrollTwo);
-       });
-  	}
-  }
 }
 </script>
 

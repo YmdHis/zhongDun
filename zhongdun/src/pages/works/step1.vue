@@ -3,7 +3,14 @@
     <div>
       <!--上部分 S-->
       <div id="topbg">
-        <div>众盾安全</div>
+        <div>
+          
+          <img src="../../assets/images/topbg.png" alt="" class="spet1_img">
+          <span style="position: relative;z-index: 999;">
+            众盾安全
+          </span>
+        </div>
+
       </div>
       <div>
         <div id="choosecity"  @click="chooCity()"> 
@@ -84,10 +91,10 @@ import cityPicker from 'src/components/cityPicker'
           show13: false,
           wpList: [
             {
-              name: '有证'
+              name: '无证'
             },
             {
-              name: '无证'
+              name: '有证'
             }
           ],
           active:'无证',
@@ -194,7 +201,14 @@ import cityPicker from 'src/components/cityPicker'
   .ex-next{height:2rem;background: #5ebf83;color:#FFF;line-height:2rem; position: fixed;
     bottom:0;font-size:0.64rem;
     width:100%;text-align:center;}
-  #topbg{background: url(../../assets/images/topbg.png);height: 5rem;background-size:cover;background-repeat: no-repeat;overflow:hidden;}
+  #topbg{width:100%;height: 5rem;overflow:hidden;position: relative;}
+  .spet1_img{
+    width: 100%;
+    height: 5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   #topbg>div{color:#ffffff;font-size:0.8rem;text-align:center;padding-top:2rem;}
   #choosecity .vux-popup-picker-value{font-size:0.66rem;}
   #jieduan{margin-top:0.3rem;background:#FFF;padding:0.4rem;}
