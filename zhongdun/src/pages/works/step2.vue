@@ -8,10 +8,7 @@
     <div class="ex-price">
     	<div class="ex-cour-info">
     		<div>{{jgname}}</div>
-    		<!-- <p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
-    		<p>制冷与空调安装作业&nbsp;<span class="pricecolor">￥650</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p> -->
-    		
-    		<p v-for="item in gzcouse" :key="item.name">{{item.name}}&nbsp;<span class="pricecolor">￥{{item.price}}</span><span class="icoset" @click="removecourse($event)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
+    		<p v-for="item in gzcouse" :key="item.dateId">{{item.name}}&nbsp;<span class="pricecolor">￥{{item.price}}</span><span class="icoset" @click="removecourse(item.dateId)"> <x-icon type="ios-minus-outline" size="18"></x-icon></span></p>
     		<p class="addgz">请选择报名工种&nbsp;<span class="icoset"> <x-icon type="ios-plus-outline" size="18"  @click="bml" ></x-icon></span></p>
     		<!--弹框显示 S-->
     		<div v-transfer-dom id="gzs">
@@ -41,8 +38,8 @@
 			         <div v-if="fs">
 			         	<p class="ex-titp">新证复审</p>
 			         	<ul class="gzfl">
-			         		<li v-for="item3 in enrollThree"  :class="[active3 == item3.title?'active':'']" :key="item3.title" 
-			         		@click="xz(item3.title,item3.price)">{{item3.title}}</li> 
+			         		<li v-for="item3 in enrollThree"  :class="[active3 == item3.title?'active':'']" :key="item3.id" 
+			         		@click="xz(item3.title,item3.price,item3.id)">{{item3.title}}</li> 
 			         	</ul>
 			         </div>
 			     <!--三级分类-->
@@ -76,13 +73,16 @@
 	    </group>
     	<group>
 	      <x-input title="验证码" class="weui-vcode" v-model="vcode">
-	        <x-button slot="right"  style="background:#5ebf83;color:#FFF" mini @click.native="yzm">发送验证码</x-button>
+					<x-button v-if="yzmShow" slot="right"  style="background:#5ebf83;color:#FFF" mini @click.native="yzm">发送验证码</x-button>
+
+					<x-button v-else slot="right"  style="color:#808080" mini disabled>倒计时:{{countdown}}s</x-button>
+	        
 	      </x-input>
 	    </group>
 	   	<div style="padding:0.4rem">
 	    	<x-button style="background:#5ebf83 !important;color:#FFF  !important;" @click.native="baoming" title="54">立即报名</x-button>
 	    </div>
-	    <p class="khxy">提交报名表示同意<span>《客户协议》</span></p>
+	    <p class="khxy">提交报名表示同意<span @click="agreement()">《客户协议》</span></p>
    	</div>
     <!--form提交 E-->
     <!--弹框内容-->
@@ -100,10 +100,6 @@
 			              <td>姓名</td>
 			              <td colspan="3">{{username}}</td>
 			            </tr>
-			            <tr>
-			              <td>性别</td>
-			              <td colspan="3">{{sex}}</td>
-			            </tr>
 			             <tr>
 			              <td>手机号码</td>
 			              <td colspan="3">{{mobile}}</td>
@@ -112,7 +108,7 @@
 			              <td>报名机构</td>
 			              <td colspan="3">{{jgname}}</td>
 			            </tr>
-			             <tr v-for="item in gzcouse">
+			             <tr v-for="item in gzcouse" :key="item.dateId">
 			              <td>报名工种</td>
 			              <td colspan="3">{{item.name}}</td>
 			            </tr>
@@ -131,13 +127,19 @@
 	  </div>
     </div>
     <!--弹框内容-->
+		<div class="agree" :class="[agreeShow?'agree-hid':'']">
+			<div class="close-map" @click="agreement()">✖</div>
+			<p class="agree-text">
+				这是客户协议
+				</p>
+		</div>
   </div>
 </template>
 
 <script>
 import {enroll} from 'src/service/api';
 import {enrollTwo} from 'src/service/api';
-import {enrollThree,yzmGet} from 'src/service/api';
+import {enrollThree,yzmGet,apply} from 'src/service/api';
 import {
 		XDialog,
 		XButton, 
@@ -200,6 +202,9 @@ export default {
 			mobile:'',
 			vcode:'',
 			sex:'',
+			yzmShow:true,
+			countdown:'',
+			agreeShow:true
      }
   },
   mounted(){
@@ -213,19 +218,22 @@ export default {
 			this.active3 = '';
 			this.enrollTwo = [];
 			this.enrollThree = [];
+			this.gz = false;
+			this.fs = false;
   		this.companyid=this.$route.query.id;
 			enroll({companyId:this.$route.query.id}).then(res=>{
         this.enroll=res.data;
-        console.log(this.enroll);
+        //console.log(this.enroll);
        });
   	},
   	gzs(data1,name){//一级
 			this.active1 = name;
 			enrollTwo({parentId:data1}).then(res=>{
 			    this.enrollTwo=res.data;
-			    this.gz = true;
+					this.gz = true;
+					this.fs = false;
 			    this.$forceUpdate();
-			    console.log(this.enrollTwo);
+			    //console.log(this.enrollTwo);
 			   });
   	},
   	fss(data1,data2,data3){//二级
@@ -236,69 +244,133 @@ export default {
         this.enrollThree=res.data;
         this.$forceUpdate();
         this.fs = true;
-        console.log(this.enrollThree);
+        //console.log(this.enrollThree);
        });
   	},
-  	xz(data,price){//三级
-			let gzcouse1 = [];
+  	xz(data,price,id){//三级
      	this.work3 = data;
-  		this.price = price;
+		this.price = price;
+		this.chooId = id;
   		this.active3 = data;
-			gzcouse1.push({name:this.work3,price:this.price});
-			this.gzcouse1 = gzcouse1;
-  		console.log(this.gzcouse1);
 		},
-		gzadd(){//确定
-			this.show13 = false;
-			this.gzcouse = this.gzcouse1;
+	gzadd(){//确定
+		this.show13 = false;
+		let dateId = new Date().getTime();
+		for(let key in this.gzcouse){
+			if(this.chooId == this.gzcouse[key].id){
+				this.$vux.toast.show({
+		text: '不能重复选择',
+		type:'text',
+		position: 'middle'
+			})
 			console.log(this.gzcouse);
-		},
-		tijiao(){
-			this.$router.push({path:'/step3'});
-		},
-		change (val, label) {
-			console.log(label[0])
-			this.sex = label[0];
-		},
-		baoming(){
-			let username = this.username;
-			let mobile = this.mobile;
-			let vcode = this.vcode;
-			if(username == ''){
-				this.$vux.toast.show({
-            text: '请填写姓名',
-            type:'text',
-            position: 'middle'
-				})
-			}else if(mobile == ''){
-				this.$vux.toast.show({
-            text: '请填写手机号',
-            type:'text',
-            position: 'middle'
-				})
-			}else if(vcode == ''){
-				this.$vux.toast.show({
-            text: '请填写验证码',
-            type:'text',
-            position: 'middle'
-				})
-			}else{
-				this.showToast = true;
+			return
 			}
-			console.log(this.username);
-		},
-    removecourse(e){
-    	e.currentTarget.parentElement.remove();
+		}
+		this.gzcouse.push({name:this.work3,price:this.price,dateId:dateId,id:this.chooId});
+		console.log(this.gzcouse);
+	},
+	change (val, label) {
+		//console.log(label[0]);
+		if(label[0] == "先生"){
+			this.sex = 'man';
+		}else{
+			this.sex = 'woman';
+		}
+	},
+	baoming(){
+		let username = this.username;
+		let mobile = this.mobile;
+		let vcode = this.vcode;
+		let gzcouse = this.gzcouse;
+		if(gzcouse.length == ""){
+			this.$vux.toast.show({
+		text: '请选择工种',
+		type:'text',
+		position: 'middle'
+			})
+		}else if(username == ''){
+			this.$vux.toast.show({
+		text: '请填写姓名',
+		type:'text',
+		position: 'middle'
+			})
+		}else if(mobile == ''){
+			this.$vux.toast.show({
+		text: '请填写手机号',
+		type:'text',
+		position: 'middle'
+			})
+		}else if(vcode == ''){
+			this.$vux.toast.show({
+		text: '请填写验证码',
+		type:'text',
+		position: 'middle'
+			})
+		}else{
+			this.showToast = true;
+		}
+		//console.log(this.username);
+	},
+	removecourse(e){
+		for(let key in this.gzcouse){
+				if(this.gzcouse[key].dateId == e){
+					this.gzcouse.splice(key,1);
+				}
+		}
+		//console.log(this.gzcouse)
+	},
+	//提交表单
+	tijiao(){
+		let ids = [];
+		for(let key in this.gzcouse){
+			ids[key] = this.gzcouse[key].id;
+		}
+		console.log(ids);
+		apply({company_id:this.companyid,user_nickname:this.username,sex:this.sex,mobile:this.mobile,code:this.vcode,course_ids:ids}).then(res=>{
+			console.log(res);
+			let data = JSON.parse(res.data);
+			if(res.code == 0){
+				this.$vux.toast.show({
+				text: '网络错误',
+				type:'text',
+				position: 'middle'
+			})
+			}else if(res.code == 1){
+				this.$vux.toast.show({
+					text: '提交成功',
+					type:'text',
+					position: 'middle'
+				})
+				setTimeout(()=>{
+					this.$router.push({path:'/step3',query:{money:data.total_money,order_sn:data.order_sn,jgname:this.jgname}});
+				},1000)
+			}
+		});		
+	},
+		agreement(){
+			this.agreeShow = !this.agreeShow
 		},
 		yzm(){
 			let mobile = this.mobile;
 			yzmGet({mobile:mobile}).then(res=>{
 				console.log(res);
-       });
+				if(res.code == 1){
+					this.setTime();
+				}
+			 });
 		},
-    log (str) {
-      console.log(str)
-    }
+		setTime(){
+			this.yzmShow = false;
+			this.countdown = 60;
+			let auth_timer = setInterval(()=>{
+				this.countdown --;
+				if(this.countdown <= 0 ){
+					this.yzmShow = true;
+					clearInterval(auth_timer);
+				}
+			},1000)
+		}
   },
 }
 </script>
@@ -433,5 +505,33 @@ font-size:0.6rem;
 .gz-close{text-align: right}
 .gz-close .vux-x-icon {
   fill: #999;
+}
+.agree{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	overflow-y: auto;
+	z-index: 999;
+}
+.agree-hid{
+	display: none;
+}
+.agree-text{
+	text-align: center;
+	font-size: .8rem;
+	padding-top: 1rem;
+}
+.close-map{
+  position: fixed;
+  top: .5rem;
+  left: .5rem;
+  z-index: 999;
+  background: #fff;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  color: #5ebf83;
 }
 </style>

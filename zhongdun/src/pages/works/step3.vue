@@ -6,18 +6,12 @@
     </div>
     <!--支付时间价格 S-->
     <div id="ex-order-info">
-    	<p>支付剩余时间09:58</p>
-    	<p>￥650.00</p>
-    	<p>安培教育 -38384383838438</p>
+    	<p>支付剩余时间{{minute}}:{{second}}</p>
+    	<p>￥{{this.$route.query.money}}</p>
+    	<p>{{this.$route.query.jgname}} -{{this.$route.query.order_sn}} </p>
     </div>
     <!--支付时间价格 E-->
-    <!--支付码兑换 S-->
-    <div id="ex-zfm">
-    	<group>
-      		<cell title="支付码兑换" is-link >
-      		</cell>
-      	</group>
-    </div>
+
     <!--支付码兑换 E-->
    <div id="ex-chose-pay">
     <checklist  :options="commonList" v-model="radioValue" :max="1" @on-change="change"></checklist>
@@ -30,32 +24,71 @@
 </template>
 <script type="text/javascript">
 	import {XHeader,Group, Cell,Checklist} from 'vux'
-	import _ from 'lodash'
 	export default {
-	components: {
-		 XHeader,Group, Cell,Checklist
+		data () {
+			return {
+			commonList: [ '微信', '支付宝'],
+			radioValue: ['微信'],
+			price:'',
+			order_sn:'',
+			minutes: 15,
+        	seconds: 0
+			}
 		},
-	methods: {
-	    change (val, label) {
-	      console.log('change', val, label)
+		components: {
+			XHeader,Group, Cell,Checklist
+		},
+		mounted(){
+			this.add()
+		},
+		methods: {
+			change (val, label) {
+				console.log('change', val, label)
 			},
 			queren(){
 				this.$vux.toast.show({
-            text: '支付成功',
-            type:'text',
-            position: 'middle'
+			text: '支付成功',
+			type:'text',
+			position: 'middle'
 				})
-				setTimeout(this.$router.push({path:'/home'}),2000);
-				
+				setTimeout(()=>{this.$router.push({path:'/home'})},1500);
 			},
-	  },
-	  data () {
-	    return {
-	      commonList: [ '微信', '支付宝'],
-	      radioValue: ['微信']
-	    }
-	  }
-  }
+			num: function (n) {
+				return n < 10 ? '0' + n : '' + n
+			},
+			add: function () {
+				var _this = this
+				var time = setInterval(function () {
+				if (_this.seconds === 0 && _this.minutes !== 0) {
+					_this.seconds = 59
+					_this.minutes -= 1
+				} else if (_this.minutes === 0 && _this.seconds === 0) {
+					_this.seconds = 0
+					clearInterval(time)
+				} else {
+					_this.seconds -= 1
+				}
+				}, 1000)
+			}
+		},
+		watch:{
+			second(val) {
+				this.num(val);
+			},
+			minute(val){
+				this.num(val);
+			}
+		},
+		computed: {
+			second: function () {
+				return this.num(this.seconds)
+			},
+			minute: function () {
+				return this.num(this.minutes)
+			}
+		}
+  	}
+	
 </script>
 <style type="text/css">
 #bmhead .vux-header{
