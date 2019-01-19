@@ -1,6 +1,6 @@
 <template>
   <div>
-  	<div id="bmhead">
+  	<div id="step3">
     	<x-header :left-options="{backText: ''}"><b>支付订单</b></x-header>
     	<div class="ex-topimg"><img src="../../assets/images/jf.png"></div>
     </div>

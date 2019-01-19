@@ -1,6 +1,6 @@
 <template>
   <div>
-  	<div id="bmhead">
+  	<div id="step2">
     	<x-header :left-options="{backText: ''}"><b>我要报名</b></x-header>
     	<div class="ex-topimg"><img src="../../assets/images/bmbanner.png"></div>
     </div>
