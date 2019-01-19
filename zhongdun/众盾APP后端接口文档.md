@@ -558,3 +558,112 @@ URL
 ```
 
 ------
+
+## 四.评论回复
+
+### 1.评论回复列表接口
+
+URL
+
+> http://zdapp.808w.com/app/blog/returnComment
+
+接口功能
+
+> ```
+> 评论回复列表
+> ```
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | limit | 是   | int    | 每页条数                                                     |
+> | page | 是   | int    | 页数                                                     |
+> | blogId | 是   | int    | 评论类型   机构：company  课程id： |
+> | commentId | 否   | int    | 评论类型id   机构id：company  课程id： |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | id       | int      | 回复评论id   |
+> | readed_count     | string   | 阅读数量 |
+> | comment_count     | int   | 评论数量 |
+> | praise_count     | int   | 点赞数量 |
+> | user_id     | int   | 用户id |
+> | comment     | string   | 评论内容 |
+> | create_Time     | int   | 评论时间 |
+> | user_nickname     | string   | 用户名 |
+> | pictures     | string   | 图片 |
+
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/blog/returnComment?limit=20&page=1&commentId=1&blogId=1
+
+```javascript
+
+```
+
+------
+
+### 2.用户发布主贴
+
+URL
+
+> http://zdapp.808w.com/app/user/blogPosting
+
+接口功能
+
+> ```
+> 用户发布主贴
+> ```
+
+#### HTTP请求方式
+> POST
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | cat_type | 是   | string    | [course:课程，company：机构]                                                     |
+> | title | 否   | string    | 发帖标题                                              |
+> | content | 是   | string    | 发帖内容： |
+> | image | 否   | string    | 图片批量上传（小于2M，最多9张图片）|
+
+```javascript
+
+```
+
+------
+
+### 3.用户回复留言
+
+URL
+
+> http://zdapp.808w.com/app/user/returnComments
+
+接口功能
+
+> ```
+> 用户发布主贴
+> ```
+
+#### HTTP请求方式
+> POST
+
+请求参数
+
+> | 参数      | 必选 | 类型   | 说明                                                         |
+> | :-------- | :--- | :----- | ------------------------------------------------------------ |
+> | blogId | 是   | int    |    主贴id                               |
+> | commentId | 否   |   int  |    回复评论id                               |
+> | comment | 是   | string    | 回复内容： |
+> | image | 否   | string    | 图片批量上传（小于2M，最多9张图片）|
+
+
+```javascript
+
+```
+
+------
