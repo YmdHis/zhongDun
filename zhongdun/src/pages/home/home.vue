@@ -23,7 +23,7 @@
     </div>
     <div class="module_block">
       <div class="module_block_list">
-         <router-link to="/step1" class="module_block_a">
+         <router-link to="/" class="module_block_a">
             <img src="../../images/icon1.png" alt="">
             <p>在线报名</p>
          </router-link>
