@@ -4,7 +4,7 @@
       <x-header :left-options="{backText: ''}"  style="background-color:#f5f5f5;">
         <a slot="overwrite-left" class="goBack" :style="borderColor" v-on:click="back"></a>
         机构详情
-       <a slot="right">  <x-icon slot="overwrite-left" type="ios-information-outline" size="30" style="fill:#333;position:relative;top:-8px;left:-3px;"></x-icon></a>
+       <a slot="right"> <img src="../../../images/send.png" alt="xxx" class="send-img"></a>
       </x-header>
     </div>
     <div class="details_box">
@@ -14,7 +14,9 @@
       <div class="details_title_box">
         <p class="details_title">
           <span class=" ellipsis">{{organ.name}}<img src="../../../images/course_icon.png" alt="" class="details_title_icon"></span>
+          <a href="tel:400-999-6389">
           <img src="../../../images/tel.jpg" alt="" class="details_phone">
+          </a>
         </p>
         <p class="details_certification">
           <img src="../../../images/icon1.jpg" alt="" class="details_img_iconR"><span>身份认证</span>
@@ -22,9 +24,9 @@
           <img src="../../../images/icon3.jpg" alt="" class="details_img_iconR"><span>营业执照认证</span>
         </p>  
       </div>
-      <div class="details_address_box">
+      <div class="details_address_box" @click="mapShow()">
         <group>
-        <cell :title="address" :value="distance" class="details_address" link="/home" >
+        <cell :title="address" :value="distance" class="details_address">
           <img slot="icon" width="12" style="display:block;margin-right:5px;" src="../../../images/add_icon.png">
         </cell>
       </group>
@@ -106,6 +108,10 @@
       </div>
     </div>
     <div class="ex-next" @click="toStepTwo()">立即报名</div>
+    <div class="bdMap" :class="[isBdMapShow?'':'bdMap-hid']" >
+        <div class="close-map" @click="mapShow()">✖</div>
+        <div id="allmap"></div>
+    </div>
   </div>
 </template>
 
@@ -122,13 +128,14 @@ export default {
     FlexboxItem,
     Group,
     Cell,
-     Rater,
-     CellBox,
+    Rater,
+    CellBox,
     XButton
   },
   data () {
     return {
       data:5,
+      isBdMapShow:false,
       address:"",
       distance:"",
       organ:[],
@@ -167,7 +174,9 @@ export default {
       s=s.toFixed(2);//四舍五入，取几位小数
       return s;
     },
-
+    mapShow(){
+      this.isBdMapShow = !this.isBdMapShow;
+    }
   },
    mounted(){
     organDetails({companyId:this.$route.query.companyId}).then(res => {
@@ -180,6 +189,18 @@ export default {
       let gc = new BMap.Geocoder();
       let latitude = getStore("latitude");
       let longitude = getStore("longitude");
+      var map = new BMap.Map("allmap");    // 创建Map实例
+      map.centerAndZoom(new BMap.Point(lng, lat), 15);  // 初始化地图,设置中心点坐标和地图级别
+      var marker = new BMap.Marker(new BMap.Point(lng, lat));
+      map.addOverlay(marker);
+      //添加地图类型控件
+      map.addControl(new BMap.MapTypeControl({
+        mapTypes:[
+                BMAP_NORMAL_MAP,
+                BMAP_HYBRID_MAP
+            ]
+      }));	 
+      map.enableScrollWheelZoom(true);
       gc.getLocation(point, function(rs){
         //或者其他信息
         //console.log(rs.address);
@@ -187,11 +208,11 @@ export default {
         _this.distance = _this.getDistance(lat,lng,latitude,longitude) + 'km';
       }); 
     }),
-     blogs({limit:this.limit,page:this.page,cat_type:this.cat_type,cat_id:this.$route.query.companyId}).then(res=>{
-        this.blogslist =res;
-        console.log(this.blogslist);
-        //alert(this.gzlist)
-      });
+    blogs({limit:this.limit,page:this.page,cat_type:this.cat_type,cat_id:this.$route.query.companyId}).then(res=>{
+      this.blogslist =res;
+      console.log(this.blogslist);
+      //alert(this.gzlist)
+    });
 
   }
 }
@@ -208,6 +229,9 @@ export default {
   -webkit-transform: rotate(315deg);
   transform: rotate(315deg);
   top: 5px;
+}
+.send-img{
+  height: 1rem;
 }
 .details_banner img{
   display: block;
@@ -347,4 +371,28 @@ export default {
 .ex-next{height:2rem;background: #5ebf83;color:#FFF;line-height:2rem; position: fixed;
     bottom:0;font-size:0.64rem;
     width:100%;text-align:center;}
+.bdMap{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  overflow-y: auto;
+  z-index: 999;
+}
+.bdMap-hid{
+  display: none;
+}
+.close-map{
+  position: fixed;
+  top: .5rem;
+  left: .5rem;
+  z-index: 999;
+  background: #fff;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  color: #5ebf83;
+}
+#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
 </style>
