@@ -58,41 +58,82 @@
         <span>每日推荐</span>
       </div>
       <div class="find_lit_li details_evaluation_list clear">
-        <div class="details_evaluation_list_left">
-          <img src="../../images/icon1.png" alt="">
-        </div>
-        <div class="details_evaluation_list_rg">
-          <flexbox orient="vertical" :gutter="0">
-            <flexbox-item >
-              <div class="find_user_name">小马同志</div>
-              <span class="find_user_i">电工</span>
-            </flexbox-item>
-            <flexbox-item>
-              <div class="find_user_time">
-                三小时
-              </div>
-            </flexbox-item>
-            <flexbox-item>
-              <div class="find_comments_txt">教的好，拿证快，老师负责。</div>
-              <div class="find_comments_img">
-                <img src="../../images/banner.jpg" alt="">
-                <img src="../../images/banner.jpg" alt="" >
-                <img src="../../images/banner.jpg" alt="" >
-                <img src="../../images/banner.jpg" alt="">
-                <img src="../../images/banner.jpg" alt="" >
-                <img src="../../images/banner.jpg" alt="" >
-              </div>
-            </flexbox-item>
-            <flexbox-item>
-              <div class="news_li_icon">
-                <i><img src="../../images/news_icon1.jpg" alt="" class="news_li_iconImg"></i><span>100</span>
-                <i><img src="../../images/news_icon2.jpg" alt="" class="news_li_iconImg"></i><span>20</span>
-                <i><img src="../../images/news_icon3.jpg" alt="" class="news_li_iconImg"></i><span>2</span>
-              </div>
-            </flexbox-item>
-          </flexbox> 
-        </div>
+        <router-link to="/findDetails">
+          <div class="details_evaluation_list_left">
+            <img src="../../images/icon1.png" alt="">
+          </div>
+          <div class="details_evaluation_list_rg">
+            <flexbox orient="vertical" :gutter="0">
+              <flexbox-item >
+                <div class="find_user_name">小马同志</div>
+                <span class="find_user_i">电工</span>
+              </flexbox-item>
+              <flexbox-item>
+                <div class="find_user_time">
+                  三小时
+                </div>
+              </flexbox-item>
+              <flexbox-item>
+                <div class="find_comments_txt">教的好，拿证快，老师负责。</div>
+                <div class="find_comments_img">
+                  <img src="../../images/banner.jpg" alt="">
+                  <img src="../../images/banner.jpg" alt="" >
+                  <img src="../../images/banner.jpg" alt="" >
+                  <img src="../../images/banner.jpg" alt="">
+                  <img src="../../images/banner.jpg" alt="" >
+                  <img src="../../images/banner.jpg" alt="" >
+                </div>
+              </flexbox-item>
+              <flexbox-item>
+                <div class="news_li_icon">
+                  <i><img src="../../images/news_icon1.jpg" alt="" class="news_li_iconImg"></i><span>100</span>
+                  <i><img src="../../images/news_icon2.jpg" alt="" class="news_li_iconImg"></i><span>20</span>
+                  <i><img src="../../images/news_icon3.jpg" alt="" class="news_li_iconImg"></i><span>2</span>
+                </div>
+              </flexbox-item>
+            </flexbox> 
+          </div>
+        </router-link>
       </div>
+      <div class="find_lit_li details_evaluation_list clear">
+        <router-link to="/findDetails">
+          <div class="details_evaluation_list_left">
+            <img src="../../images/icon1.png" alt="">
+          </div>
+          <div class="details_evaluation_list_rg">
+            <flexbox orient="vertical" :gutter="0">
+              <flexbox-item >
+                <div class="find_user_name">小马同志</div>
+                <span class="find_user_i">电工</span>
+              </flexbox-item>
+              <flexbox-item>
+                <div class="find_user_time">
+                  三小时
+                </div>
+              </flexbox-item>
+              <flexbox-item>
+                <div class="find_comments_txt">教的好，拿证快，老师负责。</div>
+                <div class="find_comments_img">
+                 
+                </div>
+              </flexbox-item>
+              <flexbox-item>
+                <div class="news_li_icon">
+                  <i><img src="../../images/news_icon1.jpg" alt="" class="news_li_iconImg"></i><span>100</span>
+                  <i><img src="../../images/news_icon2.jpg" alt="" class="news_li_iconImg"></i><span>20</span>
+                  <i><img src="../../images/news_icon3.jpg" alt="" class="news_li_iconImg"></i><span>2</span>
+                </div>
+              </flexbox-item>
+            </flexbox> 
+          </div>
+        </router-link>
+      </div>
+    </div>
+    <!-- 发帖icon -->
+    <div class="find_send_icon">
+      <router-link to="/posting">
+        <img src="../../images/find.png" alt="">
+      </router-link>
     </div>
     <div class="footer_nav">
       <section @click = "gotoAddress({path: '/step1', query: {}})" class="footer_nav_item">
@@ -250,6 +291,7 @@
   }
   .find_list_box{
     background: #fff;
+    padding-bottom: 2rem;
   }
   .find_tit{
      padding:.2rem .5rem;
@@ -286,6 +328,7 @@
     width: 9rem;
     font-size: .7rem;
     padding-bottom: .1rem;
+    color: #333;
   }
   .find_user_i{
     float: right;
@@ -304,6 +347,7 @@
   .find_comments_txt{
     font-size: .7rem;
     padding-bottom: .3rem; 
+    color: #333;
   }
   .find_comments_img{
    width: 100%
@@ -373,5 +417,13 @@
   }
   .footer_nav_item .home-img span{
     color: #fff;
+  }
+  .find_send_icon{
+    position: fixed;
+    right: .3rem;
+    bottom: 5rem;
+  }
+  .find_send_icon img{
+    width: 2rem;
   }
 </style>
