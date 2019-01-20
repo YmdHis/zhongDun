@@ -150,13 +150,13 @@ URL
 
 
 
-## 二、工种相关接口
+## 二、工种课程相关接口
 
-###  1.工种分类接口
+###  1.所有工种分类接口
 
 URL
 
-> http://zdapp.808w.com/app/category/showlist
+> http://zdapp.808w.com/app/category/allList
 
 接口功能
 
@@ -179,11 +179,9 @@ URL
 > | icon     | string   | 工种图标 |
 > | children | array    | 子分类   |
 
-
-
 > 接口示例
 
-> 地址：http://zdapp.808w.com/app/category/showlist
+> 地址：http://zdapp.808w.com/app/category/allList
 
 ```javascript
 
@@ -193,13 +191,145 @@ URL
 
 
 
+### 2.机构工种分类接口
+
+URL
+
+> http://zdapp.808w.com/app/category/showList
+
+接口功能
+
+> ```
+> 工种分类和子分类
+> ```
+
+请求参数
+
+> | 参数      | 必选 | 类型 | 说明       |
+> | :-------- | :--- | :--- | ---------- |
+> | companyId | 是   | int  | 机构id     |
+> | parentId  | 否   | int  | 分类上级id |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | id       | int      | 分类id   |
+> | name     | string   | 分类名称 |
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/category/showList?companyId=1
+
+```javascript
+
+```
+
+------
+
+
+
+>
+
+```javascript
+
+```
+
+------
+
+
+
+### 3.课程列表接口
+
+URL
+
+> http://zdapp.808w.com/app/course/showlist
+
+接口功能
+
+> ```
+> 获取课程列表（携带参数为机构的课程列表）
+> ```
+
+请求参数
+
+> | 参数       | 必选 | 类型 | 说明   |
+> | :--------- | :--- | :--- | ------ |
+> | categoryId | 否   | int  | 分类id |
+> | companyId  | 否   | int  | 机构id |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明         |
+> | :------- | :------- | :----------- |
+> | id       | int      | 机构课程id   |
+> | title    | string   | 课程名称     |
+> | price    | string   | 机构课程价格 |
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/course/showlist?categoryId=187&companyId=1
+
+```javascript
+
+```
+
+------
+
+
+
+### 4.工种课程内容接口
+
+URL
+
+> http://zdapp.808w.com/app/course/info
+
+接口功能
+
+> ```
+> 工种分类和子分类
+> ```
+
+请求参数
+
+> | 参数 | 必选 | 类型 | 说明   |
+> | :--- | :--- | :--- | ------ |
+> | id   | 是   |      | 课程id |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明     |
+> | :------- | :------- | :------- |
+> | id       | int      | 课程id   |
+> | name     | string   | 工种名称 |
+> | icon     | string   | 工种图标 |
+> | children | array    | 子分类   |
+
+
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/course/info
+
+```javascript
+
+```
+
+------
+
+### 
+
+
+
+
+
 ## 三、机构相关接口
 
 ### 1.机构列表接口
 
 URL
 
-> http://zdapp.808w.com/app/company/showlist
+> http://zdapp.808w.com/app/course/showlist
 
 接口功能
 
@@ -280,117 +410,7 @@ URL
 
 ------
 
-### 3.机构工种一级分类接口
-
-URL
-
-> http://zdapp.808w.com/app/company/categoryByCompanyId
-
-接口功能
-
-> ```
-> 工种分类和子分类
-> ```
-
-请求参数
-
-> | 参数      | 必选 | 类型   | 说明                                                         |
-> | :-------- | :--- | :----- | ------------------------------------------------------------ |
-> | companyId | 是   | int    | 机构id                                                     |
-
-业务相关数据
-
-> | 数组字段 | 字段类型 | 说明     |
-> | :------- | :------- | :------- |
-> | id       | int      | 分类id   |
-> | name     | string   | 分类名称 |
-
-
-> 接口示例
-
-> 地址：http://zdapp.808w.com/app/company/categoryByCompanyId?companyId=1
-
-```javascript
-
-```
-
-------
-
-### 4.机构工种二级分类接口
-
-URL
-
-> http://zdapp.808w.com/app/category/two_cateById
-
-接口功能
-
-> ```
-> 工种分类和子分类
-> ```
-
-请求参数
-
-> | 参数      | 必选 | 类型   | 说明                                                         |
-> | :-------- | :--- | :----- | ------------------------------------------------------------ |
-> | parentId | 是   | int    | 分类一级id                                                     |
-
-业务相关数据
-
-> | 数组字段 | 字段类型 | 说明     |
-> | :------- | :------- | :------- |
-> | id       | int      | 分类id   |
-> | name     | string   | 分类名称 |
-
-
-> 接口示例
-
-> 地址：http://zdapp.808w.com/app/category/two_cateById?parentId=1
-
-```javascript
-
-```
-
-------
-
-### 5.机构工种三级分类接口
-
-URL
-
-> http://zdapp.808w.com/app/company/three_cateById
-
-接口功能
-
-> ```
-> 工种分类和子分类
-> ```
-
-请求参数
-
-> | 参数      | 必选 | 类型   | 说明                                                         |
-> | :-------- | :--- | :----- | ------------------------------------------------------------ |
-> | categoryId | 是   | int    | 分类二级id                                                     |
-> | companyId | 是   | int    | 机构id                                                     |
-
-业务相关数据
-
-> | 数组字段 | 字段类型 | 说明     |
-> | :------- | :------- | :------- |
-> | title       | string      | 课程名称   |
-> | price     | string   | 机构课程价格 |
-> | id     | int   | 机构课程id |
-
-
-> 接口示例
-
-> 地址：http://zdapp.808w.com/app/company/three_cateById?categoryId=187&companyId=1
-
-```javascript
-
-```
-
-------
-
-### 6.机构总点评星级展示
+### 3.机构总点评星级展示
 
 URL
 
@@ -430,7 +450,7 @@ URL
 
 ------
 
-### 7.机构评论列表接口
+### 4.机构评论列表接口
 
 URL
 
@@ -478,45 +498,9 @@ URL
 
 ```
 
-------
 
-### 8.立即报名短信验证码接口
 
-URL
-
-> http://zdapp.808w.com/app/public/appSend
-
-接口功能
-
-> ```
-> 发送短信验证码
-> ```
-
-请求参数
-
-> | 参数      | 必选 | 类型   | 说明                                                         |
-> | :-------- | :--- | :----- | ------------------------------------------------------------ |
-> | mobile | 是   | int    | 手机号                                                   |
-> | type | 是   | string   | 接口状态（注册，登录，报名等等）                                                   |
-
-业务相关数据
-
-> | 数组字段 | 字段类型 | 说明     |
-> | :------- | :------- | :------- |
-> | code       | int      | 短信发送状态（0失败，1成功）   |
-> | msg     | string   | 返回的信息 |
-
-> 接口示例
-
-> 地址：http://zdapp.808w.com/app/public/appSend?mobile=12345678911
-
-```javascript
-
-```
-
-------
-
-### 9.立即报名表单提交接口
+### 5.立即报名表单提交接口
 
 URL
 
@@ -629,7 +613,7 @@ URL
 > | cat_type | 是   | string    | [course:课程，company：机构]                                                     |
 > | title | 否   | string    | 发帖标题                                              |
 > | content | 是   | string    | 发帖内容： |
-> | image | 否   | string    | 图片批量上传（小于2M，最多9张图片）|
+> | image | 否   | file | 图片批量上传（小于2M，最多9张图片）|
 
 ```javascript
 
@@ -659,7 +643,7 @@ URL
 > | blogId | 是   | int    |    主贴id                               |
 > | commentId | 否   |   int  |    回复评论id                               |
 > | comment | 是   | string    | 回复内容： |
-> | image | 否   | string    | 图片批量上传（小于2M，最多9张图片）|
+> | image | 否   | file    | 图片批量上传（小于2M，最多9张图片）|
 
 
 ```javascript
@@ -667,3 +651,44 @@ URL
 ```
 
 ------
+
+
+
+## 五.其他数据请求
+
+### 1.短信验证码接口
+
+URL
+
+> http://zdapp.808w.com/app/public/appSend
+
+接口功能
+
+> ```
+> 发送短信验证码
+> ```
+
+请求参数
+
+> | 参数   | 必选 | 类型   | 说明                             |
+> | :----- | :--- | :----- | -------------------------------- |
+> | mobile | 是   | int    | 手机号                           |
+> | type   | 是   | string | 接口状态（注册，登录，报名等等） |
+
+业务相关数据
+
+> | 数组字段 | 字段类型 | 说明                         |
+> | :------- | :------- | :--------------------------- |
+> | code     | int      | 短信发送状态（0失败，1成功） |
+> | msg      | string   | 返回的信息                   |
+
+> 接口示例
+
+> 地址：http://zdapp.808w.com/app/public/appSend
+
+```javascript
+
+```
+
+------
+
