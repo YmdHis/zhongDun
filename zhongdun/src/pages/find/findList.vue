@@ -93,7 +93,6 @@
           </flexbox> 
         </div>
       </div>
-
     </div>
     <div class="footer_nav">
       <section @click = "gotoAddress({path: '/step1', query: {}})" class="footer_nav_item">
@@ -295,7 +294,7 @@
     border:1px solid #999;
     border-top-right-radius: .3rem;
     border-bottom-left-radius: .3rem;
-    color: #999
+    color: #999;
   }
   .find_user_time{
     font-size: .5rem;
