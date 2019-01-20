@@ -43,23 +43,91 @@
             <p>一般企业</p>
          </div>
          <div class="module_block_a">
-            <img src="../../images/icon7.png" alt="">
+            <img src="../../images/find_icon7.jpg" alt="">
             <p>危化品生产</p>
          </div>
          <div class="module_block_a">
-            <img src="../../images/icon8.png" alt="">
+            <img src="../../images/find_icon8.jpg" alt="">
             <p>同城</p>
          </div>
       </div>
     </div>
-    </div>   
+    <div class="find_list_box">
+      <div class="find_tit">
+        <img src="../../images/teacher_icon1.png" alt="">
+        <span>每日推荐</span>
+      </div>
+      <div class="find_lit_li details_evaluation_list clear">
+        <div class="details_evaluation_list_left">
+          <img src="../../images/icon1.png" alt="">
+        </div>
+        <div class="details_evaluation_list_rg">
+          <flexbox orient="vertical" :gutter="0">
+            <flexbox-item >
+              <div class="find_user_name">小马同志</div>
+              <span class="find_user_i">电工</span>
+            </flexbox-item>
+            <flexbox-item>
+              <div class="find_user_time">
+                三小时
+              </div>
+            </flexbox-item>
+            <flexbox-item>
+              <div class="find_comments_txt">教的好，拿证快，老师负责。</div>
+              <div class="find_comments_img">
+                <img src="../../images/banner.jpg" alt="">
+                <img src="../../images/banner.jpg" alt="" >
+                <img src="../../images/banner.jpg" alt="" >
+                <img src="../../images/banner.jpg" alt="">
+                <img src="../../images/banner.jpg" alt="" >
+                <img src="../../images/banner.jpg" alt="" >
+              </div>
+            </flexbox-item>
+            <flexbox-item>
+              <div class="news_li_icon">
+                <i><img src="../../images/news_icon1.jpg" alt="" class="news_li_iconImg"></i><span>100</span>
+                <i><img src="../../images/news_icon2.jpg" alt="" class="news_li_iconImg"></i><span>20</span>
+                <i><img src="../../images/news_icon3.jpg" alt="" class="news_li_iconImg"></i><span>2</span>
+              </div>
+            </flexbox-item>
+          </flexbox> 
+        </div>
+      </div>
+
+    </div>
+    <div class="footer_nav">
+      <section @click = "gotoAddress({path: '/step1', query: {}})" class="footer_nav_item">
+        <img src="../../images/main11.jpg" alt="">
+        <span>报名</span>
+      </section>
+       <section @click = "gotoAddress({path: '/learning', query: {}})" class="footer_nav_item">
+        <img src="../../images/main22.jpg" alt="">
+        <span>学习</span>
+      </section>
+      <section @click = "gotoAddress({path: '/home', query: {}})" class="footer_nav_item" style="padding: 0;">
+        <div class="home-img">
+          <img src="../../images/home.png" alt="">
+        </div>
+      </section>
+      <section @click = "gotoAddress({path: '/findList', query: {}})" class="footer_nav_item">
+        <img src="../../images/main3.jpg" alt="">
+        <span>发现</span>
+      </section>
+      <section @click = "gotoAddress({path: '/personFile', query: {}})" class="footer_nav_item">
+        <img src="../../images/main44.jpg" alt="">
+        <span>我的</span>
+      </section>
+    </div>
+  </div>   
 </template>
 
 <script>
-    import { XHeader} from 'vux'
+    import { XHeader,Flexbox, FlexboxItem,} from 'vux'
     export default {
         components:{
-             XHeader
+             XHeader,
+             Flexbox, 
+             FlexboxItem,
          },
     	data(){
             return{
@@ -74,9 +142,12 @@
         computed: {
         },
         methods: {
-             back(){
-                this.$router.go(-1);//返回上一层
-            },
+          back(){
+              this.$router.go(-1);//返回上一层
+          },
+          gotoAddress(path){
+            this.$router.push(path)
+          }
         },
 
     }
@@ -157,9 +228,8 @@
     margin-bottom: .5rem;
     padding-bottom: .5rem;
      border-bottom: 1px solid #e9e9e9;
-
-   }
-   .module_block_a{
+  }
+  .module_block_a{
     width: 25%;
     padding-top: .5rem;
    /* display: -ms-flexbox;
@@ -168,15 +238,141 @@
     justify-content: center;
     text-align: center;
    }
-   .module_block_a img{
+  .module_block_a img{
     display: block;
     width: 2rem;
     height: 2rem;
     margin: 0 auto;
-   }
-   .module_block_a p{
+  }
+  .module_block_a p{
     font-size: .5rem;
     color: #343434;
     line-height: 1rem;
-   }
+  }
+  .find_list_box{
+    background: #fff;
+  }
+  .find_tit{
+     padding:.2rem .5rem;
+     border-bottom: 1px solid #e9e9e9;
+  }
+  .find_tit img{
+    vertical-align: middle;
+    height: .7rem;
+  }
+  .find_tit span{
+    font-size: .7rem;
+    color: #333;
+    display: inline-block;
+  }
+  .find_lit_li{
+    border-bottom: 1px solid #e9e9e9;
+    padding:.5rem;
+  }
+  .details_evaluation_list_left{
+  float: left;
+  }
+  .details_evaluation_list_left img{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+  }
+  .details_evaluation_list_rg{
+    padding-left: 2.5rem;
+    width: 100%;
+    text-align: left;
+  }
+  .find_user_name{
+   float: left;
+    width: 9rem;
+    font-size: .7rem;
+    padding-bottom: .1rem;
+  }
+  .find_user_i{
+    float: right;
+    font-size: .3rem;
+    padding: 0 .2rem;
+    border:1px solid #999;
+    border-top-right-radius: .3rem;
+    border-bottom-left-radius: .3rem;
+    color: #999
+  }
+  .find_user_time{
+    font-size: .5rem;
+    color: #999;
+    padding-bottom: .3rem;
+  }
+  .find_comments_txt{
+    font-size: .7rem;
+    padding-bottom: .3rem; 
+  }
+  .find_comments_img{
+   width: 100%
+  }
+  .find_comments_img img{
+    width: 30%;
+    height: 3rem;
+  }
+  .news_li_icon .news_li_iconImg{
+  vertical-align: middle;
+  height: .5rem;
+  padding-top:.1rem; 
+  }
+  .news_li_icon span{
+    font-size: .5rem;
+    color: #808080;
+    display: inline-block;
+    padding-right: 2rem;
+  }
+  .footer_nav{
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    background: url(../../images/footer_navBg.png) no-repeat center;
+    background-size: 100% 100%;
+    height: 2.6rem;
+  }
+  .footer_nav_item{
+    -ms-flex: 1;
+    flex: 1;
+    display: -ms-flexbox;
+    display: flex;
+    text-align: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: .7rem;
+  }
+  .footer_nav_item img{
+    width: 1rem;
+    height: 1rem;
+    margin-top: .1rem;
+    fill: #ccc;
+  }
+  .footer_nav_item span{
+    font-size: .45rem;
+    color: #656565;
+  }
+  .footer_nav_item .home-img{
+   background: #5ebf83;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 5px solid #fff;
+  }
+  .footer_nav_item .home-img img{
+    display: block;
+    margin: 0 auto;
+    padding-top: .5rem;
+  }
+  .footer_nav_item .home-img span{
+    color: #fff;
+  }
 </style>

@@ -42,11 +42,11 @@
         <flexbox-item :span="3">
           <div class="learning_box_list">
             <img src="../../images/test_icon2.jpg" alt="" class="learning_box_list_icon">
-            <span>我的课程</span>
+            <span>模拟测试</span>
           </div>
           <div class="learning_box_list">
             <img src="../../images/test_icon3.jpg" alt="" class="learning_box_list_icon">
-            <span>视频学习</span>
+            <span>错题本</span>
           </div>
         </flexbox-item>
         <flexbox-item :span="6">
@@ -55,11 +55,11 @@
         <flexbox-item :span="3">
           <div class="learning_box_list">
             <img src="../../images/test_icon4.jpg" alt="" class="learning_box_list_icon">
-            <span>免费试听</span>
+            <span>我的成绩</span>
           </div>
           <div class="learning_box_list">
             <img src="../../images/test_icon5.png" alt="" class="learning_box_list_icon">
-            <span>名师介绍</span>
+            <span>收藏</span>
           </div>
         </flexbox-item>
       </flexbox>
