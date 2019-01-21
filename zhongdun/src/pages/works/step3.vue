@@ -1,7 +1,7 @@
 <template>
   <div>
   	<div id="step3">
-    	<x-header :left-options="{backText: ''}"><b>支付订单</b></x-header>
+    	<x-header :left-options="{backText: ''}" style="background: #f5f5f5;"><b>支付订单</b></x-header>
     	<div class="ex-topimg"><img src="../../assets/images/jf.png"></div>
     </div>
     <!--支付时间价格 S-->

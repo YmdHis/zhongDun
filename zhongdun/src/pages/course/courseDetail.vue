@@ -3,7 +3,7 @@
 	 <div class="details_header">
       <x-header :left-options="{backText: ''}"  style="background-color:#f5f5f5;">
         <a slot="overwrite-left" class="goBack" :style="borderColor" v-on:click="back"></a>
-        机构详情
+        课程详情
       </x-header>
     </div>
 	<div class="footer_nav">
@@ -11,11 +11,11 @@
         <img src="../../images/couer_icon3.png" alt="">
         <span>咨询客服</span>
       </section>
-       <section @click = "" class="footer_nav_item">
+       <section @click = "call" class="footer_nav_item">
         <img src="../../images/couer_icon1.png" alt="">
         <span>电话咨询</span>
       </section>
-      <section @click = "" class="footer_nav_item">
+      <section @click = "toOrgan" class="footer_nav_item">
         <p class="buy-btn">立即购买</p>
       </section>
     
@@ -53,8 +53,8 @@
 				<li class="lesson-li">第一节 制冷与空调安装0332</li>
 			</ul>
   		</div>
-  		<div v-else-if="showIndex == 1">
-			介绍
+  		<div v-else-if="showIndex == 1" class="course-intro">
+			制冷与空调设备安装维修作业--陈老师
   		</div>
   		<div v-else class="course-list">
 			<p class="course-like">观看该课程的人还喜欢</p>
@@ -142,7 +142,13 @@ export default {
 		},
 		back(){
         	this.$router.go(-1);//返回上一层
-    	},
+		},
+		call(){
+			window.location.href="tel:400-999-6389"
+		},
+		toOrgan(){
+			this.$router.push("/organ");
+		}
 	}
 }
 </script>
@@ -158,6 +164,9 @@ export default {
 	  -webkit-transform: rotate(315deg);
 	  transform: rotate(315deg);
 	  top: 5px;
+	}
+	.course-intro{
+		font-size: .6rem;
 	}
 	.clearfix{
 		clear: both;
@@ -200,8 +209,13 @@ export default {
 		border-bottom: 1px solid #f2f2f2;
 	}
 	.tab-container{
-		margin-top: .5rem;
 		border-top: 1px solid #f2f2f2;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    position: absolute;
+    padding: .5rem;
+
 	}
 	.lesson-list{
 		background: #fff;

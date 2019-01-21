@@ -1,11 +1,11 @@
 <template>
 <div class="footer_nav">
-  <section @click = "gotoAddress({path: '/step1', query: {}})" class="footer_nav_item">
-    <img src="../images/main1.jpg" alt="">
+  <section @click = "gotoAddress({path: '/', query: {}})" class="footer_nav_item">
+    <img src="../images/main11.jpg" alt="">
     <span>报名</span>
   </section>
    <section @click = "gotoAddress({path: '/learning', query: {}})" class="footer_nav_item">
-    <img src="../images/main2.jpg" alt="">
+    <img src="../images/main22.jpg" alt="">
     <span>学习</span>
   </section>
   <section @click = "gotoAddress({path: '/home', query: {}})" class="footer_nav_item" style="padding: 0;">
@@ -13,12 +13,12 @@
       <img src="../images/home.png" alt="">
     </div>
   </section>
-  <section @click = "gotoAddress({path: '/', query: {}})" class="footer_nav_item">
-    <img src="../images/main3.jpg" alt="">
+  <section @click = "gotoAddress({path: '/findList', query: {}})" class="footer_nav_item">
+    <img src="../images/main33.jpg" alt="">
     <span>发现</span>
   </section>
-  <section @click = "gotoAddress({path: '/', query: {}})" class="footer_nav_item">
-    <img src="../images/main4.jpg" alt="">
+  <section @click = "gotoAddress({path: '/personFile', query: {}})" class="footer_nav_item">
+    <img src="../images/main44.jpg" alt="">
     <span>我的</span>
   </section>
     

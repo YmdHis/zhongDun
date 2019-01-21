@@ -22,7 +22,7 @@
        <tab :line-width="3" custom-bar-width="10px" active-color="#5ebf83" bar-active-color="5ebf83">
         <tab-item selected @on-item-click="onClick('organ')" class="organ_species_tit">培训机构</tab-item>
         <tab-item @on-item-click="onClick('teacher')" class="organ_species_tit">培训老师</tab-item>
-        <tab-item @on-item-click="" class="organ_species_tit">申请入驻</tab-item>
+        <tab-item @on-item-click="onClick('sqrz')" class="organ_species_tit">申请入驻</tab-item>
       </tab>
     </div>
     <div v-if="active_tab=='organ'" class="organ_item">
@@ -164,6 +164,9 @@ export default {
       });
     },
     onClick(state){
+      if(state == 'sqrz'){
+        this.$router.push("/info1");
+      }
       this.active_tab = state;
     },
     gotoAddress(path){

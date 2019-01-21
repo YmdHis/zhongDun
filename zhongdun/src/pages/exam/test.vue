@@ -2,7 +2,7 @@
 <template>
 <div id ="test">
     <div class="test-header">
-        <img src="../../images/back.png" alt="返回" class="back-img">
+        <img src="../../images/back.png" alt="返回" class="back-img" @click="back">
         <img src="../../images/setting.png" alt="设置" class="set-img">
         <div class="header-btn">
             <div class ="in-b" :class="[headerBtn == 'dt'?'bg-choo':'']" @click="modelChoo('dt')">答题模式</div>
@@ -149,6 +149,8 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 .test-container{
     background: #fff;
     width: 100%;
+    height: 100%;
+    position: absolute;
 }
 .test-title{
     font-size: .8rem;
@@ -200,7 +202,7 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 .shouc-img{
     width: .8rem;
     height: .8rem;
-    vertical-align: middle;
+    vertical-align: bottom;
     padding-right: .2rem;
 }
 .footer-shouc{

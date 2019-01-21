@@ -11,7 +11,7 @@
           众盾安全
         </div>
         <div class="header_login">
-           <router-link to="/login" class="header_login_a">
+           <router-link to="/personFile" class="header_login_a">
             <img src="../../images/user.png" alt="" class="header_login_user">
          </router-link>
         </div>
@@ -136,11 +136,11 @@
       </router-link>
     </div>
     <div class="footer_nav">
-      <section @click = "gotoAddress({path: '/step1', query: {}})" class="footer_nav_item">
+      <section @click = "gotoAddress({path: '/'})" class="footer_nav_item">
         <img src="../../images/main11.jpg" alt="">
         <span>报名</span>
       </section>
-       <section @click = "gotoAddress({path: '/learning', query: {}})" class="footer_nav_item">
+       <section @click = "gotoAddress({path: '/learning'})" class="footer_nav_item">
         <img src="../../images/main22.jpg" alt="">
         <span>学习</span>
       </section>

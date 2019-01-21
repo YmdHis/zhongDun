@@ -50,7 +50,7 @@
           </flexbox> 
         </div>
         <div class="details_evaluation_box_title_rg">
-          <cell value="全部评价（5）" class="details_address" link="/home" >
+          <cell value="全部评价（5）" class="details_address" link="/conment" >
           </cell>
         </div>
       </div> 
@@ -190,7 +190,7 @@ export default {
       let latitude = getStore("latitude");
       let longitude = getStore("longitude");
       var map = new BMap.Map("allmap");    // 创建Map实例
-      map.centerAndZoom(new BMap.Point(lng, lat), 15);  // 初始化地图,设置中心点坐标和地图级别
+      map.centerAndZoom(new BMap.Point(lng, lat), 18);  // 初始化地图,设置中心点坐标和地图级别
       var marker = new BMap.Marker(new BMap.Point(lng, lat));
       map.addOverlay(marker);
       //添加地图类型控件

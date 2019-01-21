@@ -1,5 +1,11 @@
 <template>
   <div id="courseList">
+		<div class="header">
+      <x-header :left-options="{backText: ''}"  style="background-color:#fff;">
+        <a slot="overwrite-left" class="goBack" :style="borderColor" v-on:click="back"></a>
+        课程列表
+      </x-header>
+    </div>
 	<tab :line-width = '1'>
       <tab-item v-for="item in types" :key="item.id" :selected="item.id===1">{{item.title}}</tab-item>
     </tab>
@@ -57,7 +63,7 @@
 </template>
 
 <script>
-import { Tab, TabItem, Popup, XSwitch, Cell, Group, XButton,TransferDom  } from 'vux'
+import { Tab, TabItem, Popup, XSwitch, Cell, Group, XButton,TransferDom ,XHeader, } from 'vux'
 
 export default {
   	name: 'course',
@@ -68,21 +74,70 @@ export default {
 	    XSwitch,
 	    Cell,
 	    Group,
-	    XButton
+			XButton,
+			XHeader
 	},
 	data(){
 		return{
 			types:[{id:1,title:'电工作业'},{id:2,title:'制冷与空调作业'},{id:3,title:'高处作业'},{id:4,title:'焊接热切割'},{id:5,title:'电工'}],
-
+			borderColor: {
+        borderColor: '#333'
+      },
 		}
 	},
 	methods:{
-
+		back(){
+			this.$router.go(-1)
+		},
 	}
 }
 </script>
 
 <style scoped>
+	.goBack {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px 0 0 1px;
+  -webkit-transform: rotate(315deg);
+  transform: rotate(315deg);
+  top: 5px;
+}
+.test-header{
+    width: 100%;
+    height: 1.8rem;
+    padding: .3rem .5rem;
+    background-color: rgb(245, 245, 245);
+    border-bottom: 1px solid #ccc;
+}
+.back-img{
+    float: left;
+    height: 1rem;
+    width: 1rem;
+}
+.set-img{
+    float: right;
+    height: 1rem;
+    width: 1rem;
+}
+.header-btn{
+    margin: 0 auto;
+	  font-size: .8rem;
+    text-align: center; 
+}
+.in-b{
+    font-size: .6rem;
+    float: left;
+    width: 4rem;
+    text-align: center;
+    line-height: 1.1rem;
+}
+.bg-choo{
+    background: #000;
+    color: #fff;
+}
 	.course_list{
 		background: #fff;
 	}
