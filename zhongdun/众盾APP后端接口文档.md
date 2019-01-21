@@ -317,7 +317,7 @@ URL
 
 ------
 
-### 
+###
 
 
 
@@ -486,7 +486,7 @@ URL
 > | user_id     | int   | 用户id |
 > | title     | string   | 评论标题 |
 > | content     | string   | 评论内容 |
-> | createdTime     | int   | 评论时间 |
+> | created_time     | int   | 评论时间 |
 > | user_nickname     | string   | 用户名 |
 
 
@@ -691,4 +691,3 @@ URL
 ```
 
 ------
-
