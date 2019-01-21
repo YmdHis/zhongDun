@@ -214,7 +214,7 @@ import cityPicker from 'src/components/cityPicker'
   .ex-choose-city{font-weight:bold;font-size:0.67rem;color:#505050;}
   #ex-gongzhong{padding:0.4rem;padding-top:0.8rem;background:#FFF;}
   .exactive{border:2px solid #5ebf83 !important;}
-  .ex-gongzhong-li{margin-top:0.8rem;width:20%;margin-right:5%;overflow:hidden;display: inline-block}
+  .ex-gongzhong-li{margin-top:0.8rem;width:23%;margin-right:2%;overflow:hidden;display: inline-block}
   .ex-gongzhong-li:nth-of-type(4n){margin-right:0;}
   .ex-gongzhong-li>div{display: block;border:2px solid #FFF;padding-top:0.2rem;}
   .ex-gongzhong-li>div>img{width:1.5rem;height:1.5rem;display: block;margin:0 auto;}
