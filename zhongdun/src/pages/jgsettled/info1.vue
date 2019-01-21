@@ -58,7 +58,7 @@
   }
 }
 </script>
-<style type="text/css" scoped>
+<style type="text/css">
 /*报名投不样式*/
 #bmhead .vux-header{
 background: #FFF;

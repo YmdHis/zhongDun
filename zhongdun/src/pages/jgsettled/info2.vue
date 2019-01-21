@@ -85,7 +85,7 @@
   </x-dialog>
 </div>
   <!--弹框显示 E--> 
-  <div class="ex-next">
+  <div class="ex-next1">
    <div @click="toInfo()">返回上层</div>
    <div @click="showDialogStyle=true">确定提交</div>
   </div>
@@ -186,17 +186,14 @@ font-size:0.6rem;
 #ex-subtn button{border-radius:1px;background: #5ebf83;margin-right:0.64rem;font-size:0.64rem;}
 
 /*底部按钮*/
-.ex-next1{height:2rem;background: #5ebf83;color:#FFF;line-height:2rem; position: fixed;
-    bottom:0;font-size:0.66rem;
-    width:100%;text-align:center;}
-.ex-next{position: fixed;bottom:0;width:100%;}
-.ex-next>div{ display: inline-block;width:40%;font-size:0.66rem;height: 2rem;line-height:2rem;text-align:center;}
-.ex-next>div:nth-of-type(1){
+.ex-next1{position: fixed;bottom:0;width:100%;}
+.ex-next1>div{ display: inline-block;width:40%;font-size:0.66rem;height: 2rem;line-height:2rem;text-align:center;}
+.ex-next1>div:nth-of-type(1){
   background:#eaeaea;margin-left:5%;
   margin-right:8%;
 
 }
-.ex-next>div:nth-of-type(2){
+.ex-next1>div:nth-of-type(2){
   background:#5ebf83;color:#FFF;margin-right:5%;
 }
 </style>
