@@ -27,7 +27,7 @@
             <p>焊工</p>
          </div>
          <div class="module_block_a">
-            <img src="../../images/find_icon3.png" alt="">
+            <img src="../../images/find_icon3.jpg" alt="">
             <p>制冷空调</p>
          </div>
          <div class="module_block_a">
