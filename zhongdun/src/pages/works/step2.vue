@@ -1,7 +1,7 @@
 <template>
   <div>
   	<div id="step2">
-    	<x-header :left-options="{backText: ''}"><b>我要报名</b></x-header>
+    	<x-header :left-options="{backText: ''}" style="background: #f5f5f5;"><b>我要报名</b></x-header>
     	<div class="ex-topimg"><img src="../../assets/images/bmbanner.png"></div>
     </div>
     <!--选择价格 S-->
