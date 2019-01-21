@@ -3,19 +3,20 @@
     
     <div>
       <!--上部分 S-->
-      <div id="topbg">
+      <div id="topbg" style="margin-bottom: -.5rem;">
         <div>
           <img src="../../assets/images/topbg.png" alt="" class="spet1_img">
           <span class="logo_txt">
-            众盾安全
+            <!-- 众盾安全 -->
+            <img src="../../images/zdaq.png" alt="" class="logo_img">
           </span>
         </div>
 
       </div>
-      <div>
+      <div style="background:#fff;">
         <div id="choosecity"  @click="chooCity()"> 
           <div>
-            <group><cell title="选择考试城市" :value="LocationCity" is-link></cell></group>
+            <group><cell title="选择考试城市" :value="LocationCity" is-link style="border-top:none;"></cell></group>
           </div>
         </div>
       </div>
@@ -199,9 +200,24 @@ import cityPicker from 'src/components/cityPicker'
 .fanhui{
   color: #fff;
   font-size: .6rem;
-  position: fixed;
+  position: absolute;
   top: .5rem;
   right: .5rem;
+}
+.logo_txt{
+    position: absolute;
+    z-index: 999;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+    display: block;
+    width: 100%;
+    left: 0;
+  }
+.logo_img{
+  width: 5rem;
+  display: block;
+  margin: 0 auto;
 }
   #ex-step1>div:nth-of-type(1){ display: flex; 
       display: -webkit-flex;  
@@ -253,11 +269,5 @@ import cityPicker from 'src/components/cityPicker'
   .city-hid{
     display: none;
   }
-  .logo_txt{
-    position: relative;
-    z-index: 999;
-    font-size: 1rem;
-    font-weight: bold;
-    letter-spacing: .1rem;
-  }
+  
 </style>

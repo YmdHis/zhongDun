@@ -68,33 +68,12 @@
         </cell>
       </group>
     </div>
-    <div class="footer_nav">
-      <section @click = "gotoAddress({path: '/step1', query: {}})" class="footer_nav_item">
-        <img src="../../images/main11.jpg" alt="">
-        <span>报名</span>
-      </section>
-       <section @click = "gotoAddress({path: '/learning', query: {}})" class="footer_nav_item">
-        <img src="../../images/main22.jpg" alt="">
-        <span>学习</span>
-      </section>
-      <section @click = "gotoAddress({path: '/home', query: {}})" class="footer_nav_item" style="padding: 0;">
-        <div class="home-img">
-          <img src="../../images/home.png" alt="">
-        </div>
-      </section>
-      <section @click = "gotoAddress({path: '/findList', query: {}})" class="footer_nav_item">
-        <img src="../../images/main33.jpg" alt="">
-        <span>发现</span>
-      </section>
-      <section @click = "gotoAddress({path: '/personFile', query: {}})" class="footer_nav_item">
-        <img src="../../images/main4.jpg" alt="">
-        <span>我的</span>
-      </section>
-    </div>
+    <foot-nav></foot-nav>
   </div>
 </template>
 
 <script>
+import footNav from 'src/components/footNav'
 import {Flexbox, FlexboxItem, Group,Cell,} from 'vux'
 
 export default {
@@ -107,6 +86,7 @@ export default {
     FlexboxItem,
     Group,
     Cell,
+    footNav
   },
   methods:{
     gotoAddress(path){

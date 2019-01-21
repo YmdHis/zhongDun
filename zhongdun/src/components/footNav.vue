@@ -1,11 +1,11 @@
 <template>
 <div class="footer_nav">
-  <section @click = "gotoAddress({path: '/', query: {}})" class="footer_nav_item">
-    <img src="../images/main11.jpg" alt="">
+  <section @click = "gotoAddress('/')" class="footer_nav_item">
+    <img :src="'/' === $route.path ? tabBarImgArr[0].selected : tabBarImgArr[0].normal" alt="报名">
     <span>报名</span>
   </section>
-   <section @click = "gotoAddress({path: '/learning', query: {}})" class="footer_nav_item">
-    <img src="../images/main22.jpg" alt="">
+   <section @click = "gotoAddress('/learning')" class="footer_nav_item">
+    <img :src="'/learning' === $route.path ? tabBarImgArr[1].selected : tabBarImgArr[1].normal" alt="学习">
     <span>学习</span>
   </section>
   <section @click = "gotoAddress({path: '/home', query: {}})" class="footer_nav_item" style="padding: 0;">
@@ -13,12 +13,12 @@
       <img src="../images/home.png" alt="">
     </div>
   </section>
-  <section @click = "gotoAddress({path: '/findList', query: {}})" class="footer_nav_item">
-    <img src="../images/main33.jpg" alt="">
+  <section @click = "gotoAddress('/findList')" class="footer_nav_item">
+    <img :src="'/findList' === $route.path ? tabBarImgArr[2].selected : tabBarImgArr[2].normal" alt="发现">
     <span>发现</span>
   </section>
-  <section @click = "gotoAddress({path: '/personFile', query: {}})" class="footer_nav_item">
-    <img src="../images/main44.jpg" alt="">
+  <section @click = "gotoAddress('/personFile')" class="footer_nav_item">
+    <img :src="'/personFile' === $route.path ? tabBarImgArr[3].selected : tabBarImgArr[3].normal" alt="我的">
     <span>我的</span>
   </section>
     
@@ -31,11 +31,18 @@ export default {
  
   data () {
     return {
+      tabBarImgArr:[   //图片切换
+        {normal: require('../images/main11.jpg'), selected: require('../images/main1.jpg')},
+        {normal: require('../images/main22.jpg'), selected: require('../images/main2.jpg')},
+        {normal: require('../images/main33.jpg'), selected: require('../images/main3.jpg')},
+        {normal: require('../images/main44.jpg'), selected: require('../images/main4.jpg')}
+      ]
     }
   },
   methods:{
     gotoAddress(path){
         this.$router.push(path)
+        console.log(path);
       }
   }
 }
