@@ -86,13 +86,13 @@
 </div>
   <!--弹框显示 E--> 
   <div class="ex-next">
-   <div>返回上层</div>
+   <div @click="toInfo()">返回上层</div>
    <div @click="showDialogStyle=true">确定提交</div>
   </div>
  </div>
 </template>
 <script type="text/javascript">
-  import {XHeader,XInput,Group,, XDialog, XButton, XSwitch,TransferDomDirective as TransferDom} from 'vux'
+  import {XHeader,XInput,Group, XDialog, XButton, XSwitch,TransferDomDirective as TransferDom} from 'vux'
   export default {
  directives: {
 TransferDom
@@ -101,7 +101,9 @@ TransferDom
      XHeader,XInput,Group, XDialog, XButton, XSwitch
     },
   methods: {
-     
+     toInfo(){
+       this.$router.push("/info1");
+     }
   },
   data () {
     return {
@@ -110,7 +112,7 @@ TransferDom
   }
 }
 </script>
-<style type="text/css">
+<style type="text/css" >
 /*报名投不样式*/
 #bmhead .vux-header{
 background: #FFF;

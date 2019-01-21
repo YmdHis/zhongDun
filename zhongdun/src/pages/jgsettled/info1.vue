@@ -39,7 +39,7 @@
     </div>
   </div>
     <!--基本信息 E-->    
-  <div class="ex-next">
+  <div class="ex-next" @click="toInfo()">
    下一步
   </div>
  </div>
@@ -51,11 +51,14 @@
      XHeader,XInput,Group
     },
   methods: {
-     
+     toInfo(){
+       console.log(111)
+       this.$router.push("/info2");
+     }
   }
 }
 </script>
-<style type="text/css">
+<style type="text/css" scoped>
 /*报名投不样式*/
 #bmhead .vux-header{
 background: #FFF;

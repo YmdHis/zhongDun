@@ -105,7 +105,7 @@ export default {
   data () {
     return {
       results: [],
-      value: '安全生产考证报名',
+      value: '',
        wpList: [
             {
               name: '全部'
@@ -134,7 +134,7 @@ function getResult (val) {
 }
 </script>
 <style type="text/css">
-#searchbox{padding-top:0.8rem;background: url(../../assets/images/topbg.png);height: 6rem;background-size:cover;background-repeat: no-repeat;overflow:hidden; }
+#searchbox{padding-top:0.8rem;background: url(../../assets/images/topbg.png);height: 6rem;background-size:cover;background-repeat: no-repeat;overflow:hidden;color: #888; }
   #searchbox .weui-search-bar{background: transparent;font-size:0.66rem;}
   #searchbox .weui-search-bar__cancel-btn{color:#333;padding-top:0.1rem;}
   #searchbox form{padding:0.1rem 0;border-radius:0.8rem;}
@@ -149,7 +149,8 @@ function getResult (val) {
     #search_kinds>div{font-size:0.62rem;padding-bottom:0.2rem;}
    .serach_history{
       padding:0.4rem;
-      background: #FFF
+      background: #FFF;
+      color: #888;
     }
   .searchtit{font-size:0.67rem;color:#333;font-weight:bold;margin-bottom:0.5rem;margin-top:0.4rem;}
   .serach_history>div{padding:0 0.2rem}

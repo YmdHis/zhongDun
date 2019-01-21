@@ -132,6 +132,7 @@
 			<p class="agree-text">
 				这是客户协议
 				</p>
+				
 		</div>
   </div>
 </template>
@@ -329,7 +330,7 @@ export default {
 		console.log(ids);
 		apply({company_id:this.companyid,user_nickname:this.username,sex:this.sex,mobile:this.mobile,code:this.vcode,course_ids:ids}).then(res=>{
 			console.log(res);
-			let data = JSON.parse(res.data);
+			let data = res.data;
 			if(res.code == 0){
 				this.$vux.toast.show({
 				text: '网络错误',

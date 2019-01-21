@@ -9,13 +9,13 @@
             {{LocationCity}}
          </section>
         </div>
-        <div class="header_search">
+        <div class="header_search" @click="toSearch">
           <img src="../../images/sear_icon.png" alt="" class="header_search_icon">
           <input type="text" placeholder="请输入机构名称">
           <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
         </div>
         <div class="header_login">
-           <router-link to="/login" class="header_login_a">
+           <router-link to="/personFile" class="header_login_a">
             <img src="../../images/user.png" alt="" class="header_login_user">
          </router-link>
         </div>
@@ -31,11 +31,11 @@
             <img src="../../images/icon2.png" alt="">
             <p>课程学习</p>
          </router-link>
-         <router-link :to="{ path: '/newslist', query: {id:196}}" class="module_block_a">
+         <router-link to="/findList" class="module_block_a">
             <img src="../../images/icon3.png" alt="">
             <p>发现问题</p>
          </router-link>
-         <router-link to="/learning" class="module_block_a">
+         <router-link to="/test" class="module_block_a">
             <img src="../../images/icon4.png" alt="">
             <p>试题学习</p>
          </router-link>
@@ -43,7 +43,7 @@
             <img src="../../images/icon5.png" alt="">
             <p>机构介绍</p>
          </router-link>
-         <router-link to="/enter" class="module_block_a">
+         <router-link to="/personFile" class="module_block_a">
             <img src="../../images/icon6.png" alt="">
             <p>个人中心</p>
          </router-link>
@@ -62,10 +62,10 @@
         <h2>
           热门中心
         </h2>
-        <router-link to="/enter" class="more_link">全部></router-link>
+        <router-link to="/findList" class="more_link">全部></router-link>
       </div>
       <div class="module_block_list hot_module_list" style="padding-bottom: 0;">
-        <router-link to="/step1" class="hot_module_a">
+        <router-link to="/" class="hot_module_a">
             <p>报名</p>
            <img src="../../images/bao1.png" alt="">
         </router-link>
@@ -73,7 +73,7 @@
             <p>机构介绍</p>
            <img src="../../images/bao2.png" alt="">
         </router-link>
-         <router-link :to="{ path: '/newslist', query: {id:196}}" class="hot_module_a" style="border-right: none;">
+         <router-link to="/findList" class="hot_module_a" style="border-right: none;">
             <p>重点资讯</p>
            <img src="../../images/bao3.png" alt="">
         </router-link>
@@ -109,13 +109,13 @@
         </div>
       </div>
       <div class="course_box" v-if="active_tab=='course'">
-        <div class="news_title">
+        <div class="news_title" @click="toCourseList">
           <h3>课程列表</h3>
           <span>全部></span>
         </div>
         <div class="course_list">
           <ul>
-            <li class="course_li">
+            <li class="course_li" @click="toCourse">
               <section >
                 <img src="../../images/banner.png" alt="" class="course_img">
               </section>
@@ -138,7 +138,7 @@
                 </div>
               </div>
             </li>
-            <li class="course_li">
+            <li class="course_li" @click="toCourse">
               <section >
                 <img src="../../images/banner.png" alt="" class="course_img">
               </section>
@@ -165,24 +165,24 @@
         </div>
       </div>
        <div class="video_box" v-if="active_tab=='video'">
-         <div class="news_title">
+         <div class="news_title" @click="toCourseList">
             <h3>课程列表</h3>
             <span>全部></span>
           </div>
           <div class="video_list">
-            <router-link to="/enter" class="video_list_a">
+            <router-link to="/courseList" class="video_list_a">
               <img src="../../images/leson1.jpg" alt="">
               <p class="ellipsis">电气作业(初训)</p>
             </router-link>
-             <router-link to="/enter" class="video_list_a">
+             <router-link to="/courseList" class="video_list_a">
               <img src="../../images/leson2.jpg" alt="">
               <p class="ellipsis">高压电工作业</p>
             </router-link>
-             <router-link to="/enter" class="video_list_a">
+             <router-link to="/courseList" class="video_list_a">
               <img src="../../images/leson3.jpg" alt="">
               <p class="ellipsis">制冷工作业</p>
             </router-link>
-            <router-link to="/enter" class="video_list_a">
+            <router-link to="/courseList" class="video_list_a">
               <img src="../../images/leson4.jpg" alt="">
               <p class="ellipsis">继电保护作业</p>
             </router-link>
@@ -230,6 +230,15 @@ export default {
     onClick(state){
         this.active_tab = state;
       },
+    toCourse(){
+      this.$router.push("/courseDetail");
+    },
+    toCourseList(){
+      this.$router.push("/courseList");
+    },
+    toSearch(){
+      this.$router.push("/search");
+    },
     gotoAddress(path){
         this.$router.push(path)
       },
@@ -358,7 +367,7 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
-    margin-bottom: .8rem;
+    margin-bottom: .5rem;
     padding-bottom: .8rem;
      border-bottom: 1px solid #e9e9e9;
 
