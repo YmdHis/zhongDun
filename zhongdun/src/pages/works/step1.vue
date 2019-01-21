@@ -1,5 +1,6 @@
 <template>
   <div id="ex-step1">
+    
     <div>
       <!--上部分 S-->
       <div id="topbg">
@@ -33,13 +34,13 @@
       <!--学习阶段 E-->                           
       <!-- 选择工种 S -->
       <div id="ex-gongzhong">
-        <p class="ex-choose-city">选择工种</p>
+        <p class="ex-choose-city ">选择工种</p>
         <ul class="ex-gongzhong-ul">
           <li v-for="item1 in gzlists" class="ex-gongzhong-li">
             <div  :class="{exactive : exactive == item1.id}" 
               @click="gzselected(item1.id)" >
               <img :src='item1.icon'>
-              <p>{{item1.name}}</p>
+              <p class="ellipsis">{{item1.name}}</p>
             </div>
             <!-- <div v-transfer-dom>
                 <popup v-model="show13" position="bottom" max-height="50%">
@@ -62,6 +63,7 @@
 		<div class="city-choo" :class="cityPickerShow?'':'city-hid'">
       <city-picker @closeMsg="close" @cityMsg="formPicker" :msgCity="LocationCity"></city-picker>
     </div>
+    <div class="fanhui" @click="toHome">跳过</div>
   </div>
 </template>
 <script type="text/javascript">
@@ -150,6 +152,9 @@ import cityPicker from 'src/components/cityPicker'
           this.chooCity();
         }
       },
+      toHome(){
+        this.$router.push("/home");
+      },
       formPicker(res){
         this.LocationCity = res;
       },
@@ -191,6 +196,13 @@ import cityPicker from 'src/components/cityPicker'
   }
 </script>
 <style type="text/css">
+.fanhui{
+  color: #fff;
+  font-size: .6rem;
+  position: fixed;
+  top: .5rem;
+  right: .5rem;
+}
   #ex-step1>div:nth-of-type(1){ display: flex; 
       display: -webkit-flex;  
       /* vh 相对于可视区域的高度 */
@@ -222,6 +234,7 @@ import cityPicker from 'src/components/cityPicker'
   .emptyitem{
     width:0;
     visibility: hidden;
+    
   }
   .active{
     border:1px solid #5ebf83 !important;
