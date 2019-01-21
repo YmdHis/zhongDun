@@ -19,11 +19,11 @@
       <div class="module_block">
       <div class="module_block_list">
          <div class="module_block_a">
-            <img src="../../images/find_icon1.png" alt="">
+            <img src="../../images/find_icon1.jpg" alt="">
             <p>电工</p>
          </div>
          <div class="module_block_a">
-            <img src="../../images/find_icon2.png" alt="">
+            <img src="../../images/find_icon2.jpg" alt="">
             <p>焊工</p>
          </div>
          <div class="module_block_a">
@@ -31,15 +31,15 @@
             <p>制冷空调</p>
          </div>
          <div class="module_block_a">
-            <img src="../../images/find_icon4.png" alt="">
+            <img src="../../images/find_icon4.jpg" alt="">
             <p>高处作业</p>
          </div>
          <div class="module_block_a">
-            <img src="../../images/find_icon5.png" alt="">
+            <img src="../../images/find_icon5.jpg" alt="">
             <p>危险品</p>
          </div>
          <div class="module_block_a">
-            <img src="../../images/find_icon6.png" alt="">
+            <img src="../../images/find_icon6.jpg" alt="">
             <p>一般企业</p>
          </div>
          <div class="module_block_a">
