@@ -4,9 +4,8 @@
       <!--上部分 S-->
       <div id="topbg">
         <div>
-          
           <img src="../../assets/images/topbg.png" alt="" class="spet1_img">
-          <span style="position: relative;z-index: 999;">
+          <span class="logo_txt">
             众盾安全
           </span>
         </div>
@@ -240,5 +239,12 @@ import cityPicker from 'src/components/cityPicker'
   }
   .city-hid{
     display: none;
+  }
+  .logo_txt{
+    position: relative;
+    z-index: 999;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: .1rem;
   }
 </style>
