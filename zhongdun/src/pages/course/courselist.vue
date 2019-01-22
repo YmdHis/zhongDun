@@ -11,7 +11,7 @@
     </tab>
         <div class="course_list">
           <ul>
-            <li class="course_li">
+            <li class="course_li" @click="toDetail">
               <section >
                 <img src="../../images/banner.png" alt="" class="course_img">
               </section>
@@ -34,7 +34,7 @@
                 </div>
               </div>
             </li>
-            <li class="course_li">
+            <li class="course_li" @click="toDetail">
               <section >
                 <img src="../../images/banner.png" alt="" class="course_img">
               </section>
@@ -89,6 +89,9 @@ export default {
 		back(){
 			this.$router.go(-1)
 		},
+		toDetail(){
+			this.$router.push("/courseDetail");
+		}
 	}
 }
 </script>

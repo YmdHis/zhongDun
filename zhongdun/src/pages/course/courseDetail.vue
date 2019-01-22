@@ -21,7 +21,7 @@
     
     </div>
 	<video width="335" height="200" controls id="video-play" class="video-play">
-		<source src="../../assets/video.mp4" type="video/mp4">
+		<source src="http://dyx.anpeiw.com/ejfg08%E4%BA%8C%E5%BB%BA%E6%B3%95%E8%A7%843-3%20%E6%97%A0.mp4" type="video/mp4">
 		您的浏览器不支持Video标签。
 	</video>
 	<div class="video-column">
