@@ -29,7 +29,7 @@
 			         	<p class="ex-titp">工种</p>
 			         	<ul class="gzfl">
 			         		<li :class="[active2 == item2.name?'active':'']" :key="item2.name" v-for="item2 in enrollTwo" 
-			         		@click="fss(item2.id,companyid,item2.name)">{{item2.name}}</li> 
+			         		@click="fss(item2.id,item2.companyid,item2.name)">{{item2.name}}</li> 
 			         		<!-- <li class="-gz-active" v-bind="enrollTwo"></li> -->
 			         	</ul>
 			         </div>
@@ -111,14 +111,12 @@
 			             <tr v-for="item in gzcouse" :key="item.dateId">
 			              <td>报名工种</td>
 			              <td colspan="3">{{item.name}}</td>
-			            </tr>
-									
+			            </tr>				
 			        </x-table>
 			    </div>
 			    <div id="ex-subtn">
 				   <x-button mini style="color:#000;background:#dadada;margin-right:0.3rem"  @click.native="showToast=false">返回修改</x-button>
 				   <x-button mini type="primary" @click.native="tijiao">确认提交</x-button>
-
 			   </div>
 			    <!--弹框表格 E-->
 	        </div>
@@ -223,8 +221,8 @@ export default {
 			this.fs = false;
   		this.companyid=this.$route.query.id;
 			enroll({companyId:this.$route.query.id}).then(res=>{
-        this.enroll=res.data;
-        //console.log(this.enroll);
+        	this.enroll=res.data;
+        console.log(this.enroll);
        });
   	},
   	gzs(data1,name){//一级
@@ -234,18 +232,18 @@ export default {
 					this.gz = true;
 					this.fs = false;
 			    this.$forceUpdate();
-			    //console.log(this.enrollTwo);
+			 console.log(this.enrollTwo);
 			   });
   	},
   	fss(data1,data2,data3){//二级
-  		//请求参数 categoryId companyId
+  		//请求参数  categoryId companyId
   		this.active2=data3;
   		data2=this.companyid;
   		enrollThree({categoryId:data1,companyId:data2}).then(res=>{
         this.enrollThree=res.data;
         this.$forceUpdate();
         this.fs = true;
-        //console.log(this.enrollThree);
+      console.log(this.enrollThree);
        });
   	},
   	xz(data,price,id){//三级
