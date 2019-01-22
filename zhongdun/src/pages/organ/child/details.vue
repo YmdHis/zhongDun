@@ -24,7 +24,7 @@
           <img src="../../../images/icon3.jpg" alt="" class="details_img_iconR"><span>营业执照认证</span>
         </p>  
       </div>
-      <div class="details_address_box" @click="mapShow()">
+      <div class="details_address_box" @click="toBdmap()">
         <group>
         <cell :title="address" :value="distance" class="details_address">
           <img slot="icon" width="12" style="display:block;margin-right:5px;" src="../../../images/add_icon.png">
@@ -108,10 +108,6 @@
       </div>
     </div>
     <div class="ex-next" @click="toStepTwo()">立即报名</div>
-    <div class="bdMap" :class="[isBdMapShow?'':'bdMap-hid']" >
-        <div class="close-map" @click="mapShow()">✖</div>
-        <div id="allmap"></div>
-    </div>
   </div>
 </template>
 
@@ -135,7 +131,6 @@ export default {
   data () {
     return {
       data:5,
-      isBdMapShow:false,
       address:"",
       distance:"",
       organ:[],
@@ -157,6 +152,9 @@ export default {
       let id = this.organ.id;
       this.$router.push({path:'/step2',query:{name:name,id:id}});
     },
+    toBdmap(){
+      this.$router.push({path:'/bdmap',query:{longitude:this.organ.longitude,latitude:this.organ.latitude}});
+    },
     rad(d){
       return d*Math.PI/180.0;//经纬度转换成三角函数中度分表形式
     },
@@ -173,9 +171,6 @@ export default {
       s = Math.round(s * 10000) / 10000; //输出为公里
       s=s.toFixed(2);//四舍五入，取几位小数
       return s;
-    },
-    mapShow(){
-      this.isBdMapShow = !this.isBdMapShow;
     }
   },
    mounted(){
@@ -189,18 +184,7 @@ export default {
       let gc = new BMap.Geocoder();
       let latitude = getStore("latitude");
       let longitude = getStore("longitude");
-      var map = new BMap.Map("allmap");    // 创建Map实例
-      map.centerAndZoom(new BMap.Point(lng, lat), 18);  // 初始化地图,设置中心点坐标和地图级别
-      var marker = new BMap.Marker(new BMap.Point(lng, lat));
-      map.addOverlay(marker);
-      //添加地图类型控件
-      map.addControl(new BMap.MapTypeControl({
-        mapTypes:[
-                BMAP_NORMAL_MAP,
-                BMAP_HYBRID_MAP
-            ]
-      }));	 
-      map.enableScrollWheelZoom(true);
+
       gc.getLocation(point, function(rs){
         //或者其他信息
         //console.log(rs.address);
