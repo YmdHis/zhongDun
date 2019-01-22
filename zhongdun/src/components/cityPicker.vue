@@ -28,7 +28,7 @@
         </section>
         <aside class="letter-aside">
           <ul>
-            <li v-for="(value, key, index) in sortgroupcity" @click.prevent="custormAnchor(key)"
+            <li v-for="(value, key, index) in sortgroupcity" @click="custormAnchor(key)"
   :key="index">
                 {{key}}
             </li>
@@ -100,11 +100,12 @@ export default {
             this.LocationCity = city;
             this.closeBtn();
         },
-        custormAnchor(index) { //锚点滚动到固定位置      
+        custormAnchor(index) { //锚点滚动到固定位置     
              let anchorElement = document.getElementById(index);
+             console.log(anchorElement); 
              if(anchorElement) { 
                 anchorElement.scrollIntoView();
-                alert(index);
+                //alert(index);
 
             }               
         },
