@@ -268,10 +268,6 @@ export default {
       let longitude = getStore("longitude");
       let latitude = getStore("latitude");
       let da = getStore("type");
-      jglist({longitude:longitude,latitude:latitude,type:da}).then(res=>{
-          this.jgdata=res.data;
-          console.log(this.jgdata);
-      });
     },
   },
   mounted(){
