@@ -317,7 +317,7 @@ URL
 
 ------
 
-### 
+###
 
 
 
@@ -470,6 +470,9 @@ URL
 > | page | 是   | int    | 页数                                                     |
 > | cat_type | 是   | tring    | 评论类型   机构：company  课程id： |
 > | cat_id | 是   | int    | 评论类型id   机构id：company  课程id： |
+> | praiseType | 否  | tring    | 评价等级 好评：high 中评：middle 差评：low |
+> | rankType | 否   | tring    | 评价类型 rank1 rank2 rank3 rank4 |
+> | pictureType | 否   | int    | 是否有图 picture |
 
 业务相关数据
 
@@ -483,6 +486,7 @@ URL
 > | rank2     | int   | 教学 |
 > | rank3     | int   | 环境 |
 > | rank4     | int   | 收费 |
+> | praiseType     | tring   | 评价等级 好评：high 中评：middle 差评：low |
 > | user_id     | int   | 用户id |
 > | title     | string   | 评论标题 |
 > | content     | string   | 评论内容 |
@@ -691,4 +695,3 @@ URL
 ```
 
 ------
-
