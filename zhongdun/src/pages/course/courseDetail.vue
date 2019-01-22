@@ -25,6 +25,7 @@
 		您的浏览器不支持Video标签。
 	</video>
 	<div class="video-column">
+		
 		<div class="dianz"><img src="../../images/couer_icon2.png" class="dianz-img"><span>1234</span></div>
 		<div class="share"><img src="../../images/send.png" class="share-img"><span>分享</span></div>
 		<div class="clearfix"></div>
