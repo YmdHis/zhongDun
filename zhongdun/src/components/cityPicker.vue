@@ -7,7 +7,14 @@
         <div class="city_input_box">
             <div class="city_input_style">
                 <i class="city_input_icon"><img src="../images/sear_icon.png" alt=""></i>
-                <input type="text" name="address_detail" placeholder="请输入学校/商务楼/写字楼等" required="required" class="city_input" id="suggestId" >
+                <input type="text" name="address_detail" placeholder="请输入城市名" required="required" class="city_input" id="suggestId" v-model="keyWord">
+            </div>
+            <div id="search_list" v-show="isShow">
+                <ul>
+                    <li v-for="item in searchList" @click="transCity(item.name,item.longitude,item.latitude)" >
+                        {{item.name}}
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="city_positioning" @click="getLocation()">
@@ -50,6 +57,10 @@ export default {
             groupcity: {},   //所有城市列表
             address_detail: null, //详细地址
             userlocation: {lng: "", lat: ""},
+            keyWord:'',//城市搜索
+            searchList:'',
+            isShow:false,
+          
         }
     },
     props:['msgCity'],
@@ -99,6 +110,7 @@ export default {
             setStore("longitude",longitude);
             this.LocationCity = city;
             this.closeBtn();
+            this.keyWord='';
         },
         custormAnchor(index) { //锚点滚动到固定位置     
              let anchorElement = document.getElementById(index);
@@ -108,14 +120,52 @@ export default {
                 //alert(index);
 
             }               
-        },
-
+        },  
+        // 城市筛选
+        citySearch(newCitySearch){
+            let arr=[];
+            let res=[];
+            for(let i = 65; i <= 90; i++){
+                arr=this.groupcity[String.fromCharCode(i)];
+                // console.log(arr);
+                for(let key in arr){
+                    //console.log(arr[key].pinyin)
+                   if((arr[key].pinyin).indexOf(newCitySearch) == 0||(arr[key].name).indexOf(newCitySearch)==0){
+                        // console.log(arr[key].name)
+                        res.push(arr[key]);
+                        
+                   }
+                   
+                }
+                   
+            }
+            console.log(res);
+            this.searchList=res;
+            this.isShow = !this.isShow;
+            if(newCitySearch==''){
+                this.isShow = this.isShow;
+            }
+        }
+    },
+    watch:{
+        keyWord(){
+            console.log(this.keyWord);
+            this.citySearch(this.keyWord);
+        }
     }
      
 }
 
 </script>
 <style scoped>
+#search_list{
+    background: rgb(255, 255, 255);
+    position: relative;
+    z-index: 998;
+    line-height: 1.3rem;
+    font-size: .6rem;
+    padding-left: .5rem;
+}
 #city_picker{
     background: #fff;
     overflow-y:scroll; 
