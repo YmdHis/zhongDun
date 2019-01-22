@@ -191,7 +191,7 @@
     </div>
      <foot-nav></foot-nav>
     <div class="city-choo" :class="cityPickerShow?'':'city-hid'">
-      <city-picker @closeMsg="close" :msgCity="LocationCity"></city-picker>
+      <city-picker @closeMsg="close" @cityMsg="formPicker" :msgCity="LocationCity"></city-picker>
     </div>
   </div>
 </template>
@@ -241,7 +241,7 @@ export default {
     },
     gotoAddress(path){
         this.$router.push(path)
-      },
+    },
     getLocation(){
       let _this = this;
       const geolocation = new BMap.Geolocation();
@@ -262,7 +262,17 @@ export default {
       if(res == 'close'){
         this.chooCity();
       }
-    }
+    },
+    formPicker(res){
+      this.LocationCity = res;
+      let longitude = getStore("longitude");
+      let latitude = getStore("latitude");
+      let da = getStore("type");
+      jglist({longitude:longitude,latitude:latitude,type:da}).then(res=>{
+          this.jgdata=res.data;
+          console.log(this.jgdata);
+      });
+    },
   },
   mounted(){
     shouyeNews().then(res => {

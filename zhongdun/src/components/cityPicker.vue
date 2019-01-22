@@ -132,14 +132,11 @@ export default {
                     //console.log(arr[key].pinyin)
                    if((arr[key].pinyin).indexOf(newCitySearch) == 0||(arr[key].name).indexOf(newCitySearch)==0){
                         // console.log(arr[key].name)
-                        res.push(arr[key]);
-                        
+                        res.push(arr[key]);   
                    }
-                   
-                }
-                   
+                }     
             }
-            console.log(res);
+            //console.log(res);
             this.searchList=res;
             this.isShow = !this.isShow;
             if(newCitySearch==''){
