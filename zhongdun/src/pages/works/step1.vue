@@ -1,6 +1,5 @@
 <template>
   <div id="ex-step1">
-    
     <div>
       <!--上部分 S-->
       <div id="topbg" style="margin-bottom: -.5rem;">
@@ -74,8 +73,6 @@ import {showlist} from 'src/service/api'
 import {ChinaAddressV4Data,XAddress,TransferDom, Popup, Group, Cell, XButton, XSwitch,Value2nameFilter as value2name } from 'vux'
 import { getStore, setStore } from 'src/config/mUtils'
 import cityPicker from 'src/components/cityPicker'
-
-
   export default{
      directives: {
         TransferDom
@@ -91,6 +88,7 @@ import cityPicker from 'src/components/cityPicker'
           addressData: ChinaAddressV4Data,
           showAddress: false,
           show13: false,
+          gzid:'',
           wpList: [
             {
               name: '无证'
@@ -121,6 +119,7 @@ import cityPicker from 'src/components/cityPicker'
       },
       gzselected:function(name){//工种选择
           this.exactive = name;
+          this.gzid=name;
       },
       choosegz:function(children){
         if(children){
@@ -177,7 +176,9 @@ import cityPicker from 'src/components/cityPicker'
         }else{
           setStore("active",this.active);
           setStore("exactive",this.exactive);
-          this.$router.push({path:'/organ'});
+         console.log(this.gzid);
+          this.$router.push({path:'/organ',query:{id:this.gzid}});
+
         }
       },
     },
