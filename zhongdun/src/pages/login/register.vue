@@ -10,27 +10,34 @@
         <div class="form">
             <div class="form-item">
                 <img src="../../images/sign1.png" alt="sign" class="img-sign">
-                <input type="text" placeholder="请输入手机号" class="form-inpt">
+                <input type="text" placeholder="请输入手机号" class="form-inpt" v-model="mobile">
             </div>
             <div class="form-item">
                 <img src="../../images/sign2.png" alt="sign" class="img-sign">
-                <input type="text" placeholder="请输入验证码" class="form-inpt">
-                <div class="yzm-btn">获取验证码</div>
+                <input type="text" placeholder="请输入验证码" class="form-inpt" v-model="code">
+                <div v-if="yzmShow" class="yzm-btn" @click="yzm">获取验证码</div>
+                <div v-else class="yzm-count">{{countdown}}s</div>
             </div>
             <div class="form-item">
                 <img src="../../images/sign3.png" alt="sign" class="img-sign">
-                <input type="text" placeholder="请设置密码" class="form-inpt">
+                <input type="password" placeholder="请设置密码" class="form-inpt"  v-model="password">
             </div>
             <div class="form-item">
                 <img src="../../images/sign4.png" alt="sign" class="img-sign">
-                <input type="text" placeholder="再次输入密码" class="form-inpt">
+                <input type="password" placeholder="再次输入密码" class="form-inpt"  v-model="password2">
             </div>
         </div>
-         <div class="login-btn">在线登录</div>
-         <div class="khxy"><input type="radio" checked="checked">同意客户协议</div>
-         <div class="register-btn">注册</div>
+         <div class="login-btn" @click="toLogin">在线登录</div>
+         <div class="khxy" @click="agreement()"><input type="radio" checked="checked">同意客户协议</div>
+         <div class="register-btn" @click="register">注册</div>
     </div>
-    
+    <div class="agree" :class="[agreeShow?'agree-hid':'']">
+			<div class="close-map" @click="agreement()">✖</div>
+			<p class="agree-text">
+				这是客户协议
+				</p>
+				
+		</div>
 </div>
 </template>
 
@@ -38,6 +45,7 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 import { XHeader } from 'vux'
+import { register, yzmGet } from 'src/service/api'
 
 export default {
 //import引入的组件需要注入到对象中才能使用
@@ -48,6 +56,14 @@ return {
     borderColor: {
             borderColor: '#333'
     },
+    yzmShow:true,
+    countdown:'',
+    mobile:'',
+    code:'',
+    mobile:'',
+    password:'',
+    password2:'',
+    agreeShow:true,
 };
 },
 //监听属性 类似于data概念
@@ -59,6 +75,72 @@ methods: {
     back(){
         this.$router.go(-1);//返回上一层
     },
+    toLogin(){
+        this.$router.push('/login');
+    },
+    agreement(){
+			this.agreeShow = !this.agreeShow
+    },
+    yzm(){
+        let mobile = this.mobile;
+        if(mobile == ''){
+            this.$vux.toast.show({
+                text: '请输入手机号',
+                type:'text',
+                position: 'middle'
+            })
+            return
+        }
+        console.log(mobile);
+        yzmGet({mobile:mobile,type:'register'}).then(res=>{
+            console.log(res);
+            if(res.code == 1){
+                this.setTime();
+            }else if(res.code == 0){
+                this.$vux.toast.show({
+                    text: res.msg,
+                    type:'text',
+                    position: 'middle'
+                })
+            }
+        });
+    },
+    setTime(){
+        this.yzmShow = false;
+        this.countdown = 60;
+        let auth_timer = setInterval(()=>{
+            this.countdown --;
+            if(this.countdown <= 0 ){
+                this.yzmShow = true;
+                clearInterval(auth_timer);
+            }
+        },1000)
+    },
+    register(){
+        let password = this.password;
+        let password2 = this.password2;
+        let mobile = this.mobile;
+        let code = this.code;
+        if(password != password2){
+            this.$vux.toast.show({
+                text: "两次输入密码不一致",
+                type:'text',
+                position: 'middle'
+            })
+            return
+        }
+        if(password.length<6){
+            this.$vux.toast.show({
+                text: "密码长度不能小于6位",
+                type:'text',
+                position: 'middle'
+            })
+            return
+        }
+        register({username:mobile,code:code,password:password}).then(res=>{
+            console.log(res);
+        })
+    }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
@@ -136,6 +218,16 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
     margin-top: .3rem;
     border-radius: 5px;
 }
+.yzm-count{
+    float: right;
+    background: #fff;
+    color: #666;
+    font-size: .6rem;
+    height: 1.5rem;
+    padding: .3rem .2rem;
+    margin-top: .3rem;
+    border-radius: 5px;    
+}
 .login-btn{
     font-size: .7rem;
     float: right;
@@ -157,5 +249,33 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
     margin-top: 1.5rem;
     border-radius: 10px;
     letter-spacing: .2rem;
+}
+.agree{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	overflow-y: auto;
+	z-index: 999;
+}
+.agree-hid{
+	display: none;
+}
+.agree-text{
+	text-align: center;
+	font-size: .8rem;
+	padding-top: 1rem;
+}
+.close-map{
+  position: fixed;
+  top: .5rem;
+  left: .5rem;
+  z-index: 999;
+  background: #fff;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  color: #5ebf83;
 }
 </style>
