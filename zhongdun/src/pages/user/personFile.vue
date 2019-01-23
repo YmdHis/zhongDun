@@ -3,10 +3,14 @@
     <div class="person_head">
       <img src="../../images/person_bg.png" alt="" class="person_head_bg">
       <div class="person_login">
-        <router-link to="/login" class="login_a">
+        <router-link to="/login" class="login_a" v-if="this.$route.query.isLogin==false">
           <img src="../../images/user_img.png" alt="">
           <span>立即登录</span>
         </router-link>
+        <p v-else class="login_a">
+           <img src="../../images/user_img.png" alt="">
+          <span>{{this.$route.query.username}}</span>
+        </p>
       </div>
     </div>
     <div class="person_box person_icon_box">
@@ -68,6 +72,7 @@
         </cell>
       </group>
     </div>
+    <div class="login_exit" @click="loginout">退出账号</div>
     <foot-nav></foot-nav>
   </div>
 </template>
@@ -91,7 +96,16 @@ export default {
   methods:{
     gotoAddress(path){
       this.$router.push(path)
-    }
+    },
+     //退出登录
+    loginout() {
+        //清空当前用户数据
+        this.$route.query.username = "";
+        alert("退出成功！");
+        //登录或注册入口显示
+        this.$route.query.isLogin = true;
+        
+    },
   }
 }
 </script>
@@ -148,55 +162,15 @@ export default {
   font-size: .6rem;
   color: #4e4e4e;
 }
-.footer_nav{
-    position: fixed;
-    z-index: 100;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%;
-    background: url(../../images/footer_navBg.png) no-repeat center;
-    background-size: 100% 100%;
-    height: 2.6rem;
-  }
-  .footer_nav_item{
-    -ms-flex: 1;
-    flex: 1;
-    display: -ms-flexbox;
-    display: flex;
-    text-align: center;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -ms-flex-align: center;
-    align-items: center;
-    padding-top: .7rem;
-  }
-  .footer_nav_item img{
-    width: 1rem;
-    height: 1rem;
-    margin-top: .1rem;
-    fill: #ccc;
-  }
-  .footer_nav_item span{
-    font-size: .45rem;
-    color: #656565;
-  }
-  .footer_nav_item .home-img{
-   background: #5ebf83;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    border: 5px solid #fff;
-  }
-  .footer_nav_item .home-img img{
-    display: block;
-    margin: 0 auto;
-    padding-top: .5rem;
-  }
-  .footer_nav_item .home-img span{
-    color: #fff;
-  }
+.login_exit{
+  background: #ff4b4b;
+  width: 5rem;
+  color: #fff;
+  font-size: .6rem;
+  margin: 1rem auto;
+  text-align: center;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  border-radius: .2rem;
+}
 </style>
