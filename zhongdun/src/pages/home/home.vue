@@ -274,8 +274,14 @@ export default {
     shouyeNews().then(res => {
       this.newslist = res.data;
       console.log(this.newslist);
-    }),
-    this.getLocation();  
+    });
+    let LocationCity = getStore("LocationCity");
+    if(!LocationCity){
+      this.getLocation(); 
+    }else{
+      this.LocationCity = LocationCity;
+    }
+ 
   },
 }
 </script>

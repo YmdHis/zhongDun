@@ -4,7 +4,7 @@
         <div class="header_address" @click="chooCity()">
            <section class="header_address_a ellipsis">
             <img src="../../images/add_icon.png" alt="" class="header_address_icon">
-            武汉
+            {{LocationCity}}
          </section>
         </div>
         <div class="header_txt">
@@ -136,24 +136,32 @@
       </router-link>
     </div>
      <foot-nav></foot-nav>
+     <div class="city-choo" :class="cityPickerShow?'':'city-hid'">
+      <city-picker @closeMsg="close" @cityMsg="formPicker" :msgCity="LocationCity"></city-picker>
+    </div>
   </div>   
 </template>
 
 <script>
     import footNav from 'src/components/footNav'
+    import cityPicker from 'src/components/cityPicker'
     import { XHeader,Flexbox, FlexboxItem,} from 'vux'
+    import {setStore,getStore} from 'src/config/mUtils'
     export default {
         components:{
              XHeader,
              Flexbox, 
              FlexboxItem,
-             footNav
+             footNav,
+             cityPicker
          },
     	data(){
             return{
-                borderColor: {
+              borderColor: {
                 borderColor: '#333'
               },
+              LocationCity:"",
+              cityPickerShow:false,
             }
         },
         mounted(){
@@ -167,7 +175,21 @@
           },
           gotoAddress(path){
             this.$router.push(path)
-          }
+          },
+          chooCity(){
+            this.cityPickerShow = !this.cityPickerShow
+          },
+          close:function (res){
+            if(res == 'close'){
+              this.chooCity();
+            }
+          },
+          formPicker(res){
+            this.LocationCity = res;
+            let longitude = getStore("longitude");
+            let latitude = getStore("latitude");
+            let da = getStore("type");
+          },
         },
 
     }
@@ -405,5 +427,17 @@
   }
   .find_send_icon img{
     width: 2rem;
+  }
+  .city-choo{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    overflow-y: auto;
+    z-index: 999;
+  }
+  .city-hid{
+    display: none;
   }
 </style>

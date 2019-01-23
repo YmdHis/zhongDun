@@ -8,7 +8,7 @@
     <img :src="'/learning' === $route.path ? tabBarImgArr[1].selected : tabBarImgArr[1].normal" alt="学习">
     <span>学习</span>
   </section>
-  <section @click = "gotoAddress({path: '/home', query: {}})" class="footer_nav_item" style="padding: 0;">
+  <section @click = "gotoAddress({path: '/home'})" class="footer_nav_item" style="padding: 0;">
     <div class="home-img">
       <img src="../images/home.png" alt="">
     </div>

@@ -149,12 +149,13 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 .register-btn{
     width: 100%;
     background: #5ebf83;
-    height: 2rem;
+    height: 1.5rem;
     text-align: center;
     color: #fff;
-    font-size: .8rem;
-    line-height: 2rem;
+    font-size: .7rem;
+    line-height: 1.5rem;
     margin-top: 1.5rem;
     border-radius: 10px;
+    letter-spacing: .2rem;
 }
 </style>
