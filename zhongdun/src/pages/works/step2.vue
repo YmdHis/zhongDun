@@ -458,25 +458,7 @@ font-size:0.6rem;
 #sex1>div:nth-of-type(1){float: left;padding:0.6rem;width:3.3rem;}
 #sex1>div:nth-of-type(2){float: left;}
 /*弹框样式*/
-@import '~vux/src/styles/close';
-.dialog-demo {
-  .weui-dialog{
-    border-radius: 8px;
-    padding-bottom: 8px;
-  }
-  .dialog-title {
-    line-height: 30px;
-    color: #666;
-  }
-  .img-box {
-    height: 350px;
-    overflow: hidden;
-  }
-  .vux-close {
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-}
+
 /*弹框表格样式设置*/
 .ex-checktit{color:#5ebf83;font-size:0.7rem;margin-bottom:0.5rem;text-align:left;}
 #ex-tables>tr>td:nth-of-type(1){font-size:0.66rem;color:#666;}
