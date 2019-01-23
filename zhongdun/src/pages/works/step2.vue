@@ -178,8 +178,8 @@ export default {
     	work3:'',
     	onplace:'',
     	companyid:'',
-			gzcouse:[],
-			gzcouse1:[],
+		gzcouse:[],
+		gzcouse1:[],
     	enroll:[],
     	gz:false,
     	fs:false,
@@ -194,16 +194,16 @@ export default {
     	radioValue: ['先生'],
     	data1:'',
     	addvalue:false,
-			active1:'',
-			active2:'',
-			active3:'',
-			username:'',
-			mobile:'',
-			vcode:'',
-			sex:'',
-			yzmShow:true,
-			countdown:'',
-			agreeShow:true
+		active1:'',
+		active2:'',
+		active3:'',
+		username:'',
+		mobile:'',
+		vcode:'',
+		sex:'',
+		yzmShow:true,
+		countdown:'',
+		agreeShow:true
      }
   },
   mounted(){
@@ -258,9 +258,9 @@ export default {
 		for(let key in this.gzcouse){
 			if(this.chooId == this.gzcouse[key].id){
 				this.$vux.toast.show({
-		text: '不能重复选择',
-		type:'text',
-		position: 'middle'
+				text: '不能重复选择',
+				type:'text',
+				position: 'middle'
 			})
 			console.log(this.gzcouse);
 			return
@@ -352,7 +352,7 @@ export default {
 		},
 		yzm(){
 			let mobile = this.mobile;
-			yzmGet({mobile:mobile}).then(res=>{
+			yzmGet({mobile:mobile,type:'apply'}).then(res=>{
 				console.log(res);
 				if(res.code == 1){
 					this.setTime();

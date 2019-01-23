@@ -28,8 +28,8 @@
 
 <script>
   import { XHeader,Flexbox, FlexboxItem,} from 'vux'
-  import {loginForm} from 'src/service/api';
-  
+  import {loginForm,loginCheck} from 'src/service/api';
+  import {setStore,getStore} from 'src/config/mUtils'
 
   export default {
     components:{
@@ -73,7 +73,7 @@
           return
         }
         
-        loginForm({username:this.ruleForm.username,password:this.ruleForm.password}).then(res=>{
+        loginForm({username:name,password:pass}).then(res=>{
         	let data=res.data;
           if(res.code == 0){
             this.$vux.toast.show({
@@ -87,8 +87,9 @@
               type:'text',
               position: 'middle'
             })
+            setStore("user",name)
             setTimeout(()=>{
-              this.$router.push({path:'/personFile',query:{username:this.ruleForm.username,isLogin:true}});
+              this.$router.push("/personFile");
             },1000)
           }
        }); 
