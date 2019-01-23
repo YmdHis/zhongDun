@@ -3,14 +3,15 @@
     <div class="person_head">
       <img src="../../images/person_bg.png" alt="" class="person_head_bg">
       <div class="person_login">
-        <router-link to="/login" class="login_a" v-if="this.$route.query.isLogin==false">
+         <p v-if="username" class="login_a">
+           <img src="../../images/user_img.png" alt="">
+          <span>{{username}}</span>
+        </p>
+        <router-link to="/login" class="login_a" v-else>
           <img src="../../images/user_img.png" alt="">
           <span>立即登录</span>
         </router-link>
-        <p v-else class="login_a">
-           <img src="../../images/user_img.png" alt="">
-          <span>{{this.$route.query.username}}</span>
-        </p>
+       
       </div>
     </div>
     <div class="person_box person_icon_box">
@@ -72,7 +73,7 @@
         </cell>
       </group>
     </div>
-    <div class="login_exit" @click="loginout">退出账号</div>
+    <div v-show="username" class="login_exit" @click="loginout">退出账号</div>
     <foot-nav></foot-nav>
   </div>
 </template>
@@ -80,12 +81,15 @@
 <script>
 import footNav from 'src/components/footNav'
 import {Flexbox, FlexboxItem, Group,Cell,} from 'vux'
+import {loginCheck} from 'src/service/api';
+import {setStore,getStore,removeStore} from 'src/config/mUtils'
 
 export default {
-   data () {
+  data () {
     return {
-      }
-    },
+      username:"",
+    }
+  },
   components: {
     Flexbox,
     FlexboxItem,
@@ -99,14 +103,27 @@ export default {
     },
      //退出登录
     loginout() {
-        //清空当前用户数据
-        this.$route.query.username = "";
-        alert("退出成功！");
-        //登录或注册入口显示
-        this.$route.query.isLogin = true;
-        
+      removeStore("user");
+      this.$vux.toast.show({
+              text: '退出成功',
+              type:'text',
+              position: 'middle'
+      })
+      setTimeout(() => {
+        this.$router.push("/personFile");
+      }, 1000);
     },
-  }
+    login(){
+      loginCheck({}).then(res=>{
+          console.log(res)
+          return
+        })
+    }
+  },
+  mounted() {
+    this.username  = getStore("user");
+    console.log(this.username)
+  },
 }
 </script>
 <style>

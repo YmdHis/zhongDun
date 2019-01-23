@@ -46,6 +46,7 @@
 //例如：import 《组件名称》 from '《组件路径》';
 import { XHeader } from 'vux'
 import { register, yzmGet } from 'src/service/api'
+import {setStore,getStore} from 'src/config/mUtils'
 
 export default {
 //import引入的组件需要注入到对象中才能使用
@@ -139,6 +140,23 @@ methods: {
         }
         register({username:mobile,code:code,password:password}).then(res=>{
             console.log(res);
+            if(res.code == 1){
+                this.$vux.toast.show({
+                    text: "注册成功",
+                    type:'text',
+                    position: 'middle'
+                })
+                setStore("user",this.mobile);
+                setTimeout(()=>{
+                    this.$router.push("/personFile");
+                },1000)
+            }else {
+                this.$vux.toast.show({
+                text: res.msg,
+                type:'text',
+                position: 'middle'
+                })
+            }
         })
     }
 },

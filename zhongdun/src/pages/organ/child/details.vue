@@ -4,7 +4,7 @@
       <x-header :left-options="{backText: ''}"  style="background-color:#f5f5f5;">
         <a slot="overwrite-left" class="goBack" :style="borderColor" v-on:click="back"></a>
         机构详情
-       <a slot="right"> <img src="../../../images/send.png" alt="xxx" class="send-img"></a>
+       <a slot="right" @click="showShare()"> <img src="../../../images/send.png" alt="xxx" class="send-img"></a>
       </x-header>
     </div>
     <div class="details_box">
@@ -107,7 +107,18 @@
         </div>
       </div>
     </div>
+
     <div class="ex-next" @click="toStepTwo()">立即报名</div>
+    <div class="pop-mask" :class="[isShare?'':'pop-hidd']" @click="showShare()"></div>
+    <div class="pop-container" :class="[isShare?'':'pop-hid']">
+      <flexbox class="flex-box">
+      <flexbox-item><div class="flex-demo"><img src="../../../images/wechat.png" alt=""><p>微信</p></div></flexbox-item>
+      <flexbox-item><div class="flex-demo"><img src="../../../images/pyq.png" alt=""><p>朋友圈</p></div></flexbox-item>
+      <flexbox-item><div class="flex-demo"><img src="../../../images/qq.png" alt=""><p>QQ</p></div></flexbox-item>
+      <flexbox-item><div class="flex-demo"><img src="../../../images/zone.jpg" alt=""><p>QQ空间</p></div></flexbox-item>
+    </flexbox>
+    <div class="cancel" @click="showShare()">取 消</div>
+    </div>
   </div>
 </template>
 
@@ -141,11 +152,15 @@ export default {
       borderColor: {
         borderColor: '#333'
       },
+      isShare:false
     }
   },
   methods:{
    back(){
         this.$router.go(-1);//返回上一层
+    },
+    showShare(){
+      this.isShare = !this.isShare;
     },
     toStepTwo(){
       let name = this.organ.name;
@@ -176,8 +191,8 @@ export default {
    mounted(){
     organDetails({companyId:this.$route.query.companyId}).then(res => {
       let _this = this;
+      console.log(res);
       this.organ = res.data;
-      console.log(this.organ);
       let lng = this.organ.longitude;
       let lat = this.organ.latitude;
       let point = new BMap.Point(lng, lat);
@@ -378,5 +393,50 @@ export default {
   text-align: center;
   color: #5ebf83;
 }
-#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+.pop-mask{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: .4;
+  position: fixed;
+  top: 0;
+  transition: .3s;
+}
+.pop-container{
+  width: 100%;
+  height: 20%;
+  position: fixed;
+  bottom: 0;
+  background: #fff;
+  transform: translateY(0);
+  opacity: 1;
+  transition: .3s;
+}
+.flex-box{
+  padding-top: 1rem;
+}
+.flex-demo {
+  text-align: center;
+  font-size: .6rem;
+  background-clip: padding-box;
+}
+.flex-demo img{
+  width: 1.5rem;
+  height: 1.4rem;
+}
+.cancel{
+  width: 100%;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  font-size: .7rem;
+  margin-top: 1.5rem;
+  padding-top: .5rem;
+  
+}
+.pop-hid{
+  transform: translateY(100%);
+}
+.pop-hidd{
+  display: none;
+}
 </style>
