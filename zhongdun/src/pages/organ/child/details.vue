@@ -115,7 +115,7 @@
       <flexbox-item><div class="flex-demo"><img src="../../../images/wechat.png" alt=""><p>微信</p></div></flexbox-item>
       <flexbox-item><div class="flex-demo"><img src="../../../images/pyq.png" alt=""><p>朋友圈</p></div></flexbox-item>
       <flexbox-item><div class="flex-demo"><img src="../../../images/qq.png" alt=""><p>QQ</p></div></flexbox-item>
-      <flexbox-item><div class="flex-demo"><img src="../../../images/zone.jpg" alt=""><p>QQ空间</p></div></flexbox-item>
+      
     </flexbox>
     <div class="cancel" @click="showShare()">取 消</div>
     </div>

@@ -7,13 +7,13 @@
             {{LocationCity}}
          </section>
         </div>
-        <div class="header_search">
+        <div class="header_search" @click="toSearch">
           <img src="../../images/sear_icon.png" alt="" class="header_search_icon">
           <input type="text" placeholder="请输入机构名称">
           <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
         </div>
         <div class="header_login">
-           <router-link to="/login" class="header_login_a">
+           <router-link to="/personFile" class="header_login_a">
             <img src="../../images/user.png" alt="" class="header_login_user">
          </router-link>
         </div>
@@ -162,6 +162,9 @@ export default {
 
           console.log(this.jgdata);
       });
+    },
+    toSearch(){
+      this.$router.push("/search");
     },
     onClick(state){
       if(state == 'sqrz'){

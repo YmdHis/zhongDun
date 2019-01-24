@@ -17,7 +17,7 @@
     <checklist  :options="commonList" v-model="radioValue" :max="1" @on-change="change"></checklist>
   </div>
 
-  <div class="ex-next" @click="queren">
+  <div class="ex-next" @click="tijiao">
 	 确认支付
   </div>
  </div>
@@ -45,23 +45,45 @@
 		},
 		methods: {
 			change (val, label) {
-				//console.log('change', val, label)
+				console.log(label);
+				this.payType = label;
 			},
-			queren(){
-				//console.log(this.order_sn)
-				pay({orderSN:this.order_sn}).then(res=>{
-				console.log(res);
-				if(res.code == 1){
+			// queren(){//h5
+			// 	//console.log(this.order_sn)
+			// 	pay({orderSN:this.order_sn}).then(res=>{
+			// 	console.log(res);
+			// 	if(res.code == 1){
+			// 		this.$vux.toast.show({
+			// 			text: '支付成功',
+			// 			type:'text',
+			// 			position: 'middle'
+			// 		})
+			// 	}
+			// 	setTimeout(()=>{
+			// 		window.location.href= res.data;
+			// 	},1000)
+			// 	});
+			// },
+			tijiao(){
+				if(this.payType == "支付宝"){
+					var aliPay = api.require('aliPay');
+					aliPay.payOrder({
+						orderInfo: 'partner="2088101568358171"&seller_id="xxx@alipay.com"&out_trade_no="0819145412-6177"&subject="测试"&body="测试测试"&total_fee="0.01"&notify_url="http://notify.msp.hk/notify.htm"&service="mobile.securitypay.pay"&payment_type="1"&_input_charset="utf-8"&it_b_pay="30m"&sign="lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D"&sign_type="RSA"'
+					}, function(ret, err) {
+						api.alert({
+							title: '支付结果',
+							msg: ret.code,
+							buttons: ['确定']
+						});
+					});
+				}else if(this.payType == "微信"){
 					this.$vux.toast.show({
-						text: '支付成功',
+						text: '暂未开通微信支付',
 						type:'text',
 						position: 'middle'
 					})
 				}
-				setTimeout(()=>{
-					window.location.href= res.data;
-				},1000)
-				});
+
 			},
 			num: function (n) {
 				return n < 10 ? '0' + n : '' + n
