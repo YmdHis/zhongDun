@@ -24,6 +24,7 @@
 </template>
 <script type="text/javascript">
 	import {XHeader,Group, Cell,Checklist} from 'vux'
+	import {pay} from 'src/service/api'
 	export default {
 		data () {
 			return {
@@ -40,18 +41,27 @@
 		},
 		mounted(){
 			this.add()
+			this.order_sn = this.$route.query.order_sn;
 		},
 		methods: {
 			change (val, label) {
-				console.log('change', val, label)
+				//console.log('change', val, label)
 			},
 			queren(){
-				this.$vux.toast.show({
-			text: '支付成功',
-			type:'text',
-			position: 'middle'
-				})
-				setTimeout(()=>{this.$router.push({path:'/home'})},1500);
+				//console.log(this.order_sn)
+				pay({orderSN:this.order_sn}).then(res=>{
+				console.log(res);
+				if(res.code == 1){
+					this.$vux.toast.show({
+						text: '支付成功',
+						type:'text',
+						position: 'middle'
+					})
+				}
+				setTimeout(()=>{
+					window.location.href= res.data;
+				},1000)
+				});
 			},
 			num: function (n) {
 				return n < 10 ? '0' + n : '' + n
