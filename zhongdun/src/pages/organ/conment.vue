@@ -30,7 +30,7 @@
            </div>
          </div>
         <!--用户头像 E-->
-         <div>
+         <div class="conment_div2">
           <!--内容一级 S-->
            <div class="userconment">
              <div class="userstar">
@@ -65,7 +65,7 @@
            </div>
          </div>
         <!--用户头像 E-->
-         <div>
+         <div class="conment_div2">
           <!--内容一级 S-->
            <div class="userconment">
              <div class="userstar">
@@ -99,7 +99,7 @@
            </div>
          </div>
         <!--用户头像 E-->
-         <div>
+         <div class="conment_div2">
           <!--内容一级 S-->
            <div class="userconment">
              <div class="userstar">
@@ -172,7 +172,7 @@ background: #FFF;
 .userscu{float: left;width:11%;}
 .userscu>div{border-radius: 50%;}
 .userscu>div>img{max-width:100%;}
-.conmentli>div:nth-of-type(2){float: right;width:86%;}
+.conment_div2{float: right;width:86%;}
 .userconment{
 overflow:hidden;
 height:2.2rem;
