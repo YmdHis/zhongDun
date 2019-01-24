@@ -2,23 +2,21 @@
   <div>
     <!--搜索框-->
     <div id="searchbox">
-      <search
-        @result-click="resultClick"
-        @on-change="getResult"
-        :results="results"
-        v-model="value"
-        
-        @on-focus="onFocus"
-        @on-cancel="onCancel"
-        @on-submit="onSubmit"
-        ref="search">  
-        </search>
-        <div id="search_kinds">
-          <div  v-for="item in wpList" :key="item.name"
-              :class="{active : active == item.name}" 
-              @click="selected(item.name)" >{{item.name}}
-          </div>
+      <img src="../../assets/images/topbg.png" class="bgimg">
+      <div class="con_search">
+        <div class="searchtext">
+            <input type="text" placeholder="请输入您想搜索的内容" class="header_search_input">
+            <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
         </div>
+        <div class="quxiao" @click="toback">取消</div>
+      </div>
+      <div id="search_kinds">
+        <div  v-for="item in wpList"
+            :class="{actives : actives == item.name}" 
+            @click="selected(item.name)" >{{item.name}}
+        </div>
+      </div>
+
   </div>
    <!--搜索框 E-->
    <!--历史搜索 S-->
@@ -53,39 +51,21 @@
 </div>
 </template>
 <script>
-import { Search} from 'vux'
+
 export default {
   components: {
-    Search
+   
   },
   methods: {
-    setFocus () {
-    //  this.$refs.search.setFocus()
-    },
-    resultClick (item) {
-      window.alert('you click the result item: ' + JSON.stringify(item))
-    },
-    getResult (val) {
-      console.log('on-change', val)
-      this.results = val ? getResult(this.value) : []
-    },
-    selected(name){
-        this.active = name;
-      },
-    onSubmit () {
-      this.$refs.search.setBlur()
-      this.$vux.toast.show({
-        type: 'text',
-        position: 'top',
-        text: 'on submit'
-      })
-    },
-    onFocus () {
-      console.log('on focus')
-    },
-    onCancel () {
-      console.log('on cancel')
-    },showmore(){
+
+
+  selected:function(name){
+      this.actives=name;
+  },
+  toback(){
+      this.$router.go(-1);
+     },
+   showmore(){
       if($('#searcha').height()<82){
         $("#searcha").animate(
           {height:"100%"},function(){
@@ -117,7 +97,7 @@ export default {
               name: '工种'
             }
           ],
-          active:'全部'
+          actives:'全部'
     }
   }
 }
@@ -134,18 +114,29 @@ function getResult (val) {
 }
 </script>
 <style type="text/css">
-#searchbox{padding-top:0.8rem;background: url(../../assets/images/topbg.png);height: 6rem;background-size:cover;background-repeat: no-repeat;overflow:hidden;color: #888; }
+/*搜索框*/
+.bgimg{position: absolute;height: 6rem;top:0;left:0;}
+.con_search{line-height: 1.2rem}
+.quxiao{vertical-align:top;color:#333;font-size:0.6rem;display: inline-block;margin-left:0.3rem;line-height: 1.4rem}
+.searchtext{width:80%;background:#f2f2f2;display: inline-block;
+  margin-left:0.5rem;overflow:hidden;
+  border-radius:0.6rem;height: 1.2rem;line-height: 1.2rem}
+
+.header_search_input{background-color: #f2f2f2;height:1.2rem;width:84%;position: relative;top:-0.13rem;margin-left:0.8rem;}
+.header_search_sy{width:0.46rem;}
+#searchbox{padding-top:0.8rem;height:6rem;position: relative;overflow:hidden;color: #888; }
+#searchbox>div{position: relative;z-index:56;}
   #searchbox .weui-search-bar{background: transparent;font-size:0.66rem;}
   #searchbox .weui-search-bar__cancel-btn{color:#333;padding-top:0.1rem;}
   #searchbox form{padding:0.1rem 0;border-radius:0.8rem;}
   #searchbox .weui-search-bar:before,#searchbox .weui-search-bar:after{border:none;}
-  .active{color:#333 !important;border-bottom:2px solid #333;}
+  .actives{color:#333 !important;border-bottom:2px solid #333;}
   #searchbox .weui-search-bar__label {
     padding-top:0.15rem !important;
   }
   #search_con{border-radius:0.3rem;position: relative;top:-1.02rem;background: #FFF;overflow:hidden;}
   #searchbox .vux-search-fixed{position: relative !important;background: transparent !important;}
-  #search_kinds{display: flex;justify-content: space-around;margin-top:0.38rem;}
+  #search_kinds{display: flex;justify-content: space-around;margin-top:0.6rem;}
     #search_kinds>div{font-size:0.62rem;padding-bottom:0.2rem;}
    .serach_history{
       padding:0.4rem;
