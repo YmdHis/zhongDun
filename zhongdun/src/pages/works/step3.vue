@@ -6,9 +6,9 @@
     </div>
     <!--支付时间价格 S-->
     <div id="ex-order-info">
-    	<p>支付剩余时间{{minute}}:{{second}}</p>
-    	<p>￥{{this.$route.query.money}}</p>
-    	<p>{{this.$route.query.jgname}} -{{this.$route.query.order_sn}} </p>
+    <!-- 	<p>支付剩余时间{{minute}}:{{second}}</p> -->
+    	<p class="priceinfo1">￥{{this.$route.query.money}}</p>
+    	<p class="priceinfo2">{{this.$route.query.jgname}} -{{this.$route.query.order_sn}} </p>
     </div>
     <!--支付时间价格 E-->
 
@@ -117,14 +117,14 @@ background: #FFF
 	padding:0.4rem 0;
 }
 #ex-order-info>p{text-align:center;}
-#ex-order-info>p:nth-of-type(1){
+/*#ex-order-info>p:nth-of-type(1){
 	font-size:0.5rem;color:#888;
-}
-#ex-order-info>p:nth-of-type(2){
+}*/
+.priceinfo1{
 	font-size: 0.95rem;color:#000;
 	line-height:1.9rem;
 }
-#ex-order-info>p:nth-of-type(3){
+.priceinfo2{
 	font-size:0.45rem;
 	color: #999
 }
