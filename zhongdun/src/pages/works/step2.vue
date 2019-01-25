@@ -251,7 +251,14 @@ export default {
 		this.price = price;
 		this.chooId = id;
   		this.active3 = data;
-		},
+	},
+	//检测手机号正确性
+	checkTel: function (tel) {
+		if (/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/.test(tel)) {
+		return true;
+		}
+		return false;
+	},
 	gzadd(){//确定
 		this.show13 = false;
 		let dateId = new Date().getTime();
@@ -284,27 +291,33 @@ export default {
 		let gzcouse = this.gzcouse;
 		if(gzcouse.length == ""){
 			this.$vux.toast.show({
-		text: '请选择工种',
-		type:'text',
-		position: 'middle'
+				text: '请选择工种',
+				type:'text',
+				position: 'middle'
 			})
 		}else if(username == ''){
 			this.$vux.toast.show({
-		text: '请填写姓名',
-		type:'text',
-		position: 'middle'
+				text: '请填写姓名',
+				type:'text',
+				position: 'middle'
 			})
 		}else if(mobile == ''){
 			this.$vux.toast.show({
-		text: '请填写手机号',
-		type:'text',
-		position: 'middle'
+				text: '请填写手机号',
+				type:'text',
+				position: 'middle'
+			})
+		}else if(!this.checkTel(mobile)){
+			this.$vux.toast.show({
+				text: '请输入正确手机号',
+				type:'text',
+				position: 'middle'
 			})
 		}else if(vcode == ''){
 			this.$vux.toast.show({
-		text: '请填写验证码',
-		type:'text',
-		position: 'middle'
+				text: '请填写验证码',
+				type:'text',
+				position: 'middle'
 			})
 		}else{
 			this.showToast = true;
