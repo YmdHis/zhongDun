@@ -27,6 +27,7 @@
 			     <!--二级分类-->
 			         <div v-if="gz">
 			         	<p class="ex-titp">工种</p>
+						 <p class="data-none" v-show="enrollTwoHid">暂无数据</p>
 			         	<ul class="gzfl">
 			         		<li :class="[active2 == item2.name?'active':'']" :key="item2.name" v-for="item2 in enrollTwo" 
 			         		@click="fss(item2.id,item2.companyid,item2.name)">{{item2.name}}</li> 
@@ -37,6 +38,7 @@
 			     <!--三级分类-->
 			         <div v-if="fs">
 			         	<p class="ex-titp">新证复审</p>
+						 <p class="data-none" v-show="enrollThreeHid">暂无数据</p>
 			         	<ul class="gzfl">
 			         		<li v-for="item3 in enrollThree"  :class="[active3 == item3.title?'active':'']" :key="item3.id" 
 			         		@click="xz(item3.title,item3.price,item3.id)">{{item3.title}}</li> 
@@ -219,6 +221,8 @@ export default {
 			this.enrollThree = [];
 			this.gz = false;
 			this.fs = false;
+			this.enrollTwoHid = false;
+			this.enrollThreeHid = false;
   		this.companyid=this.$route.query.id;
 			enroll({companyId:this.$route.query.id}).then(res=>{
         	this.enroll=res.data;
@@ -226,14 +230,19 @@ export default {
        });
   	},
   	gzs(data1,name){//一级
-			this.active1 = name;
-			enrollTwo({parentId:data1}).then(res=>{
-			    this.enrollTwo=res.data;
-					this.gz = true;
-					this.fs = false;
-			    this.$forceUpdate();
-			 console.log(this.enrollTwo);
-			   });
+		this.active1 = name;
+		enrollTwo({parentId:data1}).then(res=>{
+			this.enrollTwo=res.data;
+			this.gz = true;
+			this.fs = false;
+			this.$forceUpdate();
+			console.log(this.enrollTwo);
+			if(this.enrollTwo.length == 0){
+				this.enrollTwoHid = true;
+			}else{
+				this.enrollTwoHid = false;
+			}
+		});
   	},
   	fss(data1,data2,data3){//二级
   		//请求参数  categoryId companyId
@@ -243,7 +252,12 @@ export default {
         this.enrollThree=res.data;
         this.$forceUpdate();
         this.fs = true;
-      console.log(this.enrollThree);
+		console.log(this.enrollThree);
+		if(this.enrollThree.length == 0){
+			this.enrollThreeHid = true;
+		}else{
+			this.enrollThreeHid = false;
+		}
        });
   	},
   	xz(data,price,id){//三级
@@ -252,16 +266,27 @@ export default {
 		this.chooId = id;
   		this.active3 = data;
 	},
-	//检测手机号正确性
-	checkTel: function (tel) {
-		if (/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/.test(tel)) {
-		return true;
-		}
-		return false;
-	},
+
 	gzadd(){//确定
 		this.show13 = false;
 		let dateId = new Date().getTime();
+		if(this.enrollTwo.length == 0){
+			this.$vux.toast.show({
+				text: '请选择二级分类',
+				type:'text',
+				position: 'middle'
+			})
+			return
+		}
+		console.log(this.enrollThree.length);
+		if(this.enrollThree.length == 0){
+			this.$vux.toast.show({
+				text: '请选择三级分类',
+				type:'text',
+				position: 'middle'
+			})
+			return
+		}
 		for(let key in this.gzcouse){
 			if(this.chooId == this.gzcouse[key].id){
 				this.$vux.toast.show({
@@ -275,6 +300,13 @@ export default {
 		}
 		this.gzcouse.push({name:this.work3,price:this.price,dateId:dateId,id:this.chooId});
 		console.log(this.gzcouse);
+	},
+	//检测手机号正确性
+	checkTel: function (tel) {
+		if (/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/.test(tel)) {
+		return true;
+		}
+		return false;
 	},
 	change (val, label) {
 		//console.log(label[0]);
@@ -309,15 +341,15 @@ export default {
 			})
 		}else if(!this.checkTel(mobile)){
 			this.$vux.toast.show({
-				text: '请输入正确手机号',
+				text: '请填写正确手机号',
 				type:'text',
 				position: 'middle'
 			})
 		}else if(vcode == ''){
 			this.$vux.toast.show({
-				text: '请填写验证码',
-				type:'text',
-				position: 'middle'
+		text: '请填写验证码',
+		type:'text',
+		position: 'middle'
 			})
 		}else{
 			this.showToast = true;
@@ -527,5 +559,9 @@ font-size:0.6rem;
   height: 1.5rem;
   text-align: center;
   color: #5ebf83;
+}
+.data-none{
+	font-size: .6rem;
+    padding: 1rem;
 }
 </style>
