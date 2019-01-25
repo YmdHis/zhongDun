@@ -98,9 +98,9 @@ background: #FFF;
 }
 /*报名信息*/
 .part{background: #FFF}
-.titp{color:#5ebf83;font-size:0.78rem;text-align:center;background:#efefef;line-height:1.8rem;border-top:1px solid #eaeaea;border-bottom:1px solid #eaeaea;}
+.titp{color:#5ebf83;font-size:0.78rem;text-align:center;background:#f7f7f7;line-height:1.8rem;border-top:1px solid #eaeaea;border-bottom:1px solid #eaeaea;}
 .center{
-	width:90%;margin:0.8rem auto;background:#efefef;padding:0.6rem 0.6rem;
+	width:90%;margin:0.8rem auto;background:#f7f7f7;padding:0.6rem 0.6rem;
 }
 .center>p{font-size:0.74rem;font-weight: bold;color:#333;line-height:1.8rem;}
 .center-info{font-size:0.66rem;color:#333;margin-left: 0.8rem}
