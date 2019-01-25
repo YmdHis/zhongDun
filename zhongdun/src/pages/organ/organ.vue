@@ -35,7 +35,10 @@
          <flexbox-item><div class="organ_choose_t organ_choose_icon">筛选<img src="../../images/choose_icon.jpg" alt=""></div></flexbox-item>
       </flexbox>
       </div>
-      <div class="origan_box">
+      <div class="origan_box" v-if="empty">
+        <empty></empty>
+      </div>
+      <div class="origan_box" style="padding-bottom:3rem" v-else>
         <div class="origan_list" v-for="items in jgdata">
           <router-link :to="{ path: '/organDetail', query: {companyId:items.id}}"> 
             <flexbox>
@@ -126,8 +129,10 @@ import footNav from 'src/components/footNav'
 import { getStore, setStore } from 'src/config/mUtils'
 import BMap from 'BMap'
 import cityPicker from 'src/components/cityPicker'
+import empty from 'src/components/emptycontent'
 export default {
 	components: {
+    empty,
 		Tab,
 		TabItem,
     Flexbox, 
@@ -145,6 +150,7 @@ export default {
         LocationCity:'',
         cityPickerShow:false,
         type:'default',
+        empty:false
     }
   },
   mounted(){ 
@@ -158,9 +164,14 @@ export default {
       this.type = da;
       let longitude = getStore("longitude");
       let latitude = getStore("latitude");
-      jglist({longitude:longitude,latitude:latitude,type:da,name:this.$route.query.name}).then(res=>{
+      let gzid=this.$route.query.id;
+     
+      jglist({longitude:longitude,latitude:latitude,type:da,name:this.$route.query.name,category:gzid}).then(res=>{
           this.jgdata=res.data;
-
+          console.log(res.code);
+          if(res.code==0){
+            this.empty="true"
+          }
           console.log(this.jgdata);
       });
     },
