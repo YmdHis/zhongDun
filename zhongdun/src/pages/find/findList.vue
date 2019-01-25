@@ -143,56 +143,55 @@
 </template>
 
 <script>
-    import footNav from 'src/components/footNav'
-    import cityPicker from 'src/components/cityPicker'
-    import { XHeader,Flexbox, FlexboxItem,} from 'vux'
-    import {setStore,getStore} from 'src/config/mUtils'
-    export default {
-        components:{
-             XHeader,
-             Flexbox, 
-             FlexboxItem,
-             footNav,
-             cityPicker
-         },
-    	data(){
-            return{
-              borderColor: {
-                borderColor: '#333'
-              },
-              LocationCity:"",
-              cityPickerShow:false,
-            }
-        },
-        mounted(){
-          this.LocationCity = getStore("LocationCity");
-        },
-        computed: {
-        },
-        methods: {
-          back(){
-              this.$router.go(-1);//返回上一层
-          },
-          gotoAddress(path){
-            this.$router.push(path)
-          },
-          chooCity(){
-            this.cityPickerShow = !this.cityPickerShow
-          },
-          close:function (res){
-            if(res == 'close'){
-              this.chooCity();
-            }
-          },
-          formPicker(res){
-            this.LocationCity = res;
-            let longitude = getStore("longitude");
-            let latitude = getStore("latitude");
-            let da = getStore("type");
-          },
-        },
-
+import footNav from 'src/components/footNav'
+import cityPicker from 'src/components/cityPicker'
+import { XHeader,Flexbox, FlexboxItem,} from 'vux'
+import {setStore,getStore} from 'src/config/mUtils'
+export default {
+  components:{
+    XHeader,
+    Flexbox, 
+    FlexboxItem,
+    footNav,
+    cityPicker
+  },
+  data(){
+    return{
+      borderColor: {
+        borderColor: '#333'
+      },
+      LocationCity:"",
+      cityPickerShow:false,
     }
+  },
+  mounted(){
+    this.LocationCity = getStore("LocationCity");
+  },
+  computed: {
+  },
+  methods: {
+    back(){
+        this.$router.go(-1);//返回上一层
+    },
+    gotoAddress(path){
+      this.$router.push(path)
+    },
+    chooCity(){
+      this.cityPickerShow = !this.cityPickerShow
+    },
+    close:function (res){
+      if(res == 'close'){
+        this.chooCity();
+      }
+    },
+    formPicker(res){
+      this.LocationCity = res;
+      let longitude = getStore("longitude");
+      let latitude = getStore("latitude");
+      let da = getStore("type");
+    },
+  },
+}
 
 </script>
 <style scoped>

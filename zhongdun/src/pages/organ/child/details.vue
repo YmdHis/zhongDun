@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="details_evaluation">
-      <div class="details_evaluation_box_title clear">
+      <div class="details_evaluation_box_title clear" v-show="blogslist.length">
         <div class="details_evaluation_box_title_lf">
           <flexbox orient="vertical" :gutter="0">
             <flexbox-item>
@@ -170,10 +170,6 @@ export default {
       s=s.toFixed(2);//四舍五入，取几位小数
       return s;
     },
-    //星级换算
-    getStar(data){
-      let returnData = Math.round(parseFloat(data)/20);
-    }
   },
   computed:{
   

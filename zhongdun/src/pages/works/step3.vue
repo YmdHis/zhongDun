@@ -75,12 +75,20 @@
 						}, function(ret, err) {
 							//console.log(ret)
 							//console.log(err)
+							if(ret.code == '9000'){
+								api.alert({
+									title: '支付结果',
+									msg: '支付成功',
+									buttons: ['确定']
+								});
+							}else{
+								api.alert({
+									title: '支付结果',
+									msg: '支付失败',
+									buttons: ['确定']
+								});
+							}
 							
-							api.alert({
-								title: '支付结果',
-								msg: ret,
-								buttons: ['确定']
-							});
 						});
 						}else{
 						this.$vux.toast.show({
