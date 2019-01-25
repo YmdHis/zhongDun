@@ -3,29 +3,8 @@
     <div id="bmhead">
       <x-header :left-options="{backText: ''}"><b>信息确认</b></x-header>
     </div>
-    <!--负责人信息 S--> 
-    <div>
-    	<p class="titp">负责人信息</p>
-    	<div class="center">
-    		<p>姓名:<span class="center-info">韦小宝</span></p>
-    		<p>职务:<span class="center-info">总经理</span></p>
-    		<p>电话:<span class="center-info">1313336666</span></p>
-    		<p>身份证号码:<span class="center-info">45454544444455</span></p>
-    	</div>
-    	<div class="infoimg">
-    		<div>
-				<img src="../../assets/images/z.png">
-				<img src="../../assets/images/f.png">
-			</div>
-		</div>
-		<div class="sureinfo">
-			<div class="red successinfo">*</div>
-			<div class="suremessage"><span class="red">请确认以上证面信息是否准确无误,</span>如证面信息有误，请及时纠正或修改</div>
-		</div>
-    </div>
-   <!--负责人信息 E--> 
-   <!--机构信息 S-->
-     <div class="pad">
+     <!--机构信息 S-->
+     <div>
     	<p class="titp">机构信息信息</p>
     	<div class="center"> 
     		<p>机构名称:<span class="center-info">安培教育</span></p>
@@ -60,6 +39,27 @@
 		  </div>
     </div>
    <!--机构信息 E-->
+    <!--负责人信息 S--> 
+    <div  class="pad">
+    	<p class="titp">负责人信息</p>
+    	<div class="center">
+    		<p>姓名:<span class="center-info">韦小宝</span></p>
+    		<p>职务:<span class="center-info">总经理</span></p>
+    		<p>电话:<span class="center-info">1313336666</span></p>
+    		<p>身份证号码:<span class="center-info">45454544444455</span></p>
+    	</div>
+    	<div class="infoimg">
+    		<div>
+				<img src="../../assets/images/z.png">
+				<img src="../../assets/images/f.png">
+			</div>
+		</div>
+		<div class="sureinfo">
+			<div class="red successinfo">*</div>
+			<div class="suremessage"><span class="red">请确认以上证面信息是否准确无误,</span>如证面信息有误，请及时纠正或修改</div>
+		</div>
+    </div>
+   <!--负责人信息 E--> 
  </div>
 </template>
 <script type="text/javascript">
@@ -102,7 +102,7 @@ background: #FFF;
 .center{
 	width:90%;margin:0.8rem auto;background:#f7f7f7;padding:0.6rem 0.6rem;
 }
-.center>p{font-size:0.74rem;font-weight: bold;color:#333;line-height:1.8rem;}
+.center>p{font-size:0.64rem;font-weight: bold;color:#333;line-height:1.6rem;}
 .center-info{font-size:0.66rem;color:#333;margin-left: 0.8rem}
 .infoimg{width:90%;margin:0 auto;}
 .infoimg>div{overflow: hidden;

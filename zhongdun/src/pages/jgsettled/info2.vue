@@ -111,13 +111,11 @@ font-size:0.6rem;
 
 /*底部按钮*/
 .ex-next1{position: fixed;bottom:0;width:100%;}
-.ex-next1>div{ display: inline-block;width:40%;font-size:0.66rem;height: 2rem;line-height:2rem;text-align:center;}
+.ex-next1>div{ display: inline-block;width:49%;font-size:0.66rem;height: 2rem;line-height:2rem;text-align:center;}
 .ex-next1>div:nth-of-type(1){
-  background:#eaeaea;margin-left:5%;
-  margin-right:8%;
-
+  background:#eaeaea
 }
 .ex-next1>div:nth-of-type(2){
-  background:#5ebf83;color:#FFF;margin-right:5%;
+  background:#5ebf83;color:#FFF;
 }
 </style>
