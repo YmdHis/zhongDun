@@ -1,3 +1,4 @@
+@@ -1,105 +0,0 @@
 <template>
   <div>
     <div id="bmhead">
@@ -6,16 +7,21 @@
     <!--基本信息 S--> 
     <div id="ex-sub">
       <p class="jgtit">基本信息</p>
+
       <group>
+        <div class="reda">*</div>
         <x-input title="机构名称" name="username" placeholder="请输入机构名称" is-type="china-name"></x-input>
       </group>
       <group>
+       <div class="reda">*</div>
         <x-input title="联系电话" name="" placeholder="请输入联系电话码" keyboard="number"></x-input>
       </group>
       <group>
+       <div class="reda">*</div>
         <x-input title="营业执照号码" name="username" placeholder="请输入营业执照号码" is-type="china-name"></x-input>
       </group>
       <group>
+       <div class="reda">*</div>
         <x-input title="真实地址" name="" placeholder="请输入真实地址" keyboard="number"  ></x-input>
       </group>
 
@@ -58,8 +64,9 @@
   }
 }
 </script>
-<style type="text/css">
+<style  scoped>
 /*报名投不样式*/
+.reda{color:red;float:left;margin-top:0.6rem;margin-left:0.3rem;font-size:0.64rem;}
 #bmhead .vux-header{
 background: #FFF;
 }
@@ -71,7 +78,6 @@ background: #FFF;
 }
 /*报名信息*/
 #ex-sub1{font-size:0.66rem;margin-top:1.6rem;color:#FFF}
-#ex-sub .weui-cells{font-size:0.66rem;}
 #ex-sub .weui-cell__hd>label{
   width:4.3rem !important;
   text-align:left !important;
@@ -79,13 +85,13 @@ background: #FFF;
   color:#000;
 }
 #ex-sub{margin-top:0.5rem;}
-#ex-sub .weui-cells{margin-top:0;}
+/deep/#ex-sub .weui-cells{margin-top:0 !important;overflow:hidden;}
 #ex-sub input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{ 
 color:#CCC; 
 font-size:0.6rem; 
 }
-#ex-sub  .weui-cells:after{border-bottom:none;}
-#ex-sub .vux-x-input{padding-top:0.6rem;padding-bottom:0.4rem;}
+/deep/ #ex-sub  .weui-cells:after{border-bottom:none;}
+#ex-sub .vux-x-input{padding-top:0.6rem;padding-bottom:0.4rem;font-size:0.64rem;padding-left:0.1rem;}
 .jgtit{color:#666;font-size:0.64rem;padding:0 0.6rem;line-height:1.8rem}
 
 /*证件上传*/

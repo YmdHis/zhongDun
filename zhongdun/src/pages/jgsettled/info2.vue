@@ -7,12 +7,15 @@
     <div id="ex-sub">
       <p class="jgtit">负责人信息</p>
       <group>
+          <div class="reda">*</div>
         <x-input title="姓名" name="username" placeholder="请输入姓名" is-type="china-name"></x-input>
       </group>
       <group>
+          <div class="reda">*</div>
         <x-input title="职务" name="" placeholder="职务" ></x-input>
       </group>
       <group>
+          <div class="reda">*</div>
         <x-input title="电话" name="username" placeholder="请输入电话号码"  keyboard="number" ></x-input>
       </group>
     <div style="background:#FFF;padding-bottom:2rem">
@@ -31,89 +34,41 @@
     </div>
   </div>
   <!--基本信息 E-->   
-  <!--弹框显示 S--> 
 
- <div v-transfer-dom>
-  <x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', height: '90%', 'background-color': 'white'}">
-   <div class="img-box ex-dig">
-        <p class="confirminfo">信息确认</p>
-        <div>
-          <p class="ptit">机构信息</p>
-          <p>机构名称：<span>武汉安培教育科技有限公司</span></p>
-          <p>联系电话：<span>0.27-888-888</span></p>
-          <p>营业执照号码：<span>5945454545454</span></p>
-          <p>真实地址：<span>武汉市武昌区积玉桥白云边大厦</span></p>
-          <div class="infoimg">
-              <div>营业执照副本：</div>
-              <div class="jgimg">
-                <div><img src="../../assets/images/bmbanner.png"></div>
-              </div>
-          </div>
-          <div class="infoimg">
-              <div>机构图片：</div>
-              <div class="jgimg">
-                <div><img src="../../assets/images/bmbanner.png"></div>
-                 <div><img src="../../assets/images/bmbanner.png"></div>
-                  <div><img src="../../assets/images/bmbanner.png"></div>
-              </div>
-          </div>
-          <p class="ptit">负责人信息</p>
-          <p>姓名：<span>章丘</span></p>
-          <p>职务：<span>总经理</span></p>
-          <p>电话：<span>1878654556</span></p>
-          <p>身份证号码：<span>4212154545664896633</span></p>
-         <div class="infoimg">
-              <div>营业执照副本：</div>
-              <div class="jgimg">
-                <div><img src="../../assets/images/bmbanner.png"></div>
-              </div>
-          </div>
-          <div class="infoimg">
-              <div>营业执照副本：</div>
-              <div class="jgimg">
-                <div><img src="../../assets/images/bmbanner.png"></div>
-              </div>
-          </div>
-        </div>
-          <div id="ex-subtn">
-           <x-button mini style="color:#000;background:#dadada;margin-right:0.3rem"  @click.native="showDialogStyle=false">返回修改</x-button>
-           <x-button mini type="primary" @click.native="tijiao">确认提交</x-button>
-
-         </div>
-      </div>
-   
-  </x-dialog>
-</div>
-  <!--弹框显示 E--> 
   <div class="ex-next1">
    <div @click="toInfo()">返回上层</div>
-   <div @click="showDialogStyle=true">确定提交</div>
+   <div @click="tosubmit()">确定提交</div>
   </div>
  </div>
 </template>
 <script type="text/javascript">
-  import {XHeader,XInput,Group, XDialog, XButton, XSwitch,TransferDomDirective as TransferDom} from 'vux'
+  import {XHeader,XInput,Group,  XButton, TransferDomDirective as TransferDom} from 'vux'
   export default {
  directives: {
-TransferDom
+    TransferDom
   },
   components: {
-     XHeader,XInput,Group, XDialog, XButton, XSwitch
-    },
+     XHeader,XInput,Group, XButton
+   },
   methods: {
      toInfo(){
        this.$router.push("/info1");
+     },
+     tosubmit(){
+       this.$router.push("/info3");
      }
+
   },
   data () {
     return {
-       showDialogStyle: false
+      
     }
   }
 }
 </script>
-<style type="text/css" >
+<style type="text/css" scoped>
 /*报名投不样式*/
+.reda{color:red;float:left;margin-top:0.6rem;margin-left:0.3rem;font-size:0.64rem;}
 #bmhead .vux-header{
 background: #FFF;
 }
@@ -125,7 +80,7 @@ background: #FFF;
 }
 /*报名信息*/
 #ex-sub1{font-size:0.66rem;margin-top:1.6rem;color:#FFF}
-#ex-sub .weui-cells{font-size:0.66rem;}
+/deep/ #ex-sub .weui-cells{font-size:0.66rem;margin-top:0;}
 #ex-sub .weui-cell__hd>label{
   width:4.3rem !important;
   text-align:left !important;
@@ -133,13 +88,12 @@ background: #FFF;
   color:#000;
 }
 #ex-sub{margin-top:0.5rem;}
-#ex-sub .weui-cells{margin-top:0;}
 #ex-sub input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{ 
 color:#CCC; 
 font-size:0.6rem; 
 }
-#ex-sub  .weui-cells:after{border-bottom:none;}
-#ex-sub .vux-x-input{padding-top:0.6rem;padding-bottom:0.4rem;}
+/deep/ #ex-sub  .weui-cells:after{border-bottom:none;}
+#ex-sub .vux-x-input{padding-top:0.6rem;padding-bottom:0.4rem;font-size:0.64rem;padding-left:0.1rem;}
 .jgtit{color:#666;font-size:0.64rem;padding:0 0.6rem;line-height:1.8rem}
 
 /*证件上传*/
@@ -154,36 +108,6 @@ font-size:0.6rem;
 .sfzhm>div>p{font-size:0.64rem;text-align:center;}
 .sfzhm>div>img{width:100%;display: block;margin-top:0.6rem;}
 .sfzhm>div{width:38%;}
-/*弹框样式*/
-.ex-dig{
-  font-size:0.66rem;text-align:left;
-  padding:0 0.6rem 0.6rem 0.6rem;
-  line-height: 1.4rem;
-      overflow-y: auto;
-    height: 100%;
-}
-.ex-dig>div>p>span{color:#555;}
-.weui-dialog{
-
-  overflow:auto !important;
-  width:90% !important;
-  max-width:90% !important;
-}
-.confirminfo{
-  font-size:1.1rem;
-  border-bottom:1px solid #dadada;text-align:center;line-height: 3.2rem;
-  font-weight: bold;
-}
-.ptit{
-  font-size:0.76rem;
-  line-height: 1.6rem;
-  margin-top:0.6rem;
-}
-.jgimg{display: flex;justify-content: space-around;}
-.jgimg>div{width:30%;min-height: 3rem}
-.jgimg>div>img{width:100%;height: 100%}
-#ex-subtn{text-align:right;margin-bottom:0.4rem;margin-top:0.6rem;}
-#ex-subtn button{border-radius:1px;background: #5ebf83;margin-right:0.64rem;font-size:0.64rem;}
 
 /*底部按钮*/
 .ex-next1{position: fixed;bottom:0;width:100%;}
