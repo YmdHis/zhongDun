@@ -203,8 +203,8 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
     text-align: center;
 }
 .img-logo{
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
 }
 .form{
     padding-top: .8rem;
