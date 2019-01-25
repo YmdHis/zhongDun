@@ -21,7 +21,7 @@
         <x-input title="营业执照号码" name="username" placeholder="请输入营业执照号码" is-type="china-name"></x-input>
       </group>
       <group>
-      
+      <div class="reda">*</div>
         <x-input title="真实地址" name="" placeholder="请输入真实地址" keyboard="number"  ></x-input>
       </group>
 
