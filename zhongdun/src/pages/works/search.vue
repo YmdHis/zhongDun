@@ -5,17 +5,17 @@
       <img src="../../assets/images/topbg.png" class="bgimg">
       <div class="con_search">
         <div class="searchtext">
-            <input type="text" placeholder="请输入您想搜索的内容" class="header_search_input">
+            <input type="text" placeholder="请输入您想搜索的内容" class="header_search_input" v-model="keyWord">
             <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
         </div>
         <div class="quxiao" @click="toback">取消</div>
       </div>
-      <div id="search_kinds">
+      <!-- <div id="search_kinds">
         <div  v-for="item in wpList"
             :class="{actives : actives == item.name}" 
             @click="selected(item.name)" >{{item.name}}
         </div>
-      </div>
+      </div> -->
 
   </div>
    <!--搜索框 E-->
@@ -51,21 +51,27 @@
 </div>
 </template>
 <script>
-
+import {jglist} from 'src/service/api'
 export default {
   components: {
    
   },
   methods: {
-
-
+   // 机构筛选
+  jgSearch(newCitySearch){
+    let longitude = getStore("longitude");
+    let latitude = getStore("latitude");
+    console.log(newCitySearch);
+     
+  
+  },
   selected:function(name){
       this.actives=name;
   },
   toback(){
       this.$router.go(-1);
      },
-   showmore(){
+  showmore(){
       if($('#searcha').height()<82){
         $("#searcha").animate(
           {height:"100%"},function(){
@@ -86,6 +92,7 @@ export default {
     return {
       results: [],
       value: '',
+       keyWord:'',//机构搜索
        wpList: [
             {
               name: '全部'
@@ -99,7 +106,13 @@ export default {
           ],
           actives:'全部'
     }
-  }
+  },
+   watch:{
+        keyWord(){
+            console.log(this.keyWord);
+            this.jgSearch(this.keyWord);
+        }
+    }
 }
 
 function getResult (val) {
@@ -115,7 +128,7 @@ function getResult (val) {
 </script>
 <style type="text/css">
 /*搜索框*/
-.bgimg{position: absolute;height: 6rem;top:0;left:0;}
+.bgimg{position: absolute;width: 100%;height: 3rem;top:0;left:0;}
 .con_search{line-height: 1.2rem}
 .quxiao{vertical-align:top;color:#333;font-size:0.6rem;display: inline-block;margin-left:0.3rem;line-height: 1.4rem}
 .searchtext{width:80%;background:#f2f2f2;display: inline-block;
@@ -124,7 +137,7 @@ function getResult (val) {
 
 .header_search_input{background-color: #f2f2f2;height:1.2rem;width:84%;position: relative;top:-0.13rem;margin-left:0.8rem;}
 .header_search_sy{width:0.46rem;}
-#searchbox{padding-top:0.8rem;height:6rem;position: relative;overflow:hidden;color: #888; }
+#searchbox{padding-top:0.8rem;height:4rem;position: relative;overflow:hidden;color: #888; }
 #searchbox>div{position: relative;z-index:56;}
   #searchbox .weui-search-bar{background: transparent;font-size:0.66rem;}
   #searchbox .weui-search-bar__cancel-btn{color:#333;padding-top:0.1rem;}
