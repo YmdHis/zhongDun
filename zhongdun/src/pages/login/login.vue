@@ -19,8 +19,8 @@
         <div class="login_btn" @click="login('ruleForm')">登录</div>
       </div>
       <div class="clear ">
-        <span class="find_pwd login_bStyle">找回密码</span>
-        <span class="dx_login login_bStyle">短信快速登录</span>
+        <span class="find_pwd login_bStyle" @click="findPwd">找回密码</span>
+        <span class="dx_login login_bStyle" style="display:none;">短信快速登录</span>
       </div>
     </div>
   </div>
@@ -53,6 +53,9 @@
     methods:{
       back(){
             this.$router.go(-1);//返回上一层
+      },
+      findPwd(){
+        this.$router.push('/findPwd')
       },
       changeType(){
         this.registration_data.pwdType = this.registration_data.pwdType==='password'?'text':'password';

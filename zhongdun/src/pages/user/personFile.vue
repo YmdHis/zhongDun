@@ -110,7 +110,7 @@ export default {
               position: 'middle'
       })
       setTimeout(() => {
-        this.$router.push("/personFile");
+        this.$router.push("/home");
       }, 1000);
     },
     login(){
