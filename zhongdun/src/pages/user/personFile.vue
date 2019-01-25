@@ -17,7 +17,7 @@
     <div class="person_box person_icon_box">
       <flexbox :gutter="0">
         <flexbox-item>
-          <div class="person_listIcon">
+          <div class="person_listIcon" @click="empty('我的机构')">
             <div class="person_list_img">
               <img src="../../images/person_icon1.png" alt="">
             </div>
@@ -25,7 +25,7 @@
           </div>
         </flexbox-item>
         <flexbox-item>
-          <div class="person_listIcon">
+          <div class="person_listIcon" @click="empty('我的课程')">
             <div class="person_list_img">
               <img src="../../images/person_icon2.png" alt="">
             </div>
@@ -33,7 +33,7 @@
           </div>
         </flexbox-item>
         <flexbox-item>
-          <div class="person_listIcon">
+          <div class="person_listIcon" @click="empty('我的试题')">
             <div class="person_list_img">
               <img src="../../images/person_icon3.png" alt="">
             </div>
@@ -41,7 +41,7 @@
           </div>
         </flexbox-item>
         <flexbox-item>
-          <div class="person_listIcon">
+          <div class="person_listIcon" @click="empty('我的动态')">
             <div class="person_list_img">
               <img src="../../images/person_icon4.png" alt="">
             </div>
@@ -52,16 +52,16 @@
     </div>
     <div class="person_box" style="margin-top: -.5rem;">
       <group>
-        <cell title="我的订单" is-link style="font-size: .6rem;">
+        <cell title="我的订单" is-link style="font-size: .6rem;" link="/order">
           <img slot="icon" width="16" style="display:block;margin-right:10px;" src="../../images/person_icon11.png">
         </cell>
-        <cell title="我的收藏" is-link style="font-size: .6rem;">
+        <cell title="我的收藏" is-link style="font-size: .6rem;" @click.native="empty('我的收藏')">
           <img slot="icon" width="16" style="display:block;margin-right:10px;" src="../../images/person_icon22.png">
         </cell>
-        <cell title="我的点赞" is-link style="font-size: .6rem;">
+        <cell title="我的点赞" is-link style="font-size: .6rem;" @click.native="empty('我的点赞')">
           <img slot="icon" width="16" style="display:block;margin-right:10px;" src="../../images/person_icon33.png">
         </cell>
-        <cell title="我的评论" is-link style="font-size: .6rem;">
+        <cell title="我的评论" is-link style="font-size: .6rem;" @click.native="empty('我的评论')">
           <img slot="icon" width="16" style="display:block;margin-right:10px;" src="../../images/person_icon44.png">
         </cell>
       </group>
@@ -98,6 +98,10 @@ export default {
     footNav
   },
   methods:{
+    empty(name){
+      console.log(111)
+       this.$router.push({path:'/empty',query:{name:name}})
+    },
     gotoAddress(path){
       this.$router.push(path)
     },
