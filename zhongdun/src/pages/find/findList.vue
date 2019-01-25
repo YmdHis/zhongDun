@@ -165,7 +165,7 @@
             }
         },
         mounted(){
-
+          this.LocationCity = getStore("LocationCity");
         },
         computed: {
         },

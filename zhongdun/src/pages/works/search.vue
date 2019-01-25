@@ -33,7 +33,7 @@
       <div>专业制冷证</div>
       <div>专业制冷工考证</div>
     </div>
-    <p style="text-align: center"><x-icon type="ios-arrow-down" size="24" @click="showmore" id="x-t"></x-icon></p>
+    <p style="text-align: center"><x-icon type="ios-arrow-down" size="24" id="x-t"></x-icon></p>
   </div>
   <!--历史搜索 E-->
   <!--搜索发现 S-->
@@ -52,18 +52,35 @@
 </template>
 <script>
 import {jglist} from 'src/service/api'
+import { getStore, setStore } from 'src/config/mUtils'
 export default {
   components: {
    
   },
+  data () {
+    return {
+      results: [],
+      value: '',
+      keyWord:'',//机构搜索
+      wpList: [
+        {
+          name: '全部'
+        },
+        {
+          name: '机构'
+        },
+        {
+          name: '工种'
+        }
+      ],
+      actives:'全部'
+    }
+  },
   methods: {
    // 机构筛选
   jgSearch(newCitySearch){
-    let longitude = getStore("longitude");
-    let latitude = getStore("latitude");
     console.log(newCitySearch);
-     
-  
+    this.$router.push({path:'/organ',query:{name:newCitySearch}});
   },
   selected:function(name){
       this.actives=name;
@@ -72,41 +89,23 @@ export default {
       this.$router.go(-1);
      },
   showmore(){
-      if($('#searcha').height()<82){
-        $("#searcha").animate(
-          {height:"100%"},function(){
-            $('#x-t').removeAttr('type');
-          }
-        )
-      }else{
-        $("#searcha").animate(
-          {height:"2.2rem"},function(){
-            $('#x-t').attr('type','ios-arrow-up');
-          }
+      // if($('#searcha').height()<82){
+      //   $("#searcha").animate(
+      //     {height:"100%"},function(){
+      //       $('#x-t').removeAttr('type');
+      //     }
+      //   )
+      // }else{
+      //   $("#searcha").animate(
+      //     {height:"2.2rem"},function(){
+      //       $('#x-t').attr('type','ios-arrow-up');
+      //     }
          
-        )
-      } 
+      //   )
+      // } 
     }
   },
-  data () {
-    return {
-      results: [],
-      value: '',
-       keyWord:'',//机构搜索
-       wpList: [
-            {
-              name: '全部'
-            },
-            {
-              name: '机构'
-            },
-            {
-              name: '工种'
-            }
-          ],
-          actives:'全部'
-    }
-  },
+
    watch:{
         keyWord(){
             console.log(this.keyWord);

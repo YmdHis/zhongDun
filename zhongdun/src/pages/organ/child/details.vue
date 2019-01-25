@@ -69,7 +69,7 @@
              </flexbox-item>
             <flexbox-item>
               <div class="details_evaluation_list_other">
-                <span>所选课程：焊工</span>
+                <span>所选课程：{{item.title}}</span>
                <!--  <span>学费：650元</span>
                 <span>拿本：2个月</span> -->
                 <span class="loving"> <x-icon type="ios-heart" size="20" class="loving_icon" style="fill:#fb8e52;"></x-icon>{{item.praise_count}}</span>

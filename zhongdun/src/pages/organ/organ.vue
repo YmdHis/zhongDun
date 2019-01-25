@@ -9,7 +9,7 @@
         </div>
         <div class="header_search" @click="toSearch">
           <img src="../../images/sear_icon.png" alt="" class="header_search_icon">
-          <input type="text" placeholder="请输入机构名称">
+          <input type="text" placeholder="请输入机构名称" :value="this.$route.query.name">
           <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
         </div>
         <div class="header_login">
@@ -148,6 +148,7 @@ export default {
     }
   },
   mounted(){ 
+    let name = this.$route.query.name;
     this.updates('default');
     this.LocationCity=getStore('LocationCity');
   },
@@ -157,7 +158,7 @@ export default {
       this.type = da;
       let longitude = getStore("longitude");
       let latitude = getStore("latitude");
-      jglist({longitude:longitude,latitude:latitude,type:da}).then(res=>{
+      jglist({longitude:longitude,latitude:latitude,type:da,name:this.$route.query.name}).then(res=>{
           this.jgdata=res.data;
 
           console.log(this.jgdata);
