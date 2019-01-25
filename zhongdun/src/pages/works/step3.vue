@@ -16,7 +16,6 @@
    <div id="ex-chose-pay">
     <checklist  :options="commonList" v-model="radioValue" :max="1" @on-change="change"></checklist>
   </div>
-
   <div class="ex-next" @click="tijiao">
 	 确认支付
   </div>
