@@ -5,7 +5,7 @@
       <img src="../../assets/images/topbg.png" class="bgimg">
       <div class="con_search">
         <div class="searchtext">
-            <input type="text" placeholder="请输入您想搜索的内容" class="header_search_input" v-model="keyWord">
+            <input type="text" placeholder="请输入机构名称" class="header_search_input" v-model="keyWord">
             <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
         </div>
         <div class="quxiao" @click="toback">取消</div>
