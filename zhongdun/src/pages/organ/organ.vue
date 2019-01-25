@@ -173,7 +173,9 @@ export default {
           this.jgdata=res.data;
           console.log(res.code);
           if(res.code==0){
-            this.empty="true"
+            this.empty=true
+          }else{
+            this.empty=false
           }
           console.log(this.jgdata);
       });
@@ -207,7 +209,9 @@ export default {
       jglist({longitude:longitude,latitude:latitude,type:da}).then(res=>{
           this.jgdata=res.data;
           if(res.code==0){
-            this.empty="true"
+            this.empty=true
+          }else{
+            this.empty=false
           }
           console.log(this.jgdata);
       });
