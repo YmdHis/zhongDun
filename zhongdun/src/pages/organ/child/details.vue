@@ -37,70 +37,42 @@
         <div class="details_evaluation_box_title_lf">
           <flexbox orient="vertical" :gutter="0">
             <flexbox-item>
-              <div > <rater v-model="data" disabled :font-size="20"></rater>5.0</div>
+              <div > <rater v-model="rank" disabled :font-size="20"></rater>{{rank}}.0</div>
             </flexbox-item>
             <flexbox-item>
               <p style="text-align: left;">
-                <span>服务</span><i>5.0</i>
-                <span>教学</span><i>5.0</i>
-                <span>环境</span><i>5.0</i>
-                <span>收费</span><i>5.0</i>
+                <span>服务</span><i>{{rank1}}.0</i>
+                <span>教学</span><i>{{rank2}}.0</i>
+                <span>环境</span><i>{{rank3}}.0</i>
+                <span>收费</span><i>{{rank4}}.0</i>
               </p>
             </flexbox-item>
           </flexbox> 
         </div>
         <div class="details_evaluation_box_title_rg">
-          <cell value="全部评价（5）" class="details_address" link="/conment" >
-          </cell>
+          <cell :value="commentCount" class="details_address" is-link @click.native="toConment"></cell>
         </div>
       </div> 
-      <div class="details_evaluation_list clear">
+      <div class="details_evaluation_list clear" v-for="item in blogslist" :key="item.id">
         <div class="details_evaluation_list_left">
           <img src="../../../images/icon1.png" alt="">
         </div>
         <div class="details_evaluation_list_rg">
           <flexbox orient="vertical" :gutter="0">
-            <flexbox-item><div class="details_evaluation_list_user">学员1213</div></flexbox-item>
+            <flexbox-item><div class="details_evaluation_list_user">{{item.user_nickname}}</div></flexbox-item>
             <flexbox-item>
-              <div class="details_evaluation_list_star"><rater v-model="data" disabled :font-size="20"></rater>
+              <div class="details_evaluation_list_star"><rater v-model="item.userStar" disabled :font-size="20"></rater>
               </div>
             </flexbox-item>
              <flexbox-item>
-              <div class="details_evaluation_list_txt">教的好，拿证快，老师负责。</div>
+              <div class="details_evaluation_list_txt">{{item.content}}</div>
              </flexbox-item>
             <flexbox-item>
               <div class="details_evaluation_list_other">
                 <span>所选课程：焊工</span>
                <!--  <span>学费：650元</span>
                 <span>拿本：2个月</span> -->
-                <span class="loving"> <x-icon type="ios-heart" size="20" class="loving_icon" style="fill:#fb8e52;"></x-icon>12</span>
-              </div>
-            </flexbox-item>
-          </flexbox> 
-        </div>
-      </div>
-      <div class="details_evaluation_list clear">
-        <div class="details_evaluation_list_left">
-          <img src="../../../images/icon1.png" alt="">
-        </div>
-        <div class="details_evaluation_list_rg">
-          <flexbox orient="vertical" :gutter="0" >
-            <flexbox-item><div class="details_evaluation_list_user">学员1213</div></flexbox-item>
-            <flexbox-item>
-              <div class="details_evaluation_list_star"><rater v-model="data" disabled :font-size="20"></rater>
-              </div>
-            </flexbox-item>
-             <flexbox-item>
-              <div class="details_evaluation_list_txt">教的好，拿证快，老师负责。</div>
-             </flexbox-item>
-            <flexbox-item>
-              <div class="details_evaluation_list_other">
-                <span>所选课程：低压电工</span>
-                <!-- <span>学费：650元</span> -->
-                <!-- <span>拿本：2个月</span> -->
-                <span class="loving"> 
-                  <x-icon type="ios-heart-outline" size="20" class="loving_icon"></x-icon>0
-                </span>
+                <span class="loving"> <x-icon type="ios-heart" size="20" class="loving_icon" style="fill:#fb8e52;"></x-icon>{{item.praise_count}}</span>
               </div>
             </flexbox-item>
           </flexbox> 
@@ -125,7 +97,7 @@
 <script>
 import BMap from 'BMap'
 import { XHeader,Flexbox, FlexboxItem,Group,CellBox,Cell,XButton, Rater} from 'vux'
-import {organDetails,blogs} from 'src/service/api'
+import {organDetails,blogs, star} from 'src/service/api'
 import { getStore, setStore } from 'src/config/mUtils'
 
 export default {
@@ -145,9 +117,17 @@ export default {
       address:"",
       distance:"",
       organ:[],
-      limit:2,
+      limit:20,
       page:1,
       cat_id:'',
+      blogslist:'',
+      commentCount:'',
+      rank:'',
+      rank1:'',
+      rank2:'',
+      rank3:'',
+      rank4:'',
+      companyId:'',
       cat_type:'company',
       borderColor: {
         borderColor: '#333'
@@ -173,6 +153,9 @@ export default {
     rad(d){
       return d*Math.PI/180.0;//经纬度转换成三角函数中度分表形式
     },
+    toConment(){
+      this.$router.push({ path: '/conment', query: { companyId: this.companyId }})
+    },
     //计算距离
     getDistance(lat1,lng1,lat2,lng2){
       let radLat1 = this.rad(lat1);
@@ -186,12 +169,20 @@ export default {
       s = Math.round(s * 10000) / 10000; //输出为公里
       s=s.toFixed(2);//四舍五入，取几位小数
       return s;
+    },
+    //星级换算
+    getStar(data){
+      let returnData = Math.round(parseFloat(data)/20);
     }
   },
-   mounted(){
+  computed:{
+  
+  },
+  mounted(){
+    this.companyId = this.$route.query.companyId;
     organDetails({companyId:this.$route.query.companyId}).then(res => {
       let _this = this;
-      console.log(res);
+      //console.log(res);
       this.organ = res.data;
       let lng = this.organ.longitude;
       let lat = this.organ.latitude;
@@ -206,11 +197,30 @@ export default {
         _this.address = rs.address;
         _this.distance = _this.getDistance(lat,lng,latitude,longitude) + 'km';
       }); 
-    }),
+    });
+    star({companyId:this.$route.query.companyId}).then(res=>{
+      //console.log(res)
+      this.star = res.data[0];
+      this.commentCount = "全部评价("+res.data[0].count_comment+")";
+      this.rank1 = Math.round(parseFloat(res.data[0].rank1)/20);
+      this.rank2 = Math.round(parseFloat(res.data[0].rank2)/20);
+      this.rank3 = Math.round(parseFloat(res.data[0].rank3)/20);
+      this.rank4 = Math.round(parseFloat(res.data[0].rank4)/20);
+      this.rank = Math.round((this.rank1+this.rank2+this.rank3+this.rank4)/4);
+    });
     blogs({limit:this.limit,page:this.page,cat_type:this.cat_type,cat_id:this.$route.query.companyId}).then(res=>{
-      this.blogslist =res;
+      //console.log(res);
+      this.blogslist =res.data;
+      for(let key in this.blogslist){
+        let rank1 = this.blogslist[key].rank1;
+        let rank2 = this.blogslist[key].rank2;
+        let rank3 = this.blogslist[key].rank3;
+        let rank4 = this.blogslist[key].rank4;
+
+        this.blogslist[key].userStar = Math.round((rank1+rank2+rank3+rank4)/80);
+
+      }
       console.log(this.blogslist);
-      //alert(this.gzlist)
     });
 
   }
@@ -327,6 +337,7 @@ export default {
 .details_evaluation_list_txt{
   font-size: .7rem;
   width: 9.5rem;
+  color: #5f5d5d;
 }
 .details_evaluation_list_other span{
   color: #999;
@@ -404,7 +415,6 @@ export default {
 }
 .pop-container{
   width: 100%;
-  height: 20%;
   position: fixed;
   bottom: 0;
   background: #fff;
@@ -430,7 +440,7 @@ export default {
   text-align: center;
   font-size: .7rem;
   margin-top: 1.5rem;
-  padding-top: .5rem;
+  padding: .5rem 0;
   
 }
 .pop-hid{

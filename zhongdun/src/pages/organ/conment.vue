@@ -6,27 +6,25 @@
     <!--评论分类 S--> 
     <div class="ex-parts">
       <ul class="conmentlist">
-        <li class="active">全部(37)</li>
-        <li>好拼(37)</li>
-        <li>中评(0)</li>
-        <li>差评(0)</li>
-        <li>差评(0)</li>
-        <li>带图点评(0)</li>
-        <li>服务热情(0)</li>
-        <li>教训耐心(0)</li>
-        <li>环境优雅(0)</li>
-        <li>收费合理(0)</li>
+        <li @click="conmentSelect('','all')" :class="[this.selectShow == 'all'?'active':'']">全部({{star.count_comment}})</li>
+        <li @click="conmentSelect('praise','high')" :class="[this.selectShow == 'high'?'active':'']">好评(3)</li>
+        <li @click="conmentSelect('praise','middle')" :class="[this.selectShow == 'middle'?'active':'']">中评(0)</li>
+        <li @click="conmentSelect('praise','low')" :class="[this.selectShow == 'low'?'active':'']">差评(0)</li>
+        <li @click="conmentSelect('rank','rank1')" :class="[this.selectShow == 'rank1'?'active':'']">服务热情(0)</li>
+        <li @click="conmentSelect('rank','rank2')" :class="[this.selectShow == 'rank2'?'active':'']">教训耐心(0)</li>
+        <li @click="conmentSelect('rank','rank3')" :class="[this.selectShow == 'rank3'?'active':'']">环境优雅(0)</li>
+        <li @click="conmentSelect('rank','rank4')" :class="[this.selectShow == 'rank4'?'active':'']">收费合理(0)</li>
       </ul>
     </div>
     <!--评论分类 E-->
     <!--评论列表 S--> 
     <div class="ex-parts ex-parts2">
      <ul>
-       <li class="conmentli">
+       <li class="conmentli" v-for="item in blogslist" :key="item.id">
         <!--用户头像 S-->
          <div class="userscu">
            <div>
-             <img src="../../images/find_icon1.png">
+             <img src="../../images/icon1.png">
            </div>
          </div>
         <!--用户头像 E-->
@@ -34,9 +32,9 @@
           <!--内容一级 S-->
            <div class="userconment">
              <div class="userstar">
-                <p>安全操作用户</p>
+                <p>{{item.user_nickname}}</p>
                  <div class="details_evaluation_list_star">
-                  <rater v-model="data" :font-size="16"></rater>
+                  <rater v-model="item.userStar" :font-size="16"></rater>
                  </div>
              </div>
              <div class="youzhi">
@@ -46,106 +44,118 @@
           <!--内容一级 E-->
           <!--内容二级 S-->
           <div class="conment_content">
-              老师服务态度很好，咨询过程中，也没有不耐烦，不愿意解决的情况。很认真负责，给安培教育老师点一个攒，还有从报名到现在，一个月就拿到证了，非常感谢安培教育带给我的帮助。
+              {{item.content}}
           </div>
           <!--内容二级 E-->
           <!--内容三级 S-->
           <div class="dianzan">
-               <span class="loving"> <x-icon type="ios-heart" size="20" class="loving_icon" style="fill:#fb8e52;"></x-icon>23</span>
+               <span class="loving"> <x-icon type="ios-heart" size="20" class="loving_icon" style="fill:#fb8e52;"></x-icon>{{item.praise_count}}</span>
           </div>
           <!--内容三级 E-->
          </div>
        </li>
 
-        <li class="conmentli">
-        <!--用户头像 S-->
-         <div class="userscu">
-           <div>
-             <img src="../../images/find_icon2.png">
-           </div>
-         </div>
-        <!--用户头像 E-->
-         <div class="conment_div2">
-          <!--内容一级 S-->
-           <div class="userconment">
-             <div class="userstar">
-                <p>5255462用户</p>
-                 <div class="details_evaluation_list_star">
-                  <rater v-model="data" :font-size="16"></rater>
-                 </div>
-             </div>
-             <div class="youzhi">
-               <!-- <img src="../../images/youzhi.jpg"> -->
-             </div>
-           </div>
-          <!--内容一级 E-->
-          <!--内容二级 S-->
-          <div class="conment_content">
-              安培教育很好，老师好，拿证也效率，安培教育顶你上去
-          </div>
-          <!--内容二级 E-->
-          <!--内容三级 S-->
-          <div class="dianzan">
-               <span class="loving"> <x-icon type="ios-heart" size="20" class="loving_icon"></x-icon>2</span>
-          </div>
-          <!--内容三级 E-->
-         </div>
-       </li>
-       <li class="conmentli">
-        <!--用户头像 S-->
-         <div class="userscu">
-           <div>
-             <img src="../../images/find_icon3.png">
-           </div>
-         </div>
-        <!--用户头像 E-->
-         <div class="conment_div2">
-          <!--内容一级 S-->
-           <div class="userconment">
-             <div class="userstar">
-                <p>5255462用户</p>
-                 <div class="details_evaluation_list_star">
-                  <rater v-model="data" :font-size="16"></rater>
-                 </div>
-             </div>
-             <div class="youzhi">
-               <!-- <img src="../../images/youzhi.jpg"> -->
-             </div>
-           </div>
-          <!--内容一级 E-->
-          <!--内容二级 S-->
-          <div class="conment_content">
-              安培教育很好，老师好，拿证也效率，安培教育顶你上去
-          </div>
-          <!--内容二级 E-->
-          <!--内容三级 S-->
-          <div class="dianzan">
-               <span class="loving"> <x-icon type="ios-heart" size="20" class="loving_icon"></x-icon>2</span>
-          </div>
-          <!--内容三级 E-->
-         </div>
-       </li>
+       
      </ul>
     </div>
     <!--评论列表 E-->      
-  <div class="ex-next">
+  <div class="ex-next" @click="toPosting">
    我要点评
   </div>
  </div>
 </template>
 <script type="text/javascript">
   import {XHeader,XInput,Group, Rater} from 'vux'
+  import {blogs,star} from 'src/service/api'
   export default {
     data(){
       return{
-          data:5
+          data:5,
+          companyId:'',
+          star:'',
+          limit:20,
+          page:1,
+          cat_id:'',
+          blogslist:'',
+          selectShow:'all',
       }
     },
   components: {
      XHeader,XInput,Group,Rater
     },
   methods: {
-     
+    toPosting(){
+      this.$router.push("/posting");
+    },
+    conmentSelect(type,data){
+      this.selectShow = data;
+      if(type == "praise"){
+        blogs({praiseType:data,limit:this.limit,page:this.page,cat_type:this.cat_type,cat_id:this.$route.query.companyId}).then(res=>{
+          //console.log(res);
+          this.blogslist =res.data;
+          for(let key in this.blogslist){
+            let rank1 = this.blogslist[key].rank1;
+            let rank2 = this.blogslist[key].rank2;
+            let rank3 = this.blogslist[key].rank3;
+            let rank4 = this.blogslist[key].rank4;
+            this.blogslist[key].userStar = Math.round((rank1+rank2+rank3+rank4)/80);
+          }
+          console.log(this.blogslist);
+        });  
+      }else if(type == "rank"){
+        blogs({rankType:data,limit:this.limit,page:this.page,cat_type:this.cat_type,cat_id:this.$route.query.companyId}).then(res=>{
+          //console.log(res);
+          this.blogslist =res.data;
+          for(let key in this.blogslist){
+            let rank1 = this.blogslist[key].rank1;
+            let rank2 = this.blogslist[key].rank2;
+            let rank3 = this.blogslist[key].rank3;
+            let rank4 = this.blogslist[key].rank4;
+            this.blogslist[key].userStar = Math.round((rank1+rank2+rank3+rank4)/80);
+          }
+          console.log(this.blogslist);
+        });  
+      }else{
+        blogs({limit:this.limit,page:this.page,cat_type:this.cat_type,cat_id:this.$route.query.companyId}).then(res=>{
+          //console.log(res);
+          this.blogslist =res.data;
+          for(let key in this.blogslist){
+            let rank1 = this.blogslist[key].rank1;
+            let rank2 = this.blogslist[key].rank2;
+            let rank3 = this.blogslist[key].rank3;
+            let rank4 = this.blogslist[key].rank4;
+            this.blogslist[key].userStar = Math.round((rank1+rank2+rank3+rank4)/80);
+          }
+          console.log(this.blogslist);
+        });
+      }
+      
+    },
+    rankSelect(rankType){
+      
+    }
+  },
+  mounted(){
+    this.companyId = this.$route.query.companyId;
+    star({companyId:this.$route.query.companyId}).then(res=>{
+      console.log(res)
+      this.star = res.data[0];
+    });
+    blogs({limit:this.limit,page:this.page,cat_type:this.cat_type,cat_id:this.$route.query.companyId}).then(res=>{
+      //console.log(res);
+      this.blogslist =res.data;
+      for(let key in this.blogslist){
+        let rank1 = this.blogslist[key].rank1;
+        let rank2 = this.blogslist[key].rank2;
+        let rank3 = this.blogslist[key].rank3;
+        let rank4 = this.blogslist[key].rank4;
+
+        this.blogslist[key].userStar = Math.round((rank1+rank2+rank3+rank4)/80);
+
+      }
+      console.log(this.blogslist);
+    });
+
   }
 }
 </script>
