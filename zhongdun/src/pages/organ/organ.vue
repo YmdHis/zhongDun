@@ -36,7 +36,7 @@
       </flexbox>
       </div>
       <div class="origan_box" v-if="empty">
-        <empty></empty>
+        <empty :msg="msgcode0"></empty>
       </div>
       <div class="origan_box" style="margin-bottom:3rem" v-else>
         <div class="origan_list" v-for="items in jgdata">
@@ -143,6 +143,7 @@ export default {
 	},
 	data () {
     return {
+        msgcode0:'暂无数据',
         data:5,
         LocationCity:"定位中",
         active_tab: 'organ',
