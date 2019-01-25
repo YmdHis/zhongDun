@@ -6,7 +6,7 @@
      <!-- <a slot="right"><img src="../images/home.png" alt="home" style="height: 1rem;"></a> -->
     <div class="msg_box">
         <img src="../images/msg2.jpg" alt="">
-        <span class="msg_box_txt">暂无记录</span>
+        <span class="msg_box_txt">暂无数据</span>
     </div>
 </div>
 </template>
