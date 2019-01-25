@@ -26,7 +26,7 @@
       </tab>
     </div>
     <div v-if="active_tab=='organ'" class="organ_item">
-      <div class="organ_choose_title">
+      <div :class="navBarFixed == true ? 'navBarWrap' :'organ_choose_title'">
         <flexbox :gutter="0">
         <flexbox-item><div class="organ_choose_t" :class="[type =='default' ? 'organ_choo_color' : '']" @click="updates('default')">综合</div></flexbox-item>
         <flexbox-item><div class="organ_choose_t" :class="[type =='map' ? 'organ_choo_color' : '']" @click="updates('map')">距离</div></flexbox-item>
@@ -150,10 +150,13 @@ export default {
         LocationCity:'',
         cityPickerShow:false,
         type:'default',
-        empty:false
+        empty:false,
+        navBarFixed:false,
     }
   },
   mounted(){ 
+     // 事件监听滚动条
+    window.addEventListener('scroll', this.watchScroll);
     let name = this.$route.query.name;
     this.updates('default');
     this.LocationCity=getStore('LocationCity');
@@ -221,6 +224,16 @@ export default {
       s=s.toFixed(1);//四舍五入，取几位小数
       return s;
     },
+     // 滚动
+    watchScroll () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        //  当滚动超过 50 时，实现吸顶效果
+        if (scrollTop > 49) {
+          this.navBarFixed = true
+        } else {
+          this.navBarFixed = false
+        }
+     },
   },
 }
 </script>
@@ -415,5 +428,15 @@ export default {
 }
 .shouc img{
 width: 1rem;
+}
+// 定位
+.navBarWrap {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e9e9e9;
+  position:fixed;
+  width: 100%;
+  background: #fff;
+  top:0;
+  z-index:999;
 }
 </style>
