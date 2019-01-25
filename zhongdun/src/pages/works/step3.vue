@@ -90,6 +90,9 @@
 							}
 							
 						});
+						setTimeout(()=>{
+							this.$route.push("/personFile")
+						},1000)
 						}else{
 						this.$vux.toast.show({
 							text: '订单支付失败',
