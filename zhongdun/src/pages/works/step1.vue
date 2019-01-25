@@ -93,13 +93,13 @@ import cityPicker from 'src/components/cityPicker'
           gzid:'',
           wpList: [
             {
-              name: '无证'
+              name: '初训'
             },
             {
-              name: '有证'
+              name: '复审'
             }
           ],
-          active:'无证',
+          active:'初训',
           gzlists:[]
         }
       },
