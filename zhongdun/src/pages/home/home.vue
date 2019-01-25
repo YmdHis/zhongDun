@@ -79,7 +79,7 @@
         </router-link>
       </div>
     </div>
-     <div class="module_block home-last">
+     <!-- <div class="module_block home-last">
       <tab :line-width="1" active-color='#5ebf83' custom-bar-width="50px" >
         <tab-item selected @on-item-click="onClick('news')">推荐</tab-item>
         <tab-item @on-item-click="onClick('course')">课程精选</tab-item>
@@ -188,7 +188,7 @@
             </router-link>
           </div>
       </div>
-    </div>
+    </div> -->
      <foot-nav></foot-nav>
     <div class="city-choo" :class="cityPickerShow?'':'city-hid'">
       <city-picker @closeMsg="close" @cityMsg="formPicker" :msgCity="LocationCity"></city-picker>

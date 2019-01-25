@@ -66,16 +66,34 @@
 			// },
 			tijiao(){
 				if(this.payType == "支付宝"){
-					var aliPay = api.require('aliPay');
-					aliPay.payOrder({
-						orderInfo: 'partner="2088101568358171"&seller_id="xxx@alipay.com"&out_trade_no="0819145412-6177"&subject="测试"&body="测试测试"&total_fee="0.01"&notify_url="http://notify.msp.hk/notify.htm"&service="mobile.securitypay.pay"&payment_type="1"&_input_charset="utf-8"&it_b_pay="30m"&sign="lBBK%2F0w5LOajrMrji7DUgEqNjIhQbidR13GovA5r3TgIbNqv231yC1NksLdw%2Ba3JnfHXoXuet6XNNHtn7VE%2BeCoRO1O%2BR1KugLrQEZMtG5jmJIe2pbjm%2F3kb%2FuGkpG%2BwYQYI51%2BhA3YBbvZHVQBYveBqK%2Bh8mUyb7GM1HxWs9k4%3D"&sign_type="RSA"'
-					}, function(ret, err) {
-						api.alert({
-							title: '支付结果',
-							msg: ret.code,
-							buttons: ['确定']
+					pay({orderSN:this.order_sn}).then(res=>{
+						console.log(res.data);
+						if(res.code == 1){
+						var aliPay = api.require('aliPay');
+						aliPay.payOrder({
+							orderInfo: res.data
+						}, function(ret, err) {
+							//console.log(ret)
+							//console.log(err)
+							
+							api.alert({
+								title: '支付结果',
+								msg: ret,
+								buttons: ['确定']
+							});
 						});
-					});
+						}else{
+						this.$vux.toast.show({
+							text: '订单支付失败',
+							type:'text',
+							position: 'middle'
+						})
+						setTimeout(()=>{
+							this.$route.push("/personFile")
+						},1000)
+						}
+					})
+
 				}else if(this.payType == "微信"){
 					this.$vux.toast.show({
 						text: '暂未开通微信支付',
