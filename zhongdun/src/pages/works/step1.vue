@@ -57,13 +57,15 @@
       </div>
       <!-- 选择工种 E -->
     </div>
-    <div class="ex-next" @click="nextStep()">
-      下一步
+    <div class="ex-next" >
+      <!-- 下一步 -->
+      <span style="float: left;width: 50%;background: #f0f0f0;color: #5ebf83;" @click="toHome">跳过</span>
+     <span style="float: right;width: 50%;background: #5ebf83;" @click="nextStep()">下一步</span>
     </div>
 		<div class="city-choo" :class="cityPickerShow?'':'city-hid'">
       <city-picker @closeMsg="close" @cityMsg="formPicker" :msgCity="LocationCity"></city-picker>
     </div>
-    <div class="fanhui" @click="toHome">跳过</div>
+    <!-- <div class="fanhui" @click="toHome">跳过</div> -->
   </div>
 </template>
 <script type="text/javascript">
@@ -226,9 +228,14 @@ import cityPicker from 'src/components/cityPicker'
       min-height: 100vh;  
       /* 设置主轴方向 */
       flex-direction: column;   }
-  .ex-next{height:2rem;background: #5ebf83;color:#FFF;line-height:2rem; position: fixed;
+  .ex-next{
+    height:2rem;
+    /* background: #5ebf83; */
+    color:#FFF;line-height:2rem; position: fixed;
     bottom:0;font-size:0.64rem;
-    width:100%;text-align:center;}
+    width:100%;text-align:center;
+    bottom: -.1rem;
+    }
   #topbg{width:100%;height: 5rem;overflow:hidden;position: relative;}
   .spet1_img{
     width: 100%;
