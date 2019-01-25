@@ -38,7 +38,7 @@
       <div class="origan_box" v-if="empty">
         <empty></empty>
       </div>
-      <div class="origan_box" style="padding-bottom:3rem" v-else>
+      <div class="origan_box" style="margin-bottom:3rem" v-else>
         <div class="origan_list" v-for="items in jgdata">
           <router-link :to="{ path: '/organDetail', query: {companyId:items.id}}"> 
             <flexbox>
@@ -206,6 +206,9 @@ export default {
       let da = getStore("type");
       jglist({longitude:longitude,latitude:latitude,type:da}).then(res=>{
           this.jgdata=res.data;
+          if(res.code==0){
+            this.empty="true"
+          }
           console.log(this.jgdata);
       });
     },
