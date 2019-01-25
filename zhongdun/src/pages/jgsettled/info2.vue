@@ -68,7 +68,7 @@
 </script>
 <style type="text/css" scoped>
 /*报名投不样式*/
-.reda{color:red;float:left;margin-top:0.6rem;margin-left:0.3rem;font-size:0.64rem;}
+.reda{color:red;position: absolute;margin-top:0.6rem;margin-left:0.2rem;font-size:0.64rem;}
 #bmhead .vux-header{
 background: #FFF;
 }
@@ -93,7 +93,7 @@ color:#CCC;
 font-size:0.6rem; 
 }
 /deep/ #ex-sub  .weui-cells:after{border-bottom:none;}
-#ex-sub .vux-x-input{padding-top:0.6rem;padding-bottom:0.4rem;font-size:0.64rem;padding-left:0.1rem;}
+#ex-sub .vux-x-input{padding-top:0.6rem;padding-bottom:0.4rem;font-size:0.64rem;padding-left:0.6rem;}
 .jgtit{color:#666;font-size:0.64rem;padding:0 0.6rem;line-height:1.8rem}
 
 /*证件上传*/
