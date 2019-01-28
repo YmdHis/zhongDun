@@ -62,7 +62,6 @@ export default {
             searchList:'',
             isShow:false,
             closeCommand:false,
-          
         }
     },
     props:['msgCity'],
@@ -72,9 +71,10 @@ export default {
         this.$nextTick(function () {
             var th = this
             //建立一个自动完成的对象
+            var map = {lng: getStore("longitude"), lat: getStore("latitude")}
             var ac = new BMap.Autocomplete({
                 "input": "suggestId" ,
-                "location": this.LocationCity
+                "location": map
             })
             var myValue
             //鼠标点击下拉列表后的事件
@@ -84,16 +84,17 @@ export default {
                 myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
                 this.address_detail = myValue
 
-                var local = new BMap.LocalSearch(th.LocationCity, {
+                var local = new BMap.LocalSearch(map, {
                     onSearchComplete: ()=>{
                         //获取第一个智能搜索的结果
                         th.userlocation = local.getResults();   
                         console.log(th.userlocation) 
                         setStore("latitude",th.userlocation.Ar[0].point.lat);
                         setStore("longitude",th.userlocation.Ar[0].point.lng);
-                        th.closeCommand = true;
                         }
                 });
+                    th.closeCommand = !th.closeCommand;
+                    //console.log(th.closeCommand)
                 local.search(myValue);
             });
         })
@@ -129,6 +130,7 @@ export default {
                 setStore("LocationCity",city);
                 setStore("latitude",position.latitude);
                 setStore("longitude",position.longitude);
+                _this.setMap = true;
                 //console.log(city);
             }, function(e) {
                 _this.LocationCity = "定位失败"
@@ -143,6 +145,7 @@ export default {
             // this.closeBtn();
             // this.keyWord='';
             this.address_detail = city;
+            this.setMap = false;
         },
         custormAnchor(index) { //锚点滚动到固定位置     
              let anchorElement = document.getElementById(index);
@@ -181,9 +184,7 @@ export default {
             //console.log(this.address_detail);
         },
         closeCommand(){
-            if(this.closeCommand){
-                this.closeBtn();
-            }
+            this.closeBtn();
 
         }
     }

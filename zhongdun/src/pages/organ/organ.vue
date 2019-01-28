@@ -9,7 +9,7 @@
         </div>
         <div class="header_search" @click="toSearch">
           <img src="../../images/sear_icon.png" alt="" class="header_search_icon">
-          <input type="text" placeholder="请输入机构名称" :value="this.$route.query.name">
+          <input type="text" placeholder="请输入机构名称" v-model="keyword">
           <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
         </div>
         <div class="header_login">
@@ -153,14 +153,15 @@ export default {
         type:'default',
         empty:false,
         navBarFixed:false,
+        keyword:'',
     }
   },
   mounted(){ 
      // 事件监听滚动条
     window.addEventListener('scroll', this.watchScroll);
-    let name = this.$route.query.name;
     this.updates('default');
     this.LocationCity=getStore('LocationCity');
+    this.keyword = this.$route.query.keyword?this.$route.query.keyword:'';
   },
   methods:{
     updates(da){
@@ -169,8 +170,8 @@ export default {
       let longitude = getStore("longitude");
       let latitude = getStore("latitude");
       let gzid=this.$route.query.id;
-     
-      jglist({longitude:longitude,latitude:latitude,type:da,name:this.$route.query.name,category:gzid}).then(res=>{
+      let name = this.$route.query.keyword?this.$route.query.keyword:'';
+      jglist({longitude:longitude,latitude:latitude,type:da,category:gzid,name:name}).then(res=>{
           this.jgdata=res.data;
           console.log(res.code);
           if(res.code==0){
@@ -182,7 +183,7 @@ export default {
       });
     },
     toSearch(){
-      this.$router.push("/search");
+      this.$router.push({path:"/search",query:{keyword:this.keyword}});
     },
     onClick(state){
       if(state == 'sqrz'){

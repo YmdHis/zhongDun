@@ -5,7 +5,7 @@
       <img src="../../assets/images/topbg.png" class="bgimg">
       <div class="con_search">
         <div class="searchtext">
-            <input type="text" placeholder="请输入机构名称" class="header_search_input" v-model="keyWord">
+            <input type="text" placeholder="请输入机构名称" class="header_search_input" @keyup.enter="jgSearch" v-model="keyword">
             <img src="../../images/sy_icon.png" alt="" class="header_search_sy">
         </div>
         <div class="quxiao" @click="toback">取消</div>
@@ -28,7 +28,7 @@
       <div>专业制冷工考证</div>
       <div>专业制冷证</div>
       <div>专业制冷工考证</div>
-       <div>专工考证</div>
+      <div>专工考证</div>
       <div>专业制冷工考证</div>
       <div>专业制冷证</div>
       <div>专业制冷工考证</div>
@@ -61,7 +61,7 @@ export default {
     return {
       results: [],
       value: '',
-      keyWord:'',//机构搜索
+      keyword:'',//机构搜索
       wpList: [
         {
           name: '全部'
@@ -76,11 +76,16 @@ export default {
       actives:'全部'
     }
   },
+  mounted(){
+    this.keyword = this.$route.query.keyword;
+  },
   methods: {
    // 机构筛选
-  jgSearch(newCitySearch){
-    console.log(newCitySearch);
-    this.$router.push({path:'/organ',query:{name:newCitySearch}});
+  jgSearch(res){
+    console.log(res);
+    let newCitySearch = res.target.value;
+    console.log(newCitySearch)
+    this.$router.push({path:'/organ',query:{keyword:newCitySearch}})
   },
   selected:function(name){
       this.actives=name;
@@ -88,42 +93,15 @@ export default {
   toback(){
       this.$router.go(-1);
      },
-  showmore(){
-      // if($('#searcha').height()<82){
-      //   $("#searcha").animate(
-      //     {height:"100%"},function(){
-      //       $('#x-t').removeAttr('type');
-      //     }
-      //   )
-      // }else{
-      //   $("#searcha").animate(
-      //     {height:"2.2rem"},function(){
-      //       $('#x-t').attr('type','ios-arrow-up');
-      //     }
-         
-      //   )
-      // } 
-    }
   },
-
-   watch:{
-        keyWord(){
-            console.log(this.keyWord);
-            this.jgSearch(this.keyWord);
-        }
+  watch:{
+    keyword(){
+      console.log(this.keyword)
     }
+  }
+
 }
 
-function getResult (val) {
-  let rs = []
-  for (let i = 0; i < 20; i++) {
-    rs.push({
-      title: `${val} result: ${i + 1} `,
-      other: i
-    })
-  }
-  return rs
-}
 </script>
 <style type="text/css">
 /*搜索框*/
