@@ -22,7 +22,7 @@
       <!--上部分 E-->
       <!--学习阶段 S-->
       <div id="jieduan">
-        <p class="ex-choose-city">证书状态</p>
+        <p class="ex-choose-city">报名状态</p>
         <div>
              <x-button  mini plain style="border-radius:99px;margin-right:0.4rem;padding-left:0.6rem" v-for="item in wpList" :key="item.name"
               :class="{active : active == item.name}" 
@@ -116,7 +116,7 @@ import cityPicker from 'src/components/cityPicker'
     created(){
       var isopened =getStore("isopened");
       if(isopened){
-        this.$router.replace({path:'/home'});
+        //this.$router.replace({path:'/home'});
       }else{
           setStore("isopened",true);
       }
@@ -185,7 +185,6 @@ import cityPicker from 'src/components/cityPicker'
         }else{
           setStore("active",this.active);
           setStore("exactive",this.exactive);
-         console.log(this.gzid);
           this.$router.replace({path:'/organ',query:{id:this.gzid}});
 
         }
