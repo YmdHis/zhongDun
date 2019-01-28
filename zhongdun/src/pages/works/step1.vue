@@ -113,11 +113,18 @@ import cityPicker from 'src/components/cityPicker'
 				XButton,
 				cityPicker
       },
+    created(){
+      var isopened =getStore("isopened");
+      if(isopened){
+        this.$router.replace({path:'/home'});
+      }else{
+          setStore("isopened",true);
+      }
+    },
     methods:{
       selected:function(name){//有证无证
         console.log(name);
-        this.active = name;
-          
+        this.active = name; 
       },
       gzselected:function(name){//工种选择
           this.exactive = name;
@@ -179,7 +186,7 @@ import cityPicker from 'src/components/cityPicker'
           setStore("active",this.active);
           setStore("exactive",this.exactive);
          console.log(this.gzid);
-          this.$router.push({path:'/organ',query:{id:this.gzid}});
+          this.$router.replace({path:'/organ',query:{id:this.gzid}});
 
         }
       },
