@@ -39,6 +39,7 @@
 			XHeader,Group, Cell,Checklist
 		},
 		mounted(){
+			this.aliPay = api.require('aliPayPlus');
 			this.add()
 			this.order_sn = this.$route.query.order_sn;
 		},
@@ -64,12 +65,14 @@
 			// 	});
 			// },
 			tijiao(){
+				let _this = this;
 				if(this.payType == "支付宝"){
 					pay({orderSN:this.order_sn}).then(res=>{
-						console.log(res.data);
+						console.log(this.aliPay);
+						
 						if(res.code == 1){
-						var aliPay = api.require('aliPay');
-						aliPay.payOrder({
+						
+						this.aliPay.payOrder({
 							orderInfo: res.data
 						}, function(ret, err) {
 							//console.log(ret)
@@ -89,18 +92,14 @@
 							}
 							
 						});
-						setTimeout(()=>{
-							this.$route.push("/personFile")
-						},1000)
+						
 						}else{
 						this.$vux.toast.show({
 							text: '订单支付失败',
 							type:'text',
 							position: 'middle'
 						})
-						setTimeout(()=>{
-							this.$route.push("/personFile")
-						},1000)
+						
 						}
 					})
 

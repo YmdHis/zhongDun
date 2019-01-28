@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="details_evaluation">
-      <div class="details_evaluation_box_title clear" v-show="blogslist.length">
+      <div class="details_evaluation_box_title clear" v-if="blogslist.length">
         <div class="details_evaluation_box_title_lf">
           <flexbox orient="vertical" :gutter="0">
             <flexbox-item>
@@ -50,9 +50,30 @@
           </flexbox> 
         </div>
         <div class="details_evaluation_box_title_rg">
-          <cell :value="commentCount" class="details_address" is-link @click.native="toConment"></cell>
+          <cell :value="commentCount" class="details_address" is-link></cell>
         </div>
-      </div> 
+      </div>
+      <div class="details_evaluation_box_title clear"  v-else>
+        <div class="details_evaluation_box_title_lf">
+          <flexbox orient="vertical" :gutter="0">
+            <flexbox-item>
+              <div > <rater value="0" disabled :font-size="20"></rater>0</div>
+            </flexbox-item>
+            <flexbox-item>
+              <p style="text-align: left;">
+                <span>服务</span><i>0</i>
+                <span>教学</span><i>0</i>
+                <span>环境</span><i>0</i>
+                <span>收费</span><i>0</i>
+              </p>
+            </flexbox-item>
+          </flexbox> 
+        </div>
+        <div class="details_evaluation_box_title_rg">
+          <cell value="全部评价(0)" class="details_address" is-link ></cell>
+        </div>
+      </div>
+
       <div class="details_evaluation_list clear" v-for="item in blogslist" :key="item.id">
         <div class="details_evaluation_list_left">
           <img src="../../../images/icon1.png" alt="">

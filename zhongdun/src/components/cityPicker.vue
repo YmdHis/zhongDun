@@ -7,15 +7,15 @@
         <div class="city_input_box">
             <div class="city_input_style">
                 <i class="city_input_icon"><img src="../images/sear_icon.png" alt=""></i>
-                <input type="text" name="address_detail" placeholder="请输入城市名" required="required" class="city_input" id="suggestId" v-model="keyWord">
+                <input type="text" name="address_detail" placeholder="请输入城市名" required="required" class="city_input" id="suggestId" v-model="address_detail">
             </div>
-            <div id="search_list" v-show="isShow">
+            <!-- <div id="search_list" v-show="isShow">
                 <ul>
                     <li v-for="item in searchList" @click="transCity(item.name,item.longitude,item.latitude)" >
                         {{item.name}}
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
         <div class="city_positioning" @click="getLocation()">
             当前定位城市：{{LocationCity}}  
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import BMap from 'BMap'
 import data from 'src/config/cityCenter.json'
 import {setStore,getStore} from 'src/config/mUtils'
 export default {
@@ -60,6 +61,7 @@ export default {
             keyWord:'',//城市搜索
             searchList:'',
             isShow:false,
+            closeCommand:false,
           
         }
     },
@@ -67,6 +69,34 @@ export default {
     mounted(){
        this.groupcity = data,
        this.LocationCity = getStore("LocationCity");
+        this.$nextTick(function () {
+            var th = this
+            //建立一个自动完成的对象
+            var ac = new BMap.Autocomplete({
+                "input": "suggestId" ,
+                "location": this.LocationCity
+            })
+            var myValue
+            //鼠标点击下拉列表后的事件
+            ac.addEventListener("onconfirm", function (e) {   
+                console.log("onconfirm");
+                var _value = e.item.value;
+                myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+                this.address_detail = myValue
+
+                var local = new BMap.LocalSearch(th.LocationCity, {
+                    onSearchComplete: ()=>{
+                        //获取第一个智能搜索的结果
+                        th.userlocation = local.getResults();   
+                        console.log(th.userlocation) 
+                        setStore("latitude",th.userlocation.Ar[0].point.lat);
+                        setStore("longitude",th.userlocation.Ar[0].point.lng);
+                        th.closeCommand = true;
+                        }
+                });
+                local.search(myValue);
+            });
+        })
         
     },
     computed:{
@@ -95,6 +125,7 @@ export default {
             geolocation.getCurrentPosition(function getinfo(position){
                 let city = position.address.city;
                 _this.LocationCity = city;
+                _this.address_detail = city;
                 setStore("LocationCity",city);
                 setStore("latitude",position.latitude);
                 setStore("longitude",position.longitude);
@@ -109,8 +140,9 @@ export default {
             setStore("latitude",latitude);
             setStore("longitude",longitude);
             this.LocationCity = city;
-            this.closeBtn();
-            this.keyWord='';
+            // this.closeBtn();
+            // this.keyWord='';
+            this.address_detail = city;
         },
         custormAnchor(index) { //锚点滚动到固定位置     
              let anchorElement = document.getElementById(index);
@@ -145,9 +177,14 @@ export default {
         }
     },
     watch:{
-        keyWord(){
-            console.log(this.keyWord);
-            this.citySearch(this.keyWord);
+        address_detail(){
+            //console.log(this.address_detail);
+        },
+        closeCommand(){
+            if(this.closeCommand){
+                this.closeBtn();
+            }
+
         }
     }
      
@@ -194,21 +231,26 @@ export default {
 }
 .city_input_style{
     display: block;
-    background: #f5f5f5;
     width: 100%;
-    padding:.3rem .5rem;
+    position: relative;
 }
 .city_submit{
    position: absolute;
    right: 0;
 }
 .city_input_icon img{
-    width: .7rem;
+   width: .7rem;
     vertical-align: middle;
+    position: absolute;
+    top: 0.45rem;
+    left: .2rem;
 }
 .city_input{
-    width: 12rem;
-    background:none;
+    width: 100%;
+    background: none;
+    padding-left: 1.5rem;
+    height: 1.5rem;
+    background: #f5f5f5;
 }
 .city_name_box h4{
     background: #f1f1f1;
@@ -237,5 +279,6 @@ export default {
       float:right;
       padding-right: 2rem;
   }
+
 </style>
 
