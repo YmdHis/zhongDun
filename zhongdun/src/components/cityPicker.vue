@@ -7,7 +7,7 @@
         <div class="city_input_box">
             <div class="city_input_style">
                 <i class="city_input_icon"><img src="../images/sear_icon.png" alt=""></i>
-                <input type="text" name="address_detail" placeholder="请输入城市名" required="required" class="city_input" id="suggestId" v-model="address_detail">
+                <input type="text" name="address_detail" placeholder="请输入地址" required="required" class="city_input" id="suggestId" v-model="address_detail">
             </div>
             <!-- <div id="search_list" v-show="isShow">
                 <ul>
