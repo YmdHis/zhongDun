@@ -66,4 +66,32 @@ export const newsList = (params) => fetch('POST','/app/news/showlist',params);
 // 新闻详情
 export const newsDetails = (params) => fetch('POST','/app/news/article',params);
 //工种类别
-export const  showlist = (params) => fetch('GET','/app/category/showlist',params);
+export const  showlist = (params) => fetch('GET','app/category/allList',params);
+// 机构详情
+export const  organDetails = (params) => fetch('POST','/app/company/details',params);
+//机构页面
+export const  jglist = (params) => fetch('GET','/app/company/showlist',params);
+//报名页面
+export const  enroll = (params) => fetch('GET','/app/category/showList',params);
+//报名页面耳机分类
+export const  enrollTwo = (params) => fetch('GET','/app/category/showList',params);
+//报名页面三级分类
+export const  enrollThree = (params) => fetch('GET','/app/course/showlist',params);
+//验证码
+export const  yzmGet = (params) => fetch('POST','/app/public/appSend',params);
+// 评论
+export const  blogs = (params) => fetch('GET','/app/blog/blogs',params);
+//提交表单
+export const apply = (params) => fetch('POST','/app/public/addOrder',params);
+//注册
+export const register = (params) => fetch('POST','/app/public/doRegister',params);
+// 登录
+export const loginForm = (params) => fetch('POST','/app/login/doAppLogin',params);
+// 登录确认
+export const loginCheck = (params) => fetch('POST','/app/login/loginCheck',params);
+//找回密码
+export const findPassword = (params) => fetch('POST','/app/login/passwordReset',params);
+//支付
+export const pay = (params) => fetch('POST','/pay/alipay/payorder',params);
+//机构评论总星级
+export const star = (params) => fetch('POST','/app/company/companyRemark',params);

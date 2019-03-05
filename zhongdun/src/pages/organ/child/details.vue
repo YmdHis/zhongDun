@@ -235,7 +235,6 @@ export default {
         let rank4 = this.blogslist[key].rank4;
 
         this.blogslist[key].userStar = Math.round((rank1+rank2+rank3+rank4)/80);
-
       }
       console.log(this.blogslist);
     });

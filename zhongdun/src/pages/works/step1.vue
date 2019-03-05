@@ -116,7 +116,7 @@ import cityPicker from 'src/components/cityPicker'
     created(){
       var isopened =getStore("isopened");
       if(isopened){
-        //this.$router.replace({path:'/home'});
+        this.$router.replace({path:'/home'});
       }else{
           setStore("isopened",true);
       }
